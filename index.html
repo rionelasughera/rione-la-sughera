@@ -261,13 +261,41 @@
           La grande sfida sulla storia, le tradizioni e le curiosità di Orentano! Metti alla prova le tue conoscenze e porta in alto i colori del Rione La Sughera.
         </p>
 
-        <!-- BOX COUNTDOWN AUTOMATICO -->
-        <div class="mt-6 bg-white/5 border-2 border-accent/40 rounded-2xl p-4 sm:p-5 backdrop-blur shadow-inner inline-block w-full max-w-md">
-          <p class="text-xs uppercase tracking-widest text-accent font-bold mb-2">Mancano all'inizio:</p>
-          <div id="quiz-countdown" class="font-display text-4xl sm:text-5xl text-white tracking-wide">
-            Calcolo in corso...
-          </div>
-        </div>
+<!-- BOX COUNTDOWN AUTOMATICO -->
+<div class="mt-6 bg-white/5 border-2 border-accent/40 rounded-2xl p-4 sm:p-5 backdrop-blur shadow-inner inline-block w-full max-w-md">
+    <p class="text-xs uppercase tracking-widest text-accent font-bold mb-2">Mancano all'inizio:</p>
+    <div id="palio-countdown-finale" class="font-display text-4xl sm:text-5xl text-white tracking-wide">
+        Calcolo in corso...
+    </div>
+</div>
+
+<script>
+(function() {
+    function updateLiveCountdown() {
+        const targetDate = new Date('2026-11-02T00:00:00').getTime();
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        
+        const container = document.getElementById('palio-countdown-finale');
+        if (!container) return;
+
+        if (diff <= 0) {
+            container.innerHTML = '<span class="text-primary">IL PALIO È IN CORSO! 🚀</span>';
+            return;
+        }
+
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        if (days === 1) {
+            container.innerHTML = '<span class="text-accent">SOLO 1 GIORNO! 🔥</span>';
+        } else {
+            container.innerHTML = `<span class="text-accent">${days} GIORNI</span>`;
+        }
+    }
+
+    updateLiveCountdown();
+    setInterval(updateLiveCountdown, 60000);
+})();
+</script>
 
         <div class="mt-6 flex flex-wrap gap-3 justify-center md:justify-start">
           <a href="https://orentano.news/rioni/il-palio-del-quiz" target="_blank" rel="noopener noreferrer" class="bg-accent text-accent-foreground px-8 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide shadow-lg hover:brightness-110 transition">
