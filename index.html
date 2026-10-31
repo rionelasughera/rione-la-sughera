@@ -366,34 +366,39 @@
     }
 
     // Countdown automatico per il Palio del Quiz (Inizio: 2 Novembre 2026)
-    function updateQuizCountdown() {
-      const targetDate = new Date('2026-11-02T00:00:00').getTime();
-      const now = new Date().getTime();
-      const diff = targetDate - now;
+<div id="palio-countdown-box" style="font-family: inherit; margin-top: 1.5rem;">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold; margin-bottom: 0.5rem;">Mancano all'inizio:</p>
+    <div id="quiz-countdown" style="font-size: 2.25rem; font-weight: bold;">Calcolo in corso...</div>
+</div>
 
-      const countdownElement = document.getElementById('quiz-countdown');
-if (!countdownElement) {
-    console.error("ERRORE: Elemento quiz-countdown non trovato!");
-    return;
-}
-      if (diff <= 0) {
-        countdownElement.innerHTML = '<span class="text-primary">IL PALIO È IN CORSO! 🚀</span>';
-        return;
-      }
+<script>
+(function() {
+    function runCountdown() {
+        const targetDate = new Date('2026-11-02T00:00:00').getTime();
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        
+        const el = document.getElementById('quiz-countdown');
+        if (!el) return;
 
-      const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        if (diff <= 0) {
+            el.innerHTML = '<span style="color: #ff5722;">IL PALIO È IN CORSO! 🚀</span>';
+            return;
+        }
 
-      if (days === 1) {
-        countdownElement.innerHTML = '<span class="text-accent">SOLO 1 GIORNO! 🔥</span>';
-      } else {
-        countdownElement.innerHTML = `<span class="text-accent">${days} GIORNI</span>`;
-      }
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        if (days === 1) {
+            el.innerHTML = '<span style="color: #ff9800;">SOLO 1 GIORNO! 🔥</span>';
+        } else {
+            el.innerHTML = '<span style="color: #ff9800;">' + days + ' GIORNI</span>';
+        }
     }
 
-document.addEventListener('DOMContentLoaded', function() {
-    updateQuizCountdown();
-    setInterval(updateQuizCountdown, 60000);
-});
-  </script>
-</body>
-</html>
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runCountdown);
+    } else {
+        runCountdown();
+    }
+    setInterval(runCountdown, 60000);
+})();
+</script>
