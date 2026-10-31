@@ -372,8 +372,10 @@
       const diff = targetDate - now;
 
       const countdownElement = document.getElementById('quiz-countdown');
-      if (!countdownElement) return;
-
+if (!countdownElement) {
+    console.error("ERRORE: Elemento quiz-countdown non trovato!");
+    return;
+}
       if (diff <= 0) {
         countdownElement.innerHTML = '<span class="text-primary">IL PALIO È IN CORSO! 🚀</span>';
         return;
