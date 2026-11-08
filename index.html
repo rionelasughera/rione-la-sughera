@@ -568,7 +568,7 @@
             if (!container) return;
 
             if (diff <= 0) {
-                container.innerHTML = '<span class="text-primary">IL PALIO È IN CORSO! 🚀</span>';
+                container.innerHTML = '<span class="text-white text-2xl sm:text-3xl font-bold">IL PALIO NON È ANCORA INIZIATO</span>';
                 return;
             }
 
@@ -583,6 +583,5 @@
         runCountdown();
         setInterval(runCountdown, 60000);
     })();
-  </script>
 </body>
 </html>
