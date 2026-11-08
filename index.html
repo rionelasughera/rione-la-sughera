@@ -558,31 +558,32 @@
     }
 
     // Countdown automatico per il Palio del Quiz
-    (function() {
-        function runCountdown() {
-            const targetDate = new Date('2026-11-02T00:00:00').getTime();
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-            
-            const container = document.getElementById('palio-countdown-finale');
-            if (!container) return;
+<script>
+(function() {
+    function updateLiveCountdown() {
+        const targetDate = new Date('2026-11-02T00:00:00').getTime();
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        
+        const container = document.getElementById('palio-countdown-finale');
+        if (!container) return;
 
-            if (diff <= 0) {
-                container.innerHTML = '<span class="text-primary">IL PALIO È IN CORSO! 🚀</span>';
-                return;
-            }
-
-            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-            if (days === 1) {
-                container.innerHTML = '<span class="text-primary">SOLO 1 GIORNO! 🔥</span>';
-            } else {
-                container.innerHTML = `<span class="text-white">${days} GIORNI</span>`;
-            }
+        if (diff <= 0) {
+            container.innerHTML = '<span class="text-accent">IL PALIO NON È ANCORA INIZIATO</span>';
+            return;
         }
 
-        runCountdown();
-        setInterval(runCountdown, 60000);
-    })();
-  </script>
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        if (days === 1) {
+            container.innerHTML = '<span class="text-accent">SOLO 1 GIORNO! 🔥</span>';
+        } else {
+            container.innerHTML = `<span class="text-accent">${days} GIORNI</span>`;
+        }
+    }
+
+    updateLiveCountdown();
+    setInterval(updateLiveCountdown, 60000);
+})();
+</script>
 </body>
 </html>
