@@ -13,7 +13,7 @@
         extend: {
           colors: {
             primary: { DEFAULT: '#dc2626', foreground: '#ffffff' },
-            accent: { DEFAULT: '#facc15', foreground: '#000000' },
+            accent: { DEFAULT: '#ffffff', foreground: '#000000' },
             foreground: '#111827',
             background: '#ffffff',
             muted: { foreground: '#4b5563' },
@@ -47,55 +47,57 @@
 <body class="bg-background text-foreground font-sans">
 
   <!-- NAV -->
-  <header class="sticky top-0 z-50 bg-foreground/95 backdrop-blur border-b-2 border-accent">
+  <header class="sticky top-0 z-50 bg-foreground/95 backdrop-blur border-b-2 border-primary">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       <a href="#top" class="flex items-center gap-3">
         <img src="logo.png" alt="Stemma Rione La Sughera" class="h-12 w-auto object-contain">
-        <span class="font-display text-2xl text-accent leading-none hidden sm:block">RIONE LA SUGHERA</span>
+        <span class="font-display text-2xl text-white leading-none hidden sm:block">RIONE LA SUGHERA</span>
       </a>
-<nav class="hidden md:flex items-center gap-6">
-    <a href="#storia" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-accent transition">Storia</a>
-    <a href="#eventi" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-accent transition">Eventi</a>
-    <a href="#unisciti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-accent transition">Unisciti</a>
-    <a href="#palmares" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-accent transition">Palmarès</a>
-    <a href="#galleria" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-accent transition">Galleria</a>
-    <a href="#palio-quiz" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-accent transition">Palio del Quiz</a>
-    <a href="#orentano-news" class="text-sm font-semibold uppercase tracking-wider text-accent hover:underline transition">Orentano News</a>
-    <a href="#contatti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-accent transition">Contatti</a>
-    <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold uppercase text-xs tracking-wider">Unisciti</a>
-</nav>
-<button id="menuBtn" aria-label="Menu" class="md:hidden text-white w-10 h-10 grid place-items-center text-2xl">☰</button>
-</div>
+      <nav class="hidden md:flex items-center gap-6">
+          <a href="#storia" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Storia</a>
+          <a href="#eventi" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Eventi</a>
+          <a href="#unisciti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Unisciti</a>
+          <a href="#palmares" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palmarès</a>
+          <a href="#galleria" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Galleria</a>
+          <a href="#palio-quiz" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palio del Quiz</a>
+          <a href="#faq" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">FAQ</a>
+          <a href="#orentano-news" class="text-sm font-semibold uppercase tracking-wider text-primary hover:underline transition">Orentano News</a>
+          <a href="#contatti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Contatti</a>
+          <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold uppercase text-xs tracking-wider">Unisciti</a>
+      </nav>
+      <button id="menuBtn" aria-label="Menu" class="md:hidden text-white w-10 h-10 grid place-items-center text-2xl">☰</button>
+    </div>
 
-<div id="mobileMenu" class="hidden md:hidden bg-foreground border-t border-white/10 px-4 pb-4">
-    <a href="#storia" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Storia</a>
-    <a href="#eventi" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Eventi</a>
-    <a href="#unisciti" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Unisciti</a>
-    <a href="#palmares" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palmarès</a>
-    <a href="#galleria" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Galleria</a>
-    <a href="#palio-quiz" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palio del Quiz</a>
-    <a href="#orentano-news" class="mobile-link block py-3 font-display text-2xl text-accent border-b border-white/10">Orentano News</a>
-    <a href="#contatti" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Contatti</a>
-    <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="mt-4 block text-center bg-primary text-primary-foreground py-3 rounded-full font-bold uppercase text-sm tracking-wider">Unisciti</a>
-</div>
+    <div id="mobileMenu" class="hidden md:hidden bg-foreground border-t border-white/10 px-4 pb-4">
+        <a href="#storia" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Storia</a>
+        <a href="#eventi" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Eventi</a>
+        <a href="#unisciti" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Unisciti</a>
+        <a href="#palmares" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palmarès</a>
+        <a href="#galleria" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Galleria</a>
+        <a href="#palio-quiz" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palio del Quiz</a>
+        <a href="#faq" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">FAQ</a>
+        <a href="#orentano-news" class="mobile-link block py-3 font-display text-2xl text-primary border-b border-white/10">Orentano News</a>
+        <a href="#contatti" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Contatti</a>
+        <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="mt-4 block text-center bg-primary text-primary-foreground py-3 rounded-full font-bold uppercase text-sm tracking-wider">Unisciti</a>
+    </div>
   </header>
 
   <!-- HERO -->
   <section id="top" class="relative overflow-hidden bg-foreground text-white">
     <div class="absolute -right-32 -top-32 w-[28rem] h-[28rem] rounded-full bg-primary/50 blur-3xl"></div>
-    <div class="absolute -left-32 bottom-0 w-[24rem] h-[24rem] rounded-full bg-accent/25 blur-3xl"></div>
+    <div class="absolute -left-32 bottom-0 w-[24rem] h-[24rem] rounded-full bg-white/10 blur-3xl"></div>
     <div class="relative max-w-6xl mx-auto px-4 py-14 md:py-24 grid md:grid-cols-2 gap-10 items-center">
       <div>
-        <p class="inline-block bg-accent text-accent-foreground font-bold text-xs uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">Orentano · Fondato nel 2026</p>
+        <p class="inline-block bg-primary text-white font-bold text-xs uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">Orentano · Fondato nel 2026</p>
         <h1 class="font-display text-6xl sm:text-7xl lg:text-8xl leading-[0.95] mt-5">
-          SUGHERA <span class="text-accent">AVANTI</span> TUTTA!
+          SUGHERA <span class="text-primary">AVANTI</span> TUTTA!
         </h1>
         <p class="mt-5 text-lg text-white/80 max-w-md">
           Siamo la volpe che corre per prima. Siamo rosso, bianco e sughera. Siamo una grande famiglia e il posto accanto a noi è per te.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide shadow-lg hover:brightness-110 transition">Unisciti al Rione</a>
-          <a href="#eventi" class="border-2 border-accent text-accent px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-accent hover:text-accent-foreground transition">Prossimi eventi</a>
+          <a href="#eventi" class="border-2 border-white text-white px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-white hover:text-foreground transition">Prossimi eventi</a>
         </div>
       </div>
       <div class="flex justify-center">
@@ -105,10 +107,10 @@
   </section>
 
   <!-- MARQUEE -->
-  <div class="bg-foreground text-accent overflow-hidden border-y-4 border-accent">
+  <div class="bg-primary text-white overflow-hidden border-y-4 border-white">
     <div class="marquee flex whitespace-nowrap w-max py-3">
-      <span class="font-display text-2xl md:text-3xl px-6 flex items-center gap-6">SUGHERA AVANTI TUTTA! <span class="text-primary">✦</span> LA SUGHERA RISPONDE: PRESENTI! <span class="text-primary">✦</span> ROSSO E BIANCO NEL CUORE <span class="text-primary">✦</span> ORENTANO <span class="text-primary">✦</span></span>
-      <span class="font-display text-2xl md:text-3xl px-6 flex items-center gap-6">SUGHERA AVANTI TUTTA! <span class="text-primary">✦</span> LA SUGHERA RISPONDE: PRESENTI! <span class="text-primary">✦</span> ROSSO E BIANCO NEL CUORE <span class="text-primary">✦</span> ORENTANO <span class="text-primary">✦</span></span>
+      <span class="font-display text-2xl md:text-3xl px-6 flex items-center gap-6">SUGHERA AVANTI TUTTA! <span class="text-white">✦</span> LA SUGHERA RISPONDE: PRESENTI! <span class="text-white">✦</span> ROSSO E BIANCO NEL CUORE <span class="text-white">✦</span> ORENTANO <span class="text-white">✦</span></span>
+      <span class="font-display text-2xl md:text-3xl px-6 flex items-center gap-6">SUGHERA AVANTI TUTTA! <span class="text-white">✦</span> LA SUGHERA RISPONDE: PRESENTI! <span class="text-white">✦</span> ROSSO E BIANCO NEL CUORE <span class="text-white">✦</span> ORENTANO <span class="text-white">✦</span></span>
     </div>
   </div>
 
@@ -119,8 +121,8 @@
         <p class="text-primary font-bold uppercase tracking-[0.2em] text-sm">La nostra storia</p>
         <h2 class="font-display text-5xl md:text-6xl mt-2 leading-none">NATI DALL'ESTATE <span class="text-primary">2026</span></h2>
         <div class="mt-6 flex gap-6">
-          <div><div class="font-display text-5xl text-accent">4</div><div class="text-xs uppercase tracking-wider text-muted-foreground">rioni di Orentano</div></div>
-          <div><div class="font-display text-5xl text-accent">1°</div><div class="text-xs uppercase tracking-wider text-muted-foreground">torneo dei rioni</div></div>
+          <div><div class="font-display text-5xl text-primary">4</div><div class="text-xs uppercase tracking-wider text-muted-foreground">rioni di Orentano</div></div>
+          <div><div class="font-display text-5xl text-primary">1°</div><div class="text-xs uppercase tracking-wider text-muted-foreground">torneo dei rioni</div></div>
         </div>
       </div>
       <div class="md:col-span-3 space-y-5 text-lg leading-relaxed text-muted-foreground">
@@ -138,8 +140,9 @@
       <p class="font-bold uppercase tracking-[0.2em] text-sm text-white/80">Segnati la data</p>
       <h2 class="font-display text-5xl md:text-7xl mt-2 leading-none">PROSSIMI EVENTI</h2>
 
+      <div class="mt-10 max-w-lg">
         <article class="bg-background text-foreground rounded-2xl overflow-hidden shadow-xl h-full flex flex-col">
-          <div class="bg-foreground text-accent px-6 py-4 flex items-end gap-3">
+          <div class="bg-foreground text-white px-6 py-4 flex items-end gap-3 border-b-2 border-primary">
             <span class="font-display text-7xl leading-none">8</span>
             <span class="font-display text-3xl pb-1">DIC</span>
           </div>
@@ -165,108 +168,134 @@
         <a href="tel:+393331645269" class="inline-block font-display text-4xl md:text-5xl text-foreground hover:text-primary transition">333 16 45 269</a>
         <a href="tel:+393711260190" class="inline-block font-display text-4xl md:text-5xl text-foreground hover:text-primary transition">371 12 60 190</a>
       </div>
-      <div class="mt-8">
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
         <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="inline-block bg-[#25D366] text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide shadow-lg hover:brightness-105">Scrivici su WhatsApp</a>
-        <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" target="_blank" rel="noopener" class="inline-block ml-0 mt-3 sm:mt-0 sm:ml-3 border-2 border-primary text-primary px-8 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-primary hover:text-primary-foreground transition">Entra nel gruppo</a>
+        <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" target="_blank" rel="noopener" class="inline-block border-2 border-primary text-primary px-8 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-primary hover:text-primary-foreground transition">Entra nel gruppo</a>
       </div>
     </div>
   </section>
 
-<!-- SEZIONE PALMARÈS RIONE LA SUGHERA -->
-<section id="palmares" class="py-16 bg-zinc-950 text-white border-t border-accent/20">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-        
-        <span class="inline-block bg-accent/10 text-accent font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
-            Albo d'Oro
-        </span>
-        
-        <h2 class="font-display text-4xl sm:text-5xl text-accent font-bold tracking-tight mb-4">
-            IL PALMARÈS
-        </h2>
-        
-        <p class="text-white/80 max-w-2xl mx-auto mb-10 text-sm sm:text-base">
-            I trofei, i podi e la storia dei piazzamenti del Rione La Sughera nelle competizioni locali.
-        </p>
-
-        <!-- GRID PALMARÈS -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-            
-            <!-- MEDAGLIE D'ARGENTO -->
-            <div class="bg-white/5 border border-accent/30 rounded-2xl p-6 backdrop-blur transition hover:border-accent">
-                <div class="text-4xl mb-3">🥈</div>
-                <span class="text-accent font-bold text-xs uppercase tracking-wider">3 Medaglie d'Argento</span>
-                <h3 class="text-2xl font-bold text-white mt-1">Palio del Quiz</h3>
-                <p class="text-zinc-400 text-sm mt-2">
-                    Tre secondi posti conquistati con orgoglio nella sfida di cultura, storia e tradizioni.
-                </p>
-            </div>
-
-            <!-- MEDAGLIA DI BRONZO -->
-            <div class="bg-white/5 border border-accent/30 rounded-2xl p-6 backdrop-blur transition hover:border-accent">
-                <div class="text-4xl mb-3">🥉</div>
-                <span class="text-accent font-bold text-xs uppercase tracking-wider">1 Medaglia di Bronzo</span>
-                <h3 class="text-2xl font-bold text-white mt-1">Palio del Quiz</h3>
-                <p class="text-zinc-400 text-sm mt-2">
-                    Terzo posto sul podio a testimonianza della continuità e della preparazione del Rione.
-                </p>
-            </div>
-
-            <!-- MEDAGLIA DI LEGNO -->
-            <div class="bg-white/5 border border-accent/30 rounded-2xl p-6 backdrop-blur transition hover:border-accent">
-                <div class="text-4xl mb-3">🪵</div>
-                <span class="text-accent font-bold text-xs uppercase tracking-wider">1 Medaglia di Legno</span>
-                <h3 class="text-2xl font-bold text-white mt-1">Torneo dei Rioni</h3>
-                <p class="text-zinc-400 text-sm mt-2">
-                    4° posto ottenuto lottando fino all'ultimo minuto nel torneo di calcio interrionale.
-                </p>
-            </div>
-
-        </div>
-    </div>
-</section>
-  
-  <!-- GALLERIA -->
-  <section id="galleria" class="py-20 md:py-28 bg-secondary">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="text-primary font-bold uppercase tracking-[0.2em] text-sm">Momenti rossi e bianchi</p>
-      <h2 class="font-display text-5xl md:text-6xl mt-2 leading-none">GALLERIA</h2>
-      
-      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-        
-        <!-- CARD TORNEO DEI RIONI CON IMMAGINE DI SFONDO -->
-        <div class="col-span-2 md:col-span-4 relative rounded-2xl overflow-hidden border-4 border-accent shadow-xl min-h-[350px] flex flex-col justify-end p-6 md:p-10">
-          <img src="torneo.jpg" alt="Torneo dei Rioni" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+  <!-- SEZIONE PALMARÈS RIONE LA SUGHERA -->
+  <section id="palmares" class="py-16 bg-zinc-950 text-white border-t border-primary/30">
+      <div class="max-w-5xl mx-auto px-4 text-center">
           
-          <div class="relative z-10 text-center">
-            <img src="logo.png" alt="Stemma" class="h-16 w-auto mx-auto mb-3 object-contain drop-shadow-md">
-            <div class="font-display text-4xl md:text-5xl text-accent leading-none">TORNEO DEI RIONI</div>
-            <div class="text-white text-base md:text-lg mt-2 font-medium">La Sughera in campo: presenti!</div>
-          </div>
-        </div>
-        
-<!-- RICORDO / FOTO PIZZATA DEI RIONI -->
-<div class="col-span-2 md:col-span-2 rounded-2xl bg-foreground border-4 border-accent p-6 shadow-xl text-center">
-    <div class="font-display text-3xl sm:text-4xl text-accent leading-none mb-2">LA PIZZATA DEI RIONI</div>
-    <p class="text-white/80 text-sm mb-6">Un bellissimo momento di festa e unione tra i rioni. Grazie a tutti i partecipanti!</p>
-    
-    <!-- GRIGLIA FOTO -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="overflow-hidden rounded-xl border-2 border-accent/30 bg-black">
-            <img src="NOME_PRIMA_FOTO.jpg" alt="Preparazione e sala della Pizzata dei Rioni" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
-        </div>
-        <div class="overflow-hidden rounded-xl border-2 border-accent/30 bg-black">
-            <img src="NOME_SECONDA_FOTO.jpg" alt="I ragazzi con i colori dei rioni" class="w-full h-64 object-cover hover:scale-105 transition duration-500">
-        </div>
-    </div>
-</div>
+          <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
+              Albo d'Oro
+          </span>
+          
+          <h2 class="font-display text-4xl sm:text-5xl text-white font-bold tracking-tight mb-4">
+              IL PALMARÈS
+          </h2>
+          
+          <p class="text-white/80 max-w-2xl mx-auto mb-10 text-sm sm:text-base">
+              I trofei, i podi e la storia dei piazzamenti del Rione La Sughera nelle competizioni locali.
+          </p>
 
-        <div class="col-span-2 md:col-span-2 rounded-2xl border-2 border-dashed border-accent bg-background/70 aspect-video md:aspect-auto grid place-items-center text-center p-6">
-          <div>
-            <div class="font-display text-2xl text-primary leading-tight">Albero di Natale</div>
-            <div class="text-sm text-muted-foreground mt-1">Le foto arrivano presto</div>
+          <!-- GRID PALMARÈS -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+              
+              <!-- MEDAGLIE D'ARGENTO -->
+              <div class="bg-white/5 border border-primary/40 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
+                  <div class="text-4xl mb-3">🥈</div>
+                  <span class="text-primary font-bold text-xs uppercase tracking-wider">3 Medaglie d'Argento</span>
+                  <h3 class="text-2xl font-bold text-white mt-1">Palio del Quiz</h3>
+                  <p class="text-zinc-400 text-sm mt-2">
+                      Tre secondi posti conquistati con orgoglio nella sfida di cultura, storia e tradizioni.
+                  </p>
+              </div>
+
+              <!-- MEDAGLIA DI BRONZO -->
+              <div class="bg-white/5 border border-primary/40 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
+                  <div class="text-4xl mb-3">🥉</div>
+                  <span class="text-primary font-bold text-xs uppercase tracking-wider">1 Medaglia di Bronzo</span>
+                  <h3 class="text-2xl font-bold text-white mt-1">Palio del Quiz</h3>
+                  <p class="text-zinc-400 text-sm mt-2">
+                      Terzo posto sul podio a testimonianza della continuità e della preparazione del Rione.
+                  </p>
+              </div>
+
+              <!-- MEDAGLIA DI LEGNO -->
+              <div class="bg-white/5 border border-primary/40 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
+                  <div class="text-4xl mb-3">🪵</div>
+                  <span class="text-primary font-bold text-xs uppercase tracking-wider">1 Medaglia di Legno</span>
+                  <h3 class="text-2xl font-bold text-white mt-1">Torneo dei Rioni</h3>
+                  <p class="text-zinc-400 text-sm mt-2">
+                      4° posto ottenuto lottando fino all'ultimo minuto nel torneo di calcio interrionale.
+                  </p>
+              </div>
+
           </div>
+      </div>
+  </section>
+  
+  <!-- GALLERIA FOTOGRAFICA ESPANDIBILE -->
+  <section id="galleria" class="py-20 md:py-28 bg-secondary">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <span class="inline-block bg-primary/10 text-primary font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
+          Momenti rossi e bianchi
+      </span>
+      <h2 class="font-display text-5xl md:text-6xl mt-2 leading-none">GALLERIA RIONALE</h2>
+      <p class="text-muted-foreground max-w-2xl mx-auto mb-10 text-sm sm:text-base mt-3">
+        I momenti più belli, le feste, i preparativi e le sfilate che raccontano la storia del Rione La Sughera.
+      </p>
+      
+      <!-- GRIGLIA FOTO VISIBILI SUBITO -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+        
+        <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
+            <img src="882c7f1b-7f10-45e9-b8f1-76f580511b0e.jpg" alt="Pizzata dei Rioni - Sala" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                <p class="text-white font-bold text-sm">Pizzata dei Rioni - Sala</p>
+            </div>
         </div>
+
+        <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
+            <img src="IMG_0201.PNG" alt="Festa dei Rioni" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                <p class="text-white font-bold text-sm">Festa dei Rioni</p>
+            </div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
+            <img src="torneo.jpg" alt="Torneo dei Rioni" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                <p class="text-white font-bold text-sm">Torneo dei Rioni in Campo</p>
+            </div>
+        </div>
+
+      </div>
+
+      <!-- GRIGLIA FOTO EXTRA (NASCOSTE ALL'AVVIO) -->
+      <div id="extra-photos" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 text-left">
+          
+          <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
+              <img src="foto4.jpg" alt="Palio del Quiz" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                  <p class="text-white font-bold text-sm">Palio del Quiz</p>
+              </div>
+          </div>
+
+          <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
+              <img src="foto5.jpg" alt="Eventi Rionali" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                  <p class="text-white font-bold text-sm">Eventi e Tradizioni</p>
+              </div>
+          </div>
+
+          <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
+              <img src="foto6.jpg" alt="Sfilata e Allestimenti" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                  <p class="text-white font-bold text-sm">Sfilata Rionale</p>
+              </div>
+          </div>
+
+      </div>
+
+      <!-- PULSANTE CARICA ALTRE FOTO -->
+      <div class="mt-8">
+          <button id="toggleGalleryBtn" onclick="toggleGallery()" class="inline-block bg-foreground hover:bg-primary text-white font-bold px-8 py-3 rounded-full border border-primary/40 transition duration-300 uppercase text-xs tracking-widest shadow">
+              Mostra altre foto
+          </button>
       </div>
       
       <p class="mt-8 mb-4 text-center text-muted-foreground">Seguici sui social del Rione per non perdere neanche uno scatto.</p>
@@ -280,87 +309,151 @@
     </div>
   </section>
 
-<!-- SEZIONE PALIO DEL QUIZ -->
-<section id="palio-quiz" class="py-16 bg-gradient-to-br from-foreground via-zinc-900 to-black text-white border-y-4 border-accent relative overflow-hidden">
-  <div class="max-w-5xl mx-auto px-4">
-    <div class="grid md:grid-cols-12 gap-8 items-center">
-      
-      <!-- LOGO DEL PALIO -->
-      <div class="md:col-span-5 flex justify-center">
-        <div class="relative group">
-          <div class="absolute -inset-1 bg-gradient-to-r from-accent to-primary rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
-          <img src="palio-quiz.jpg" alt="Il Palio del Quiz Logo" class="relative w-64 h-64 md:w-80 md:h-80 object-contain rounded-full bg-black p-2 border-2 border-accent shadow-2xl">
-        </div>
-      </div>
-
-      <!-- TESTO E COUNTDOWN -->
-      <div class="md:col-span-7 text-center md:text-left">
-        <span class="inline-block bg-primary text-primary-foreground font-bold text-xs uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full mb-3 shadow">
-          4ª Edizione · Orentano News
-        </span>
-        <h2 class="font-display text-5xl sm:text-6xl text-accent leading-none">IL PALIO DEL QUIZ</h2>
-        <p class="mt-3 text-white/80 text-base md:text-lg">
-          La grande sfida sulla storia, le tradizioni e le curiosità di Orentano! Metti alla prova le tue conoscenze e porta in alto i colori del Rione La Sughera.
-        </p>
-
-<!-- BOX COUNTDOWN AUTOMATICO -->
-<div class="mt-6 bg-white/5 border-2 border-accent/40 rounded-2xl p-4 sm:p-5 backdrop-blur shadow-inner inline-block w-full max-w-md">
-    <p class="text-xs uppercase tracking-widest text-accent font-bold mb-2">Mancano all'inizio:</p>
-    <div id="palio-countdown-finale" class="font-display text-4xl sm:text-5xl text-white tracking-wide">
-        Calcolo in corso...
-    </div>
-</div>
-
-<script>
-(function() {
-    function updateLiveCountdown() {
-        const targetDate = new Date('2026-11-02T00:00:00').getTime();
-        const now = new Date().getTime();
-        const diff = targetDate - now;
+  <!-- SEZIONE PALIO DEL QUIZ -->
+  <section id="palio-quiz" class="py-16 bg-gradient-to-br from-foreground via-zinc-900 to-black text-white border-y-4 border-primary relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid md:grid-cols-12 gap-8 items-center">
         
-        const container = document.getElementById('palio-countdown-finale');
-        if (!container) return;
-
-        if (diff <= 0) {
-            container.innerHTML = '<span class="text-accent">IL PALIO NON È ANCORA INIZIATO</span>';
-            return;
-        }
-
-        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        if (days === 1) {
-            container.innerHTML = '<span class="text-accent">SOLO 1 GIORNO! 🔥</span>';
-        } else {
-            container.innerHTML = `<span class="text-accent">${days} GIORNI</span>`;
-        }
-    }
-
-    updateLiveCountdown();
-    setInterval(updateLiveCountdown, 60000);
-})();
-</script>
-
-        <div class="mt-6 flex flex-wrap gap-3 justify-center md:justify-start">
-          <a href="https://orentano.news/rioni/il-palio-del-quiz" target="_blank" rel="noopener noreferrer" class="bg-accent text-accent-foreground px-8 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide shadow-lg hover:brightness-110 transition">
-            Gioca sul Palio del Quiz ↗
-          </a>
+        <!-- LOGO DEL PALIO -->
+        <div class="md:col-span-5 flex justify-center">
+          <div class="relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-primary to-white rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+            <img src="palio-quiz.jpg" alt="Il Palio del Quiz Logo" class="relative w-64 h-64 md:w-80 md:h-80 object-contain rounded-full bg-black p-2 border-2 border-primary shadow-2xl">
+          </div>
         </div>
-      </div>
 
+        <!-- TESTO E COUNTDOWN -->
+        <div class="md:col-span-7 text-center md:text-left">
+          <span class="inline-block bg-primary text-primary-foreground font-bold text-xs uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full mb-3 shadow">
+            4ª Edizione · Orentano News
+          </span>
+          <h2 class="font-display text-5xl sm:text-6xl text-white leading-none">IL PALIO DEL QUIZ</h2>
+          <p class="mt-3 text-white/80 text-base md:text-lg">
+            La grande sfida sulla storia, le tradizioni e le curiosità di Orentano! Metti alla prova le tue conoscenze e porta in alto i colori del Rione La Sughera.
+          </p>
+
+          <!-- BOX COUNTDOWN AUTOMATICO -->
+          <div class="mt-6 bg-white/5 border-2 border-primary/40 rounded-2xl p-4 sm:p-5 backdrop-blur shadow-inner inline-block w-full max-w-md">
+              <p class="text-xs uppercase tracking-widest text-primary font-bold mb-2">Mancano all'inizio:</p>
+              <div id="palio-countdown-finale" class="font-display text-4xl sm:text-5xl text-white tracking-wide">
+                  Calcolo in corso...
+              </div>
+          </div>
+
+          <div class="mt-6 flex flex-wrap gap-3 justify-center md:justify-start">
+            <a href="https://orentano.news/rioni/il-palio-del-quiz" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide shadow-lg hover:brightness-110 transition">
+              Gioca sul Palio del Quiz ↗
+            </a>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- SEZIONE FAQ (DOMANDE FREQUENTI) -->
+  <section id="faq" class="py-16 bg-zinc-950 text-white border-t border-primary/30">
+      <div class="max-w-4xl mx-auto px-4">
+          
+          <div class="text-center mb-10">
+              <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
+                  Dubbi e Info
+              </span>
+              <h2 class="font-display text-4xl sm:text-5xl text-white font-bold tracking-tight mb-4">
+                  DOMANDE FREQUENTI
+              </h2>
+              <p class="text-white/80 text-sm sm:text-base max-w-xl mx-auto">
+                  Tutto quello che c'è da sapere per entrare a far parte della famiglia del Rione La Sughera.
+              </p>
+          </div>
+
+          <!-- GRIGLIA DOMANDE -->
+          <div class="space-y-6">
+              
+              <!-- DOMANDA 1 -->
+              <div class="bg-white/5 border border-primary/30 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
+                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                      <span class="text-primary">❓</span> Chi può partecipare alle attività del Rione?
+                  </h3>
+                  <p class="text-zinc-300 text-sm leading-relaxed pl-8">
+                      Le attività del Rione La Sughera sono aperte a tutti coloro che desiderano partecipare, mettersi in gioco e dare una mano per sostenere la nostra comunità!
+                  </p>
+              </div>
+
+              <!-- DOMANDA 2 -->
+              <div class="bg-white/5 border border-primary/30 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
+                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                      <span class="text-primary">🤝</span> Come posso tesserarmi o dare il mio contributo?
+                  </h3>
+                  <div class="text-zinc-300 text-sm leading-relaxed pl-8 space-y-3">
+                      <p>
+                          Non esiste ancora un vero e proprio tesseramento formalizzato. Per partecipare alle attività del Rione basta abitare all'interno del territorio rionale (o esserne stati residenti in passato) e unirsi al nostro gruppo WhatsApp ufficiale, dove ci organizziamo per ogni evento.
+                      </p>
+                      <div class="pt-2">
+                          <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" 
+                             target="_blank" 
+                             rel="noopener noreferrer" 
+                             class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-5 py-2.5 rounded-full text-xs uppercase tracking-wider transition duration-300 shadow-md hover:scale-105">
+                              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                              </svg>
+                              <span>Unisciti al Gruppo WhatsApp</span>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- DOMANDA 3 (SOCIAL) -->
+              <div class="bg-white/5 border border-primary/30 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
+                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                      <span class="text-primary">📢</span> Come posso rimanere aggiornato sugli eventi e le iniziative?
+                  </h3>
+                  <div class="text-zinc-300 text-sm leading-relaxed pl-8 space-y-3">
+                      <p>
+                          Basta seguirci sui nostri canali social ufficiali per non perderti nessuna novità, data o comunicato!
+                      </p>
+                      <div class="flex flex-wrap gap-3 pt-2">
+                          <a href="https://www.instagram.com/rionelasughera" 
+                             target="_blank" 
+                             rel="noopener noreferrer" 
+                             class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-500 hover:opacity-90 text-white font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider transition duration-300 shadow">
+                              Instagram
+                          </a>
+                          <a href="https://www.facebook.com/share/1D3WoTb2c1/?mibextid=wwXIfr" 
+                             target="_blank" 
+                             rel="noopener noreferrer" 
+                             class="inline-flex items-center gap-2 bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider transition duration-300 shadow">
+                              Facebook
+                          </a>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- DOMANDA 4 -->
+              <div class="bg-white/5 border border-primary/30 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
+                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                      <span class="text-primary">💡</span> Posso proporre nuove idee o aiutare nell'organizzazione?
+                  </h3>
+                  <p class="text-zinc-300 text-sm leading-relaxed pl-8">
+                      Assolutamente sì! Ogni proposta per valorizzare il Rione o organizzare nuovi eventi è benvenuta. Puoi condividerla direttamente nel gruppo WhatsApp o parlarne con gli altri ragazzi del rione.
+                  </p>
+              </div>
+
+          </div>
+      </div>
+  </section>
   
-  <!-- SEZIONE ORENTANO NEWS (Logo ingrandito) -->
+  <!-- SEZIONE ORENTANO NEWS -->
   <section id="orentano-news" class="py-20 md:py-28 bg-foreground text-white relative overflow-hidden">
     <div class="absolute -left-32 top-0 w-[26rem] h-[26rem] rounded-full bg-primary/30 blur-3xl"></div>
-    <div class="absolute -right-32 bottom-0 w-[26rem] h-[26rem] rounded-full bg-accent/20 blur-3xl"></div>
+    <div class="absolute -right-32 bottom-0 w-[26rem] h-[26rem] rounded-full bg-white/10 blur-3xl"></div>
     
     <div class="relative max-w-4xl mx-auto px-4 text-center">
-      <div class="inline-block bg-accent text-accent-foreground font-bold text-xs uppercase tracking-[0.2em] px-3 py-1.5 rounded-full mb-4">L'app ufficiale del paese</div>
-      <h2 class="font-display text-5xl md:text-7xl mt-2 leading-none">ORENTANO <span class="text-accent">NEWS</span></h2>
+      <div class="inline-block bg-primary text-white font-bold text-xs uppercase tracking-[0.2em] px-3 py-1.5 rounded-full mb-4">L'app ufficiale del paese</div>
+      <h2 class="font-display text-5xl md:text-7xl mt-2 leading-none">ORENTANO <span class="text-primary">NEWS</span></h2>
       
       <div class="mt-8 flex justify-center">
-        <img src="orentano-news.png" alt="Orentano News Logo" class="h-48 w-48 md:h-56 md:w-56 object-contain rounded-3xl border-4 border-accent shadow-2xl bg-white p-3">
+        <img src="orentano-news.png" alt="Orentano News Logo" class="h-48 w-48 md:h-56 md:w-56 object-contain rounded-3xl border-4 border-primary shadow-2xl bg-white p-3">
       </div>
 
       <p class="mt-8 text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
@@ -368,107 +461,128 @@
       </p>
 
       <div class="mt-10">
-        <a href="https://orentano.news/" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary text-primary-foreground px-10 py-4 rounded-full font-bold uppercase tracking-wide shadow-xl hover:brightness-110 transition text-lg border-2 border-accent">
+        <a href="https://orentano.news/" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary text-primary-foreground px-10 py-4 rounded-full font-bold uppercase tracking-wide shadow-xl hover:brightness-110 transition text-lg border-2 border-white">
           Visita Orentano News ↗
         </a>
       </div>
     </div>
   </section>
 
-  <!-- CONTATTI (Modulo rimosso e sostituito con l'immagine contatti.jpg) -->
+  <!-- CONTATTI & CONDIVISIONE RAPIDA -->
   <section id="contatti" class="py-20 md:py-28">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
       <div>
         <p class="text-primary font-bold uppercase tracking-[0.2em] text-sm">Contatti</p>
         <h2 class="font-display text-5xl md:text-6xl mt-2 leading-none">SCRIVICI, ORA!</h2>
-        <p class="mt-4 text-muted-foreground text-lg">Iscriviti alla mailing list, chiedi informazioni o prenota la tua presenza agli eventi.</p>
+        <p class="mt-4 text-muted-foreground text-lg">Chiedi informazioni o prenota la tua presenza agli eventi del rione.</p>
         <div class="mt-6 space-y-3 text-lg">
           <p><strong>Telefono / WhatsApp:</strong> <a class="text-primary font-semibold" href="tel:+393331645269">333 16 45 269</a> · <a class="text-primary font-semibold" href="tel:+393711260190">371 12 60 190</a></p>
           <p><strong>Dove:</strong> Orentano (Castelfranco di Sotto, PI)</p>
         </div>
-        <div class="mt-6 rounded-2xl overflow-hidden border-2 border-accent shadow-lg">
+        <div class="mt-6 rounded-2xl overflow-hidden border-2 border-primary shadow-lg">
           <iframe title="Mappa Orentano" src="https://www.google.com/maps?q=Orentano&output=embed" width="100%" height="260" style="border:0;" loading="lazy"></iframe>
         </div>
       </div>
 
-      <div>
-        <div class="rounded-2xl overflow-hidden border-4 border-accent shadow-xl bg-card">
+      <div class="space-y-6">
+        <div class="rounded-2xl overflow-hidden border-4 border-primary shadow-xl bg-card">
           <img src="contatti.jpg" alt="Rione La Sughera" class="w-full h-auto object-cover">
+        </div>
+
+        <!-- PULSANTE CONDIVISIONE RAPIDA -->
+        <div class="bg-foreground border border-white/10 rounded-2xl p-6 text-center shadow-lg">
+            <h3 class="font-display text-xl text-white font-bold mb-2">
+                Porta la Sughera con te! 🔴⚪
+            </h3>
+            <p class="text-zinc-400 text-xs mb-4">
+                Condividi il sito ufficiale del Rione con un click!
+            </p>
+            <a href="https://api.whatsapp.com/send?text=Guarda%20il%20sito%20ufficiale%20del%20Rione%20La%20Sughera!%20🔴⚪%20Tutte%20le%20news,%20il%20Palmar%C3%A8s%20e%20gli%20eventi%20aggiornati:%20https://rionelasughera.github.io/rione-la-sughera/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-5 py-3 rounded-full shadow transition duration-300 hover:scale-105 uppercase text-xs tracking-wider">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+                <span>Condividi su WhatsApp</span>
+            </a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-foreground text-white/80 border-t-4 border-accent">
+  <footer class="bg-foreground text-white/80 border-t-4 border-primary">
     <div class="max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
       <div class="flex items-center gap-4">
         <img src="logo.png" alt="Stemma" class="h-14 w-auto object-contain">
         <div>
-          <div class="font-display text-3xl text-accent">RIONE LA SUGHERA</div>
+          <div class="font-display text-3xl text-white">RIONE LA SUGHERA</div>
           <div class="text-sm">Orentano · Fondato nel 2026</div>
         </div>
       </div>
       <div class="flex flex-col items-center md:items-end gap-3">
         <div class="font-display text-2xl text-white">SUGHERA AVANTI TUTTA!</div>
         <div class="flex flex-wrap justify-center gap-2">
-          <a href="https://www.instagram.com/rioni_orentano/" target="_blank" rel="noopener noreferrer" class="border-2 border-accent text-accent px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-accent hover:text-foreground transition">Rioni Orentano</a>
-          <a href="https://www.instagram.com/rionelasughera?rpxt=MXNpeG93NmM3Z29ueA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="border-2 border-accent text-accent px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-accent hover:text-foreground transition">Instagram</a>
-          <a href="https://www.facebook.com/share/1D3WoTb2c1/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="border-2 border-accent text-accent px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-accent hover:text-foreground transition">Facebook</a>
-          <a href="https://www.tiktok.com/@rionelasughera?_r=1&_t=ZN-9AuVEf30owo" target="_blank" rel="noopener noreferrer" class="border-2 border-accent text-accent px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-accent hover:text-foreground transition">TikTok</a>
-          <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" target="_blank" rel="noopener noreferrer" class="border-2 border-accent text-accent px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-accent hover:text-foreground transition">Gruppo WhatsApp</a>
+          <a href="https://www.instagram.com/rioni_orentano/" target="_blank" rel="noopener noreferrer" class="border-2 border-primary text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-white transition">Rioni Orentano</a>
+          <a href="https://www.instagram.com/rionelasughera" target="_blank" rel="noopener noreferrer" class="border-2 border-primary text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-white transition">Instagram</a>
+          <a href="https://www.facebook.com/share/1D3WoTb2c1/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="border-2 border-primary text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-white transition">Facebook</a>
+          <a href="https://www.tiktok.com/@rionelasughera" target="_blank" rel="noopener noreferrer" class="border-2 border-primary text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-white transition">TikTok</a>
+          <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" target="_blank" rel="noopener noreferrer" class="border-2 border-primary text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase hover:bg-primary hover:text-white transition">WhatsApp</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    
- <script>
-    // Menu mobile
+    // Menu mobile toggle
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     if (menuBtn && mobileMenu) {
       menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     }
 
-    // Countdown automatico per il Palio del Quiz (Inizio: 2 Novembre 2026)
-<div id="palio-countdown-box" style="font-family: inherit; margin-top: 1.5rem;">
-    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold; margin-bottom: 0.5rem;">Mancano all'inizio:</p>
-    <div id="quiz-countdown" style="font-size: 2.25rem; font-weight: bold;">Calcolo in corso...</div>
-</div>
-
-<script>
-(function() {
-    function runCountdown() {
-        const targetDate = new Date('2026-11-02T00:00:00').getTime();
-        const now = new Date().getTime();
-        const diff = targetDate - now;
+    // Toggle Galleria Fotografica Espandibile
+    function toggleGallery() {
+        const extraPhotos = document.getElementById('extra-photos');
+        const btn = document.getElementById('toggleGalleryBtn');
         
-        const el = document.getElementById('quiz-countdown');
-        if (!el) return;
-
-        if (diff <= 0) {
-            el.innerHTML = '<span style="color: #ff5722;">IL PALIO È IN CORSO! 🚀</span>';
-            return;
-        }
-
-        const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        if (days === 1) {
-            el.innerHTML = '<span style="color: #ff9800;">SOLO 1 GIORNO! 🔥</span>';
+        if (extraPhotos.classList.contains('hidden')) {
+            extraPhotos.classList.remove('hidden');
+            btn.innerText = 'Mostra meno';
         } else {
-            el.innerHTML = '<span style="color: #ff9800;">' + days + ' GIORNI</span>';
+            extraPhotos.classList.add('hidden');
+            btn.innerText = 'Mostra altre foto';
         }
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', runCountdown);
-    } else {
+    // Countdown automatico per il Palio del Quiz
+    (function() {
+        function runCountdown() {
+            const targetDate = new Date('2026-11-02T00:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            
+            const container = document.getElementById('palio-countdown-finale');
+            if (!container) return;
+
+            if (diff <= 0) {
+                container.innerHTML = '<span class="text-primary">IL PALIO È IN CORSO! 🚀</span>';
+                return;
+            }
+
+            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            if (days === 1) {
+                container.innerHTML = '<span class="text-primary">SOLO 1 GIORNO! 🔥</span>';
+            } else {
+                container.innerHTML = `<span class="text-white">${days} GIORNI</span>`;
+            }
+        }
+
         runCountdown();
-    }
-    setInterval(runCountdown, 60000);
-})();
-</script>
+        setInterval(runCountdown, 60000);
+    })();
+  </script>
+</body>
+</html>
