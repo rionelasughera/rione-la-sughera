@@ -1165,26 +1165,35 @@
                     <div class="space-y-2">
             `;
 
-            if (error || !leaderboard || leaderboard.length === 0) {
-                html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato. Apri un pacchetto per entrare!</p>`;
-            } else {
-                leaderboard.forEach((user, index) => {
-                    let badge = `#${index + 1}`;
-                    if (index === 0) badge = "🥇";
-                    else if (index === 1) badge = "🥈";
-                    else if (index === 2) badge = "🥉";
+if (error || !leaderboard) {
+              html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato.</p>`;
+          } else {
+              // BLOCCO TOTALE: Escludi categoricamente "Rosa" (case-insensitive) da qualsiasi visualizzazione
+              const filteredList = leaderboard.filter(user => 
+                  user.username && user.username.toLowerCase() !== "rosa"
+              );
 
-                    html += `
-                        <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-xl border border-slate-800">
-                            <div class="flex items-center gap-2">
-                                <span class="text-sm font-black w-6 text-center">${badge}</span>
-                                <span class="text-xs font-bold text-white">${user.username}</span>
-                            </div>
-                            <span class="text-xs font-extrabold text-amber-400">${user.cards_count} carte</span>
-                        </div>
-                    `;
-                });
-            }
+              if (filteredList.length === 0) {
+                  html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato.</p>`;
+              } else {
+                  filteredList.forEach((user, index) => {
+                      let badge = `#${index + 1}`;
+                      if (index === 0) badge = "🥇";
+                      else if (index === 1) badge = "🥈";
+                      else if (index === 2) badge = "🥉";
+
+                      html += `
+                          <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-xl border border-slate-800">
+                              <div class="flex items-center gap-2">
+                                  <span class="text-sm font-black w-6 text-center">${badge}</span>
+                                  <span class="text-xs font-bold text-white">${user.username}</span>
+                              </div>
+                              <span class="text-xs font-extrabold text-amber-400">${user.cards_count} carte</span>
+                          </div>
+                      `;
+                  });
+              }
+          }
 
             html += `</div></div>`;
             container.innerHTML = html;
