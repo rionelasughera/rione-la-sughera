@@ -1148,27 +1148,35 @@
       return username;
   }
 
-  async function syncProgressToCloud() {
+async function syncProgressToCloud() {
       const username = getPlayerUsername();
-      const collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
+      
+      // Recupera le carte trovate provando entrambe le chiavi possibili
+      let collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
+      if (collectedCards.length === 0) {
+          collectedCards = JSON.parse(localStorage.getItem('my_cards')) || [];
+      }
+      
       const cardsCount = collectedCards.length;
 
       try {
-const { error } = await supabaseClient
+          // Salva/aggiorna il punteggio su Supabase
+          const { error } = await supabaseClient
               .from('leaderboard')
               .upsert(
-                  { username: username, cards_count: cardsCount, created_at: new Date() },
+                  { username: username, cards_count: cardsCount, created_at: new Date().toISOString() },
                   { onConflict: 'username' }
               );
 
           if (error) {
               console.error("Errore salvataggio Supabase:", error.message);
           }
-          await fetchGlobalLeaderboard();
       } catch (err) {
           console.error("Errore di connessione:", err);
-          await fetchGlobalLeaderboard();
       }
+
+      // Mostra sempre la classifica aggiornata
+      await fetchGlobalLeaderboard();
   }
 
   async function fetchGlobalLeaderboard() {
@@ -1182,25 +1190,14 @@ const { error } = await supabaseClient
               .order('cards_count', { ascending: false })
               .limit(10);
 
-          if (error) {
-              console.error("Errore nel recupero della classifica:", error.message);
-              container.innerHTML = `
-                  <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-center w-full max-w-md mx-auto">
-                      <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-2">🏆 TOP 10 COLLEZIONISTI RIONE LA SUGHERA</h4>
-                      <p class="text-xs text-slate-400">Nessun giocatore registrato al momento.</p>
-                  </div>
-              `;
-              return;
-          }
-
           let html = `
               <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-left w-full max-w-md mx-auto">
                   <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-3 text-center">🏆 TOP 10 COLLEZIONISTI RIONE LA SUGHERA</h4>
                   <div class="space-y-2">
           `;
 
-          if (!leaderboard || leaderboard.length === 0) {
-              html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio salvato. Sii il primo!</p>`;
+          if (error || !leaderboard || leaderboard.length === 0) {
+              html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato. Apri un pacchetto per entrare!</p>`;
           } else {
               leaderboard.forEach((user, index) => {
                   let badge = `#${index + 1}`;
@@ -1223,11 +1220,11 @@ const { error } = await supabaseClient
           html += `</div></div>`;
           container.innerHTML = html;
       } catch (e) {
-          console.error("Errore imprevisto:", e);
+          console.error("Errore recupero classifica:", e);
       }
   }
 
-  // Avvio immediato
+  // Esegui subito la sincronizzazione all'avvio
   syncProgressToCloud();
 </script>
   
