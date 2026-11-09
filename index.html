@@ -37,7 +37,7 @@
     }
   </script>
 
-<style>
+  <style>
     html { scroll-behavior: smooth; }
     @keyframes marquee {
       0% { transform: translateX(0%); }
@@ -51,12 +51,10 @@
     }
     .floaty { animation: float 4s ease-in-out infinite; }
 
-    /* --- VERA SAGOMA GEOMETRICA STILE EA SPORTS FC --- */
+    /* --- VERA SAGOMA GEOMETRICA STILE FUT --- */
     .fut-card {
       width: 210px;
       height: 310px;
-      background: linear-gradient(135deg, #f5d77f 0%, #d4af37 40%, #aa771c 100%);
-      /* Taglio geometrico FUT con clip-path */
       clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
       padding: 3px;
       position: relative;
@@ -70,13 +68,57 @@
     .fut-card-inner {
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, #2a2008 0%, #0d1117 60%);
       clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    /* 1. CARTE NORMALI (ORO) */
+    .card-gold {
+      background: linear-gradient(135deg, #f5d77f 0%, #d4af37 40%, #aa771c 100%);
+      color: #3b2c0d;
+    }
+    .card-gold .fut-card-inner {
+      background: linear-gradient(180deg, #2a2008 0%, #0d1117 60%);
+    }
+
+    /* 2. CARTE ICON (BIANCO / GRIGIO) */
+    .card-icon {
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #64748b 100%);
+      color: #0f172a;
+    }
+    .card-icon .fut-card-inner {
+      background: linear-gradient(180deg, #334155 0%, #0f172a 60%);
+    }
+
+    /* 3. CARTE TOTY / TOTS (BLU) */
+    .card-toty {
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #1e3a8a 100%);
+      color: #e0f2fe;
+    }
+    .card-toty .fut-card-inner {
+      background: linear-gradient(180deg, #0c4a6e 0%, #030712 60%);
+    }
+
+    /* 4. CARTE HEROES (VERDI) */
+    .card-hero {
+      background: linear-gradient(135deg, #4ade80 0%, #16a34a 50%, #14532d 100%);
+      color: #dcfce7;
+    }
+    .card-hero .fut-card-inner {
+      background: linear-gradient(180deg, #14532d 0%, #051c0f 60%);
+    }
+
+    /* 5. CARTE FUTURE STARS (VIOLA ACCESO) */
+    .card-futures {
+      background: linear-gradient(135deg, #e879f9 0%, #a855f7 50%, #6b21a8 100%);
+      color: #fae8ff;
+    }
+    .card-futures .fut-card-inner {
+      background: linear-gradient(180deg, #581c87 0%, #0f051d 60%);
     }
 
     .fut-card-locked {
@@ -117,20 +159,6 @@
       font-size: 11px;
       margin-top: 3px;
       letter-spacing: 1px;
-    }
-
-    .fut-badge {
-      position: absolute;
-      top: 14px;
-      right: 32px;
-      width: 22px;
-      height: 26px;
-      background: #dc2626;
-      border: 1px solid #fef08a;
-      display: grid;
-      place-items: center;
-      font-size: 10px;
-      border-radius: 2px;
     }
 
     .fut-player-img {
@@ -825,22 +853,61 @@
     }
   </script>
 
-  <!-- Script per Gestione Carte (Grafica FUT, Statistiche e Timer 3 Giorni) -->
+  <!-- Script per Gestione Carte (Database con Statistiche Esatte, Tipi Colore e Logo.png sotto il ruolo) -->
   <script>
     const playersDatabase = [
-        { name: "Ferrera #2", img: "ferrera.jpg", weight: 18, rating: 84, pos: "CC", pac: 82, sho: 78, pas: 80, dri: 83, def: 75, phy: 79 },
-        { name: "Pizzi #11", img: "pizzi.jpg", weight: 18, rating: 84, pos: "ATT", pac: 85, sho: 84, pas: 75, dri: 82, def: 40, phy: 78 },
-        { name: "Matranga #18 (ATT)", img: "matranga-movimento.jpg", weight: 8, rating: 87, pos: "ATT", pac: 88, sho: 86, pas: 79, dri: 85, def: 45, phy: 82 },
-        { name: "Matranga (POR)", img: "matranga-portiere.jpg", weight: 8, rating: 86, pos: "POR", pac: 86, sho: 85, pas: 84, dri: 87, def: 83, phy: 88 },
-        { name: "Ciancia", img: "ciancia.jpg", weight: 8, rating: 85, pos: "DC", pac: 76, sho: 50, pas: 72, dri: 74, def: 86, phy: 88 },
-        { name: "Dariokke #9", img: "dariokke.jpg", weight: 8, rating: 85, pos: "ATT", pac: 86, sho: 83, pas: 74, dri: 84, def: 42, phy: 76 },
-        { name: "Maddalena #10", img: "maddalena.jpg", weight: 8, rating: 86, pos: "CDC", pac: 79, sho: 76, pas: 85, dri: 83, def: 84, phy: 85 },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", weight: 5, rating: 89, pos: "COC", pac: 88, sho: 85, pas: 90, dri: 91, def: 60, phy: 75 },
-        { name: "Agrestini #7", img: "agrestini.jpg", weight: 4, rating: 90, pos: "TS", pac: 92, sho: 70, pas: 83, dri: 88, def: 85, phy: 82 },
-        { name: "Bertoncini #1", img: "bertoncini.jpg", weight: 4, rating: 90, pos: "POR", pac: 90, sho: 89, pas: 88, dri: 91, def: 88, phy: 92 },
-        { name: "Mucci #3", img: "mucci.jpg", weight: 3, rating: 91, pos: "TD", pac: 93, sho: 72, pas: 86, dri: 89, def: 88, phy: 86 },
-        { name: "Mister", img: "mister.jpg", weight: 1, rating: 95, pos: "ALL", pac: 80, sho: 80, pas: 95, dri: 85, def: 90, phy: 92 },
-        { name: "La Sughera", img: "lasughera.jpg", weight: 1, rating: 99, pos: "ICON", pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 }
+        { 
+            name: "MISTER", img: "mister.jpg", weight: 1, rating: 99, pos: "ALL", type: "card-icon", 
+            isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 
+        },
+        { 
+            name: "LASUGHERA", img: "lasughera.jpg", weight: 1, rating: 99, pos: "SQD", type: "card-icon", 
+            isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 
+        },
+        { 
+            name: "Cianca #6", img: "ciancia.jpg", weight: 8, rating: 91, pos: "CC", type: "card-futures", 
+            isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 94, phy: 89 
+        },
+        { 
+            name: "Agrestini #7", img: "agrestini.jpg", weight: 4, rating: 92, pos: "CC/DC", type: "card-gold", 
+            isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93 
+        },
+        { 
+            name: "Dariokke #9", img: "dariokke.jpg", weight: 8, rating: 93, pos: "ATT", type: "card-hero", 
+            isGK: false, pac: 86, sho: 91, pas: 90, dri: 88, def: 82, phy: 94 
+        },
+        { 
+            name: "Pizzi #11", img: "pizzi.jpg", weight: 18, rating: 89, pos: "ATT", type: "card-gold", 
+            isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90 
+        },
+        { 
+            name: "Maddalena #10", img: "maddalena.jpg", weight: 8, rating: 90, pos: "CC", type: "card-hero", 
+            isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93 
+        },
+        { 
+            name: "Mucci #3", img: "mucci.jpg", weight: 3, rating: 98, pos: "DC", type: "card-icon", 
+            isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99 
+        },
+        { 
+            name: "Rosamilia #5", img: "rosamilia.jpg", weight: 5, rating: 91, pos: "DC", type: "card-toty", 
+            isGK: false, pac: 90, sho: 89, pas: 93, dri: 85, def: 96, phy: 92 
+        },
+        { 
+            name: "Matranga #18", img: "matranga-movimento.jpg", weight: 8, rating: 89, pos: "ATT", type: "card-futures", 
+            isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82 
+        },
+        { 
+            name: "Ferrera #2", img: "ferrera.jpg", weight: 18, rating: 88, pos: "CC", type: "card-gold", 
+            isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90 
+        },
+        { 
+            name: "BERTONCINI #1", img: "bertoncini.jpg", weight: 4, rating: 97, pos: "POR", type: "card-toty", 
+            isGK: true, s1: 95, s2: 93, s3: 98, s4: 97, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" 
+        },
+        { 
+            name: "MATRANGA #99", img: "matranga-portiere.jpg", weight: 8, rating: 93, pos: "POR", type: "card-gold", 
+            isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" 
+        }
     ];
 
     function renderAlbum() {
@@ -855,36 +922,54 @@
             const isUnlocked = collectedCards.includes(player.name);
             if (isUnlocked) unlockedCount++;
 
+            let statsHtml = "";
+            if (player.isGK) {
+                statsHtml = `
+                    <div class="fut-stats">
+                        <div>${player.s1} <span>${player.l1}</span></div>
+                        <div>${player.s2} <span>${player.l2}</span></div>
+                        <div>${player.s3} <span>${player.l3}</span></div>
+                    </div>
+                    <div class="fut-stats mt-1">
+                        <div>${player.s4} <span>${player.l4}</span></div>
+                        <div>${player.s5} <span>${player.l5}</span></div>
+                        <div>${player.s6} <span>${player.l6}</span></div>
+                    </div>
+                `;
+            } else {
+                statsHtml = `
+                    <div class="fut-stats">
+                        <div>${player.pac} <span>PAC</span></div>
+                        <div>${player.sho} <span>SHO</span></div>
+                        <div>${player.pas} <span>PAS</span></div>
+                    </div>
+                    <div class="fut-stats mt-1">
+                        <div>${player.dri} <span>DRI</span></div>
+                        <div>${player.def} <span>DEF</span></div>
+                        <div>${player.phy} <span>PHY</span></div>
+                    </div>
+                `;
+            }
+
             if (isUnlocked) {
-                // Carta Sbloccata in Stile FUT
                 grid.innerHTML += `
-                    <div class="fut-card transition-transform hover:scale-105">
+                    <div class="fut-card ${player.type} transition-transform hover:scale-105">
                         <div class="fut-card-inner">
                             <div class="fut-top-info">
                                 <span class="fut-rating">${player.rating}</span>
                                 <span class="fut-position">${player.pos}</span>
+                                <img src="logo.png" alt="Logo La Sughera" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
                             </div>
-                            <div class="fut-badge">🦊</div>
                             <img src="${player.img}" alt="${player.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
                             <div class="fut-bottom-section">
                                 <div class="fut-name">${player.name}</div>
-                                <div class="fut-stats">
-                                    <div>${player.pac} <span>PAC</span></div>
-                                    <div>${player.sho} <span>SHO</span></div>
-                                    <div>${player.pas} <span>PAS</span></div>
-                                </div>
-                                <div class="fut-stats mt-1">
-                                    <div>${player.dri} <span>DRI</span></div>
-                                    <div>${player.def} <span>DEF</span></div>
-                                    <div>${player.phy} <span>PHY</span></div>
-                                </div>
+                                ${statsHtml}
                                 <span class="text-[9px] text-green-400 font-bold mt-1">✓ Sbloccata</span>
                             </div>
                         </div>
                     </div>
                 `;
             } else {
-                // Carta Bloccata
                 grid.innerHTML += `
                     <div class="fut-card-locked">
                         <div class="text-4xl mb-2">🔒</div>
@@ -951,31 +1036,51 @@
 
             const wonPlayer = openPack();
             
+            let wonStatsHtml = "";
+            if (wonPlayer.isGK) {
+                wonStatsHtml = `
+                    <div class="fut-stats">
+                        <div>${wonPlayer.s1} <span>${wonPlayer.l1}</span></div>
+                        <div>${wonPlayer.s2} <span>${wonPlayer.l2}</span></div>
+                        <div>${wonPlayer.s3} <span>${wonPlayer.l3}</span></div>
+                    </div>
+                    <div class="fut-stats mt-1">
+                        <div>${wonPlayer.s4} <span>${wonPlayer.l4}</span></div>
+                        <div>${wonPlayer.s5} <span>${wonPlayer.l5}</span></div>
+                        <div>${wonPlayer.s6} <span>${wonPlayer.l6}</span></div>
+                    </div>
+                `;
+            } else {
+                wonStatsHtml = `
+                    <div class="fut-stats">
+                        <div>${wonPlayer.pac} <span>PAC</span></div>
+                        <div>${wonPlayer.sho} <span>SHO</span></div>
+                        <div>${wonPlayer.pas} <span>PAS</span></div>
+                    </div>
+                    <div class="fut-stats mt-1">
+                        <div>${wonPlayer.dri} <span>DRI</span></div>
+                        <div>${wonPlayer.def} <span>DEF</span></div>
+                        <div>${wonPlayer.phy} <span>PHY</span></div>
+                    </div>
+                `;
+            }
+
             const container = document.getElementById('card-container');
             if (container) {
                 container.innerHTML = `
                     <div class="flex flex-col items-center w-full animate-bounce">
                         <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold mb-3">🎉 HAI SBUSTATO:</span>
-                        <div class="fut-card shadow-2xl scale-105">
+                        <div class="fut-card ${wonPlayer.type} shadow-2xl scale-105">
                             <div class="fut-card-inner">
                                 <div class="fut-top-info">
                                     <span class="fut-rating">${wonPlayer.rating}</span>
                                     <span class="fut-position">${wonPlayer.pos}</span>
+                                    <img src="logo.png" alt="Logo La Sughera" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
                                 </div>
-                                <div class="fut-badge">🦊</div>
                                 <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
                                 <div class="fut-bottom-section">
                                     <div class="fut-name">${wonPlayer.name}</div>
-                                    <div class="fut-stats">
-                                        <div>${wonPlayer.pac} <span>PAC</span></div>
-                                        <div>${wonPlayer.sho} <span>SHO</span></div>
-                                        <div>${wonPlayer.pas} <span>PAS</span></div>
-                                    </div>
-                                    <div class="fut-stats mt-1">
-                                        <div>${wonPlayer.dri} <span>DRI</span></div>
-                                        <div>${wonPlayer.def} <span>DEF</span></div>
-                                        <div>${wonPlayer.phy} <span>PHY</span></div>
-                                    </div>
+                                    ${wonStatsHtml}
                                 </div>
                             </div>
                         </div>
@@ -994,7 +1099,6 @@
         });
     }
 
-    // Carica l'album e il timer all'avvio
     renderAlbum();
     checkPackTimer();
     setInterval(checkPackTimer, 60000);
