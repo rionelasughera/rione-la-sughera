@@ -1150,6 +1150,7 @@
 
 async function syncProgressToCloud() {
       const username = getPlayerUsername();
+  if (username === "Rosa") return; // Non sincronizzare o registrare Rosa
       
       // Recupera le carte trovate provando entrambe le chiavi possibili
       let collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
