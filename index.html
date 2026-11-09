@@ -1213,10 +1213,9 @@
       container.innerHTML = html;
   }
 
-  // Esegui all'avvio
-  document.addEventListener('DOMContentLoaded', () => {
-      syncProgressToCloud();
-  });
+// Esegui subito e avvia la sincronizzazione e il caricamento
+  syncProgressToCloud();
+  fetchGlobalLeaderboard();
 </script>
   
 </body>
