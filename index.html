@@ -69,6 +69,7 @@
           <a href="#galleria" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Galleria</a>
           <a href="#palio-quiz" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palio del Quiz</a>
           <a href="#faq" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">FAQ</a>
+          <a href="#carte" class="text-sm font-semibold uppercase tracking-wider text-yellow-400 hover:underline transition">Carte</a>
           <a href="#orentano-news" class="text-sm font-semibold uppercase tracking-wider text-primary hover:underline transition">Orentano News</a>
           <a href="#contatti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Contatti</a>
           <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold uppercase text-xs tracking-wider">Unisciti</a>
@@ -84,6 +85,7 @@
         <a href="#galleria" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Galleria</a>
         <a href="#palio-quiz" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palio del Quiz</a>
         <a href="#faq" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">FAQ</a>
+        <a href="#carte" class="mobile-link block py-3 font-display text-2xl text-yellow-400 border-b border-white/10">Carte</a>
         <a href="#orentano-news" class="mobile-link block py-3 font-display text-2xl text-primary border-b border-white/10">Orentano News</a>
         <a href="#contatti" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Contatti</a>
         <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="mt-4 block text-center bg-primary text-primary-foreground py-3 rounded-full font-bold uppercase text-sm tracking-wider">Unisciti</a>
@@ -474,37 +476,38 @@
       </div>
   </section>
 
-<!-- SEZIONE COLLEZIONA LE CARTE -->
-<div id="section-carte" class="w-full max-w-4xl mx-auto py-8 px-4 flex flex-col items-center">
-    
-    <div class="w-full flex justify-between items-center mb-6">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-yellow-400 tracking-wider">COLLEZIONA LE CARTE</h2>
-        <div id="counter" class="text-xs sm:text-sm font-bold text-slate-300 bg-slate-900 px-3 py-2 rounded-xl border border-slate-800">
-            0 / 13 Trovate
-        </div>
-    </div>
+  <!-- SEZIONE COLLEZIONA LE CARTE (POSIZIONATA SUBITO DOPO LE FAQ) -->
+  <section id="carte" class="py-16 bg-slate-950 text-white border-t border-primary/30">
+      <div class="w-full max-w-4xl mx-auto py-8 px-4 flex flex-col items-center">
+          <div class="w-full flex justify-between items-center mb-6">
+              <h2 class="text-xl sm:text-2xl font-extrabold text-yellow-400 tracking-wider">COLLEZIONA LE CARTE</h2>
+              <div id="counter" class="text-xs sm:text-sm font-bold text-slate-300 bg-slate-900 px-3 py-2 rounded-xl border border-slate-800">
+                  0 / 13 Trovate
+              </div>
+          </div>
 
-    <!-- Box Apertura Pacchetto -->
-    <div class="w-full max-w-md bg-slate-900/80 border border-slate-800 p-6 rounded-3xl shadow-xl flex flex-col items-center text-center mb-10">
-        <h3 class="text-lg font-bold text-yellow-400 mb-4">PACCHETTO SETTIMANALE 🎁</h3>
-        
-        <button id="open-pack-btn" class="w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 text-slate-950 font-black rounded-2xl shadow-lg transition-transform active:scale-95 cursor-pointer text-base sm:text-lg mb-6">
-            APRI PACCHETTO
-        </button>
+          <!-- Box Apertura Pacchetto -->
+          <div class="w-full max-w-md bg-slate-900/80 border border-slate-800 p-6 rounded-3xl shadow-xl flex flex-col items-center text-center mb-10">
+              <h3 class="text-lg font-bold text-yellow-400 mb-4">PACCHETTO SETTIMANALE 🎁</h3>
+              
+              <button id="open-pack-btn" class="w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 text-slate-950 font-black rounded-2xl shadow-lg transition-transform active:scale-95 cursor-pointer text-base sm:text-lg mb-6">
+                  APRI PACCHETTO
+              </button>
 
-        <div id="card-container" class="min-h-[220px] w-full flex items-center justify-center">
-            <p class="text-slate-400 text-sm">Clicca il bottone per scoprire la tua carta!</p>
-        </div>
-    </div>
+              <div id="card-container" class="min-h-[220px] w-full flex items-center justify-center">
+                  <p class="text-slate-400 text-sm">Clicca il bottone per scoprire la tua carta!</p>
+              </div>
+          </div>
 
-    <!-- Griglia Album -->
-    <div class="w-full">
-        <h3 class="text-lg font-bold text-yellow-400 mb-4 text-center sm:text-left">ALBUM DEL RIONE</h3>
-        <div id="album-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            <!-- Generato via JavaScript -->
-        </div>
-    </div>
-</div>
+          <!-- Griglia Album -->
+          <div class="w-full">
+              <h3 class="text-lg font-bold text-yellow-400 mb-4 text-center sm:text-left">ALBUM DEL RIONE</h3>
+              <div id="album-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                  <!-- Generato via JavaScript -->
+              </div>
+          </div>
+      </div>
+  </section>
   
   <!-- SEZIONE ORENTANO NEWS -->
   <section id="orentano-news" class="py-20 md:py-28 bg-foreground text-white relative overflow-hidden">
@@ -686,8 +689,10 @@
           .catch((err) => console.log('Registrazione Service Worker fallita:', err));
       });
     }
+  </script>
 
-<script>
+  <!-- Script per Gestione Carte & Pacchetti -->
+  <script>
     const playersDatabase = [
         { name: "Ferrera #2", img: "ferrera.jpg", weight: 18 },
         { name: "Pizzi #11", img: "pizzi.jpg", weight: 18 },
