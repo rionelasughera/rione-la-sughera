@@ -1154,10 +1154,10 @@
       const cardsCount = collectedCards.length;
 
       try {
-          const { error } = await supabaseClient
+const { error } = await supabaseClient
               .from('leaderboard')
               .upsert(
-                  { username: username, cards_count: cardsCount, updated_at: new Date() },
+                  { username: username, cards_count: cardsCount, created_at: new Date() },
                   { onConflict: 'username' }
               );
 
