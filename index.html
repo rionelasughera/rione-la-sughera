@@ -1128,29 +1128,26 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  // Credenziali del tuo progetto Supabase
   const SUPABASE_URL = "https://vuhgzhyamdkiciuueyhp.supabase.co";
-  const SUPABASE_ANON_KEY = "sb_publishable_cH_SxDLZnkbImYu6r_MPyQ_QPBvzi4F"; // Incolla la tua Publishable key (sb_publishable_...)
+  // Sostituisci la stringa qui sotto con la tua vera ANON KEY di Supabase (quella che inizia con eyJ...)
+  const SUPABASE_ANON_KEY = "sb_publishable_cH_SxDLZnkbImYu6r_MPyQ_QPBvzi4F"; 
 
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Gestione Nickname Utente
   function getPlayerUsername() {
       let username = localStorage.getItem('rione_user_nickname');
-      if (!username) {
+      if (!username || username.trim() === "") {
           username = prompt("Inserisci il tuo nome/soprannome per la Classifica del Rione:");
           if (username && username.trim() !== "") {
               username = username.trim();
-              localStorage.setItem('rione_user_nickname', username);
           } else {
-              username = "Collezionista_" + Math.floor(Math.random() * 1000);
-              localStorage.setItem('rione_user_nickname', username);
+              username = "Collezionista_" + Math.floor(1000 + Math.random() * 9000);
           }
+          localStorage.setItem('rione_user_nickname', username);
       }
       return username;
   }
 
-// Sincronizza il conteggio carte su Supabase
   async function syncProgressToCloud() {
       const username = getPlayerUsername();
       const collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
@@ -1164,59 +1161,74 @@
                   { onConflict: 'username' }
               );
 
-          if (error) console.error("Errore salvataggio Supabase:", error);
-          else fetchGlobalLeaderboard();
+          if (error) {
+              console.error("Errore salvataggio Supabase:", error.message);
+          }
+          await fetchGlobalLeaderboard();
       } catch (err) {
           console.error("Errore di connessione:", err);
+          await fetchGlobalLeaderboard();
       }
   }
 
-  // Scarica e mostra la Top 10
   async function fetchGlobalLeaderboard() {
       const container = document.getElementById('friend-stats');
       if (!container) return;
 
-      const { data: leaderboard, error } = await supabaseClient
-          .from('leaderboard')
-          .select('username, cards_count')
-          .order('cards_count', { ascending: false })
-          .limit(10);
+      try {
+          const { data: leaderboard, error } = await supabaseClient
+              .from('leaderboard')
+              .select('username, cards_count')
+              .order('cards_count', { ascending: false })
+              .limit(10);
 
-      if (error || !leaderboard) {
-          container.innerHTML = '<p class="text-xs text-red-400">Impossibile caricare la classifica.</p>';
-          return;
-      }
-
-      let html = `
-          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-left w-full max-w-md mx-auto">
-              <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-3 text-center">🏆 TOP 10 COLLEZIONISTI RIONE LA SUGHERA</h4>
-              <div class="space-y-2">
-      `;
-
-      leaderboard.forEach((user, index) => {
-          let badge = `#${index + 1}`;
-          if (index === 0) badge = "🥇";
-          else if (index === 1) badge = "🥈";
-          else if (index === 2) badge = "🥉";
-
-          html += `
-              <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-xl border border-slate-800">
-                  <div class="flex items-center gap-2">
-                      <span class="text-sm font-black w-6 text-center">${badge}</span>
-                      <span class="text-xs font-bold text-white">${user.username}</span>
+          if (error) {
+              console.error("Errore nel recupero della classifica:", error.message);
+              container.innerHTML = `
+                  <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-center w-full max-w-md mx-auto">
+                      <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-2">🏆 TOP 10 COLLEZIONISTI RIONE LA SUGHERA</h4>
+                      <p class="text-xs text-slate-400">Nessun giocatore registrato al momento.</p>
                   </div>
-                  <span class="text-xs font-extrabold text-amber-400">${user.cards_count} carte</span>
-              </div>
-          `;
-      });
+              `;
+              return;
+          }
 
-      html += `</div></div>`;
-      container.innerHTML = html;
+          let html = `
+              <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-left w-full max-w-md mx-auto">
+                  <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-3 text-center">🏆 TOP 10 COLLEZIONISTI RIONE LA SUGHERA</h4>
+                  <div class="space-y-2">
+          `;
+
+          if (!leaderboard || leaderboard.length === 0) {
+              html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio salvato. Sii il primo!</p>`;
+          } else {
+              leaderboard.forEach((user, index) => {
+                  let badge = `#${index + 1}`;
+                  if (index === 0) badge = "🥇";
+                  else if (index === 1) badge = "🥈";
+                  else if (index === 2) badge = "🥉";
+
+                  html += `
+                      <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-xl border border-slate-800">
+                          <div class="flex items-center gap-2">
+                              <span class="text-sm font-black w-6 text-center">${badge}</span>
+                              <span class="text-xs font-bold text-white">${user.username}</span>
+                          </div>
+                          <span class="text-xs font-extrabold text-amber-400">${user.cards_count} carte</span>
+                      </div>
+                  `;
+              });
+          }
+
+          html += `</div></div>`;
+          container.innerHTML = html;
+      } catch (e) {
+          console.error("Errore imprevisto:", e);
+      }
   }
 
-// Esegui subito e avvia la sincronizzazione e il caricamento
+  // Avvio immediato
   syncProgressToCloud();
-  fetchGlobalLeaderboard();
 </script>
   
 </body>
