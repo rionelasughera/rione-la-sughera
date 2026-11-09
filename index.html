@@ -50,6 +50,26 @@
       50% { transform: translateY(-10px); }
     }
     .floaty { animation: float 4s ease-in-out infinite; }
+
+    /* Stile Carta FIFA */
+    .fifa-card {
+      background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+      border-radius: 20px;
+      padding: 3px;
+      box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4);
+      position: relative;
+    }
+    .fifa-card-inner {
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+    }
+    .fifa-card-locked {
+      background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+      border: 2px solid #475569;
+      border-radius: 20px;
+    }
   </style>
 </head>
 <body class="bg-background text-foreground font-sans">
@@ -476,7 +496,7 @@
       </div>
   </section>
 
-  <!-- SEZIONE COLLEZIONA LE CARTE (POSIZIONATA SUBITO DOPO LE FAQ) -->
+  <!-- SEZIONE COLLEZIONA LE CARTE (STILE FIFA) -->
   <section id="carte" class="py-16 bg-slate-950 text-white border-t border-primary/30">
       <div class="w-full max-w-4xl mx-auto py-8 px-4 flex flex-col items-center">
           <div class="w-full flex justify-between items-center mb-6">
@@ -495,14 +515,14 @@
               </button>
 
               <div id="card-container" class="min-h-[220px] w-full flex items-center justify-center">
-                  <p class="text-slate-400 text-sm">Clicca il bottone per scoprire la tua carta!</p>
+                  <p class="text-slate-400 text-sm">Clicca il bottone per scoprire la tua carta in stile FIFA!</p>
               </div>
           </div>
 
           <!-- Griglia Album -->
           <div class="w-full">
               <h3 class="text-lg font-bold text-yellow-400 mb-4 text-center sm:text-left">ALBUM DEL RIONE</h3>
-              <div id="album-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div id="album-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   <!-- Generato via JavaScript -->
               </div>
           </div>
@@ -691,22 +711,22 @@
     }
   </script>
 
-  <!-- Script per Gestione Carte & Pacchetti -->
+  <!-- Script per Gestione Carte & Pacchetti (Timer 3 Giorni) -->
   <script>
     const playersDatabase = [
-        { name: "Ferrera #2", img: "ferrera.jpg", weight: 18 },
-        { name: "Pizzi #11", img: "pizzi.jpg", weight: 18 },
-        { name: "Matranga #18 (ATT)", img: "matranga-movimento.jpg", weight: 8 },
-        { name: "Matranga (POR)", img: "matranga-portiere.jpg", weight: 8 },
-        { name: "Ciancia", img: "ciancia.jpg", weight: 8 },
-        { name: "Dariokke #9", img: "dariokke.jpg", weight: 8 },
-        { name: "Maddalena #10", img: "maddalena.jpg", weight: 8 },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", weight: 5 },
-        { name: "Agrestini #7", img: "agrestini.jpg", weight: 4 },
-        { name: "Bertoncini #1", img: "bertoncini.jpg", weight: 4 },
-        { name: "Mucci #3", img: "mucci.jpg", weight: 3 },
-        { name: "Mister", img: "mister.jpg", weight: 1 },
-        { name: "La Sughera", img: "lasughera.jpg", weight: 1 }
+        { name: "Ferrera #2", img: "ferrera.jpg", weight: 18, rating: 84, pos: "CC" },
+        { name: "Pizzi #11", img: "pizzi.jpg", weight: 18, rating: 84, pos: "ATT" },
+        { name: "Matranga #18 (ATT)", img: "matranga-movimento.jpg", weight: 8, rating: 87, pos: "ATT" },
+        { name: "Matranga (POR)", img: "matranga-portiere.jpg", weight: 8, rating: 86, pos: "POR" },
+        { name: "Ciancia", img: "ciancia.jpg", weight: 8, rating: 85, pos: "DC" },
+        { name: "Dariokke #9", img: "dariokke.jpg", weight: 8, rating: 85, pos: "ATT" },
+        { name: "Maddalena #10", img: "maddalena.jpg", weight: 8, rating: 86, pos: "CDC" },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", weight: 5, rating: 89, pos: "COC" },
+        { name: "Agrestini #7", img: "agrestini.jpg", weight: 4, rating: 90, pos: "TS" },
+        { name: "Bertoncini #1", img: "bertoncini.jpg", weight: 4, rating: 90, pos: "POR" },
+        { name: "Mucci #3", img: "mucci.jpg", weight: 3, rating: 91, pos: "TD" },
+        { name: "Mister", img: "mister.jpg", weight: 1, rating: 95, pos: "ALL" },
+        { name: "La Sughera", img: "lasughera.jpg", weight: 1, rating: 99, pos: "ICON" }
     ];
 
     function renderAlbum() {
@@ -721,22 +741,74 @@
             const isUnlocked = collectedCards.includes(player.name);
             if (isUnlocked) unlockedCount++;
 
-            grid.innerHTML += `
-                <div class="flex flex-col items-center bg-slate-900 border ${isUnlocked ? 'border-yellow-500/50 shadow-lg' : 'border-slate-800/60 opacity-40'} p-4 rounded-2xl text-center">
-                    <div class="w-28 h-36 sm:w-32 sm:h-40 mb-3 overflow-hidden rounded-xl border border-white/10 bg-slate-950">
-                        <img src="${isUnlocked ? player.img : 'icon-192.png'}" alt="${player.name}" class="w-full h-full object-cover ${isUnlocked ? '' : 'filter grayscale brightness-50'}">
+            if (isUnlocked) {
+                grid.innerHTML += `
+                    <div class="fifa-card w-full max-w-[220px] mx-auto text-center transition-transform hover:scale-105">
+                        <div class="fifa-card-inner p-3 flex flex-col items-center">
+                            <div class="w-full flex justify-between items-start px-2 text-yellow-300 font-black font-display">
+                                <div class="text-left leading-none">
+                                    <span class="text-2xl">${player.rating}</span><br>
+                                    <span class="text-[10px] tracking-widest text-amber-400">${player.pos}</span>
+                                </div>
+                                <div class="w-6 h-6 rounded-full bg-red-600 border border-yellow-400 grid place-items-center text-[10px]">🦊</div>
+                            </div>
+                            <div class="w-24 h-28 my-2 overflow-hidden rounded-lg border-2 border-yellow-400/50 bg-slate-900">
+                                <img src="${player.img}" alt="${player.name}" class="w-full h-full object-cover" onerror="this.src='icon-192.png'">
+                            </div>
+                            <h3 class="text-sm font-black text-white uppercase tracking-wider truncate w-full mt-1">${player.name}</h3>
+                            <span class="text-[10px] text-green-400 font-bold mt-1">✓ Sbloccata</span>
+                        </div>
                     </div>
-                    <h3 class="text-base font-bold ${isUnlocked ? 'text-white' : 'text-slate-500'}">${player.name}</h3>
-                    <span class="text-xs mt-1 font-semibold ${isUnlocked ? 'text-green-400' : 'text-red-400'}">
-                        ${isUnlocked ? '✓ Sbloccata' : '🔒 Bloccata'}
-                    </span>
-                </div>
-            `;
+                `;
+            } else {
+                grid.innerHTML += `
+                    <div class="fifa-card-locked w-full max-w-[220px] mx-auto p-4 text-center opacity-40 flex flex-col items-center justify-center min-h-[220px]">
+                        <div class="w-20 h-24 my-2 overflow-hidden rounded-lg bg-slate-900 flex items-center justify-center border border-slate-700">
+                            <span class="text-3xl">🔒</span>
+                        </div>
+                        <h3 class="text-xs font-bold text-slate-400 mt-2">${player.name}</h3>
+                        <span class="text-[10px] text-red-400 font-semibold mt-1">Bloccata</span>
+                    </div>
+                `;
+            }
         });
 
         const counterEl = document.getElementById('counter');
         if (counterEl) {
             counterEl.innerText = `${unlockedCount} / ${playersDatabase.length} Trovate`;
+        }
+    }
+
+    // Controlla lo stato del timer dei 3 giorni (72 ore)
+    function checkPackTimer() {
+        const lastOpenTime = localStorage.getItem('rione_last_pack_time');
+        const openBtn = document.getElementById('open-pack-btn');
+        const container = document.getElementById('card-container');
+        
+        if (!lastOpenTime || !openBtn) return;
+
+        const now = new Date().getTime();
+        const threeDaysInMs = 72 * 60 * 60 * 1000; // 72 ore in millisecondi (3 giorni)
+        const timeElapsed = now - parseInt(lastOpenTime);
+
+        if (timeElapsed < threeDaysInMs) {
+            const timeLeft = threeDaysInMs - timeElapsed;
+            const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
+            openBtn.disabled = true;
+            openBtn.classList.add('opacity-55', 'cursor-not-allowed');
+            openBtn.classList.remove('hover:from-yellow-400', 'cursor-pointer');
+            openBtn.innerText = `⏳ PROSSIMO PACCHETTO TRA ${hoursLeft}h ${minutesLeft}m`;
+
+            if (container && container.innerHTML.trim() === '') {
+                container.innerHTML = `<p class="text-amber-400/80 text-xs font-semibold">Hai già aperto un pacchetto di recente. Torna tra 3 giorni per il prossimo!</p>`;
+            }
+        } else {
+            openBtn.disabled = false;
+            openBtn.classList.remove('opacity-55', 'cursor-not-allowed');
+            openBtn.classList.add('cursor-pointer');
+            openBtn.innerText = "APRI PACCHETTO 🎁";
         }
     }
 
@@ -753,17 +825,31 @@
     const openBtn = document.getElementById('open-pack-btn');
     if (openBtn) {
         openBtn.addEventListener('click', () => {
+            // Registra il momento esatto dell'apertura
+            localStorage.setItem('rione_last_pack_time', new Date().getTime().toString());
+
             const wonPlayer = openPack();
             
             const container = document.getElementById('card-container');
             if (container) {
                 container.innerHTML = `
-                    <div class="flex flex-col items-center bg-slate-950 border-2 border-yellow-500/70 p-4 rounded-2xl shadow-xl w-full">
-                        <span class="text-[10px] uppercase tracking-widest text-yellow-400 font-bold mb-1">Hai sbustato:</span>
-                        <div class="w-28 h-36 mb-2 overflow-hidden rounded-lg border border-white/10">
-                            <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="w-full h-full object-cover" onerror="this.src='icon-192.png'">
+                    <div class="flex flex-col items-center w-full animate-bounce">
+                        <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold mb-2">🎉 HAI SBUSTATO:</span>
+                        <div class="fifa-card w-48 mx-auto text-center shadow-2xl">
+                            <div class="fifa-card-inner p-4 flex flex-col items-center">
+                                <div class="w-full flex justify-between items-start px-2 text-yellow-300 font-black font-display">
+                                    <div class="text-left leading-none">
+                                        <span class="text-3xl">${wonPlayer.rating}</span><br>
+                                        <span class="text-xs tracking-widest text-amber-400">${wonPlayer.pos}</span>
+                                    </div>
+                                    <div class="w-7 h-7 rounded-full bg-red-600 border border-yellow-400 grid place-items-center text-xs">🦊</div>
+                                </div>
+                                <div class="w-28 h-32 my-2 overflow-hidden rounded-lg border-2 border-yellow-400 bg-slate-900 shadow-inner">
+                                    <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="w-full h-full object-cover" onerror="this.src='icon-192.png'">
+                                </div>
+                                <h2 class="text-base font-black text-white uppercase tracking-wider mt-1">${wonPlayer.name}</h2>
+                            </div>
                         </div>
-                        <h2 class="text-lg font-black text-white">${wonPlayer.name}</h2>
                     </div>
                 `;
             }
@@ -775,11 +861,15 @@
             }
 
             renderAlbum();
+            checkPackTimer();
         });
     }
 
-    // Carica l'album all'avvio della pagina
+    // All'avvio della pagina carica l'album e controlla il timer
     renderAlbum();
+    checkPackTimer();
+    // Aggiorna il conto alla rovescia ogni minuto
+    setInterval(checkPackTimer, 60000);
   </script>
 </body>
 </html>
