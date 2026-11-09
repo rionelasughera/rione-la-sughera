@@ -116,11 +116,15 @@
         <p class="mt-5 text-lg text-white/80 max-w-md">
           Siamo la volpe che corre per prima. Siamo rosso, bianco e sughera. Siamo una grande famiglia e il posto accanto a noi è per te.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide shadow-lg hover:brightness-110 transition">Unisciti al Rione</a>
-          <a href="#eventi" class="border-2 border-white text-white px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-white hover:text-foreground transition">Prossimi eventi</a>
-        </div>
-      </div>
+     <div class="mt-8 flex flex-wrap gap-3">
+  <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition">UNISCITI AL RIONE</a>
+  <a href="#eventi" class="border-2 border-white text-white px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-white hover:text-foreground transition">Prossimi eventi</a>
+  
+  <!-- Pulsante Installa App -->
+  <button id="install-btn" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition cursor-pointer">
+    🦊 INSTALLA APP
+  </button>
+</div>
       <div class="flex justify-center">
         <img src="logo.png" alt="Stemma Rione La Sughera" class="floaty w-64 sm:w-80 md:w-[24rem] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
       </div>
@@ -622,6 +626,30 @@
         runCountdown();
         setInterval(runCountdown, 60000);
     })();
-<script>
+  <script>
+  let deferredPrompt;
+  const installBtn = document.getElementById('install-btn');
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        installBtn.style.display = 'none';
+      }
+      deferredPrompt = null;
+    } else if (isIOS) {
+alert("Per installare l'app su iPhone:\n1. Tocca il tasto Condividi in basso (quadrato con freccia ⬆️)\n2. Seleziona 'Aggiungi alla schermata Home'");
+    } else {
+      alert("Per installare l'app, apri il menu del browser e seleziona 'Aggiungi a schermata Home'.");
+    }
+  });
+</script>
 </body>
 </html>
