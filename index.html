@@ -51,20 +51,19 @@
     }
     .floaty { animation: float 4s ease-in-out infinite; }
 
-    /* --- VERA FORMA CARTA FUT (SAGOMATA FIFA) --- */
+    /* --- VERA SAGOMA GEOMETRICA STILE EA SPORTS FC --- */
     .fut-card {
       width: 210px;
       height: 310px;
       background: linear-gradient(135deg, #f5d77f 0%, #d4af37 40%, #aa771c 100%);
-      /* Taglio geometrico tipico delle carte FUT in alto a destra */
-      border-radius: 15px 45px 15px 15px;
+      /* Taglio geometrico FUT con clip-path */
+      clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
       padding: 3px;
       position: relative;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 15px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: #3b2c0d;
       font-family: Arial, sans-serif;
     }
 
@@ -72,18 +71,32 @@
       width: 100%;
       height: 100%;
       background: linear-gradient(180deg, #2a2008 0%, #0d1117 60%);
-      border-radius: 13px 43px 13px 13px;
+      clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: 1px solid rgba(255, 215, 0, 0.4);
+    }
+
+    .fut-card-locked {
+      width: 210px;
+      height: 310px;
+      background: #1e293b;
+      border: 2px dashed #475569;
+      clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.45;
+      padding: 15px;
+      text-align: center;
     }
 
     .fut-top-info {
       position: absolute;
-      top: 14px;
+      top: 12px;
       left: 16px;
       display: flex;
       flex-direction: column;
@@ -108,8 +121,8 @@
 
     .fut-badge {
       position: absolute;
-      top: 16px;
-      right: 28px;
+      top: 14px;
+      right: 32px;
       width: 22px;
       height: 26px;
       background: #dc2626;
@@ -124,7 +137,7 @@
       width: 110px;
       height: 125px;
       position: absolute;
-      top: 30px;
+      top: 28px;
       object-fit: cover;
       filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));
     }
@@ -150,7 +163,7 @@
       text-align: center;
       letter-spacing: 0.5px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
-      width: 90%;
+      width: 85%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -170,21 +183,6 @@
 
     .fut-stats span {
       color: #94a3b8;
-    }
-
-    .fut-card-locked {
-      width: 210px;
-      height: 310px;
-      background: #1e293b;
-      border: 2px dashed #475569;
-      border-radius: 15px 45px 15px 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0.45;
-      padding: 15px;
-      text-align: center;
     }
   </style>
 </head>
