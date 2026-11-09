@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pack Opening - Rione La Sughera</title>
+    <!-- Tailwind CSS per la grafica -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white min-h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- Link per tornare alla home principale -->
+    <div class="absolute top-4 left-4">
+        <a href="index.html" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-sm font-bold transition-colors">← Torna alla Home</a>
+    </div>
+
+    <h1 class="text-3xl font-extrabold mb-6 text-yellow-400 tracking-wider text-center">PACCHETTO SETTIMANALE</h1>
+    
+    <!-- Bottone per aprire il pacchetto -->
+    <button id="open-pack-btn" class="px-6 py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-slate-950 font-black rounded-2xl shadow-xl transition-transform active:scale-95 mb-8 cursor-pointer text-lg">
+        APRI PACCHETTO 🎁
+    </button>
+
+    <!-- Box dove comparirà la carta estratta -->
+    <div id="card-container" class="flex items-center justify-center min-h-[384px]">
+        <p class="text-slate-400 text-sm">Clicca il bottone per scoprire la tua carta!</p>
+    </div>
+
+    <!-- Script con la logica e il database -->
+    <script>
+        // Database completo delle 13 carte con i relativi pesi di rarità e le immagini
+        const playersDatabase = [
+            { name: "Ferrera #2", img: "ferrera.jpg", weight: 18 },
+            { name: "Pizzi #11", img: "pizzi.jpg", weight: 18 },
+            { name: "Matranga #18 (ATT)", img: "matranga-movimento.jpg", weight: 8 },
+            { name: "Matranga (POR)", img: "matranga-portiere.jpg", weight: 8 },
+            { name: "Ciancia", img: "ciancia.jpg", weight: 8 },
+            { name: "Dariokke #9", img: "dariokke.jpg", weight: 8 },
+            { name: "Maddalena #10", img: "maddalena.jpg", weight: 8 },
+            { name: "Rosamilia #5", img: "rosamilia.jpg", weight: 5 },
+            { name: "Agrestini #7", img: "agrestini.jpg", weight: 4 },
+            { name: "Bertoncini #1", img: "bertoncini.jpg", weight: 4 },
+            { name: "Mucci #3", img: "mucci.jpg", weight: 3 },
+            { name: "Mister", img: "mister.jpg", weight: 1 },
+            { name: "La Sughera", img: "lasughera.jpg", weight: 1 }
+        ];
+
+        // Funzione di estrazione basata sui pesi
+        function openPack() {
+            const totalWeight = playersDatabase.reduce((sum, player) => sum + player.weight, 0);
+            let randomNum = Math.random() * totalWeight;
+            
+            for (let player of playersDatabase) {
+                if (randomNum < player.weight) {
+                    return player;
+                }
+                randomNum -= player.weight;
+            }
+            return playersDatabase[0];
+        }
+
+        // Gestione del click sul bottone
+        document.getElementById('open-pack-btn').addEventListener('click', () => {
+            const wonPlayer = openPack();
+            
+            // Mostra la carta estratta a schermo
+            const container = document.getElementById('card-container');
+            container.innerHTML = `
+                <div class="flex flex-col items-center bg-slate-900 border-2 border-yellow-500/50 p-6 rounded-2xl shadow-2xl max-w-xs text-center">
+                    <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold mb-2">Hai sbustato:</span>
+                    <div class="w-40 h-48 mb-4 overflow-hidden rounded-xl border border-white/10 shadow-lg">
+                        <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="w-full h-full object-cover" onerror="this.src='icon-192.png'">
+                    </div>
+                    <h2 class="text-2xl font-black text-white">${wonPlayer.name}</h2>
+                </div>
+            `;
+
+            // Salvataggio automatico nel localStorage del browser
+            let collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
+            if (!collectedCards.includes(wonPlayer.name)) {
+                collectedCards.push(wonPlayer.name);
+                localStorage.setItem('rione_cards', JSON.stringify(collectedCards));
+                console.log("Nuova carta salvata nella collezione!");
+            }
+        });
+    </script>
+</body>
+</html>
