@@ -659,7 +659,8 @@
               </div>
           </div>
 
-<div id="friend-stats"></div>
+          <!-- Posizione Classifica -->
+          <div id="friend-stats" class="w-full max-w-md mb-8"></div>
         
           <!-- Box Apertura Pacchetto -->
           <div class="w-full max-w-md bg-slate-900/90 border border-slate-800 p-6 rounded-3xl shadow-xl flex flex-col items-center text-center mb-12">
@@ -985,7 +986,6 @@
                     </div>
                 `;
             } else {
-                // Carta bloccata con il nome del tipo di carta al posto dell'overall
                 grid.innerHTML += `
                     <div class="fut-card-locked">
                         <div class="text-3xl mb-1">🔒</div>
@@ -1115,7 +1115,7 @@
 
             renderAlbum();
             checkPackTimer();
-          syncProgressToCloud();
+            syncProgressToCloud();
         });
     }
 
@@ -1124,64 +1124,104 @@
     setInterval(checkPackTimer, 60000);
   </script>
 
-<!-- SDK Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- SDK Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-  const SUPABASE_URL = "https://vuhgzhyamdkiciuueyhp.supabase.co";
-  // Sostituisci la stringa qui sotto con la tua vera ANON KEY di Supabase (quella che inizia con eyJ...)
-  const SUPABASE_ANON_KEY = "sb_publishable_cH_SxDLZnkbImYu6r_MPyQ_QPBvzi4F"; 
+  <script>
+    const SUPABASE_URL = "https://vuhgzhyamdkiciuueyhp.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_cH_SxDLZnkbImYu6r_MPyQ_QPBvzi4F"; 
 
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  function getPlayerUsername() {
-      let username = localStorage.getItem('rione_user_nickname');
-      if (!username || username.trim() === "") {
-          username = prompt("Inserisci il tuo nome/soprannome per la Classifica del Rione:");
-          if (username && username.trim() !== "") {
-              username = username.trim();
-          } else {
-              username = "Collezionista_" + Math.floor(1000 + Math.random() * 9000);
-          }
-          localStorage.setItem('rione_user_nickname', username);
-      }
-      return username;
-  }
+    function getPlayerUsername() {
+        let username = localStorage.getItem('rione_user_nickname');
+        if (!username || username.trim() === "") {
+            username = prompt("Inserisci il tuo nome/soprannome per la Classifica del Rione:");
+            if (username && username.trim() !== "") {
+                username = username.trim();
+            } else {
+                username = "Collezionista_" + Math.floor(1000 + Math.random() * 9000);
+            }
+            localStorage.setItem('rione_user_nickname', username);
+        }
+        return username;
+    }
 
-async function syncProgressToCloud() {
-      const username = getPlayerUsername();
-  if (username === "Rosa") return; // Non sincronizzare o registrare Rosa
-      
-      // Recupera le carte trovate provando entrambe le chiavi possibili
-      let collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
-      if (collectedCards.length === 0) {
-          collectedCards = JSON.parse(localStorage.getItem('my_cards')) || [];
-      }
-      
-      const cardsCount = collectedCards.length;
+    // 1. Funzione che scarica e mostra la classifica da Supabase
+    async function fetchGlobalLeaderboard() {
+        const container = document.getElementById('friend-stats');
+        if (!container) return;
 
-      try {
-          // Salva/aggiorna il punteggio su Supabase
-          const { error } = await supabaseClient
-              .from('leaderboard')
-              .upsert(
-                  { username: username, cards_count: cardsCount, created_at: new Date().toISOString() },
-                  { onConflict: 'username' }
-              );
+        try {
+            const { data: leaderboard, error } = await supabaseClient
+                .from('leaderboard')
+                .select('username, cards_count')
+                .order('cards_count', { ascending: false })
+                .limit(10);
 
-          if (error) {
-              console.error("Errore salvataggio Supabase:", error.message);
-          }
-      } catch (err) {
-          console.error("Errore di connessione:", err);
-      }
+            let html = `
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-left w-full max-w-md mx-auto">
+                    <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-3 text-center">🏆 TOP 10 COLLEZIONISTI RIONE LA SUGHERA</h4>
+                    <div class="space-y-2">
+            `;
 
-      // Mostra sempre la classifica aggiornata
-      await fetchGlobalLeaderboard();
-  }
+            if (error || !leaderboard || leaderboard.length === 0) {
+                html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato. Apri un pacchetto per entrare!</p>`;
+            } else {
+                leaderboard.forEach((user, index) => {
+                    let badge = `#${index + 1}`;
+                    if (index === 0) badge = "🥇";
+                    else if (index === 1) badge = "🥈";
+                    else if (index === 2) badge = "🥉";
 
+                    html += `
+                        <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-xl border border-slate-800">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-black w-6 text-center">${badge}</span>
+                                <span class="text-xs font-bold text-white">${user.username}</span>
+                            </div>
+                            <span class="text-xs font-extrabold text-amber-400">${user.cards_count} carte</span>
+                        </div>
+                    `;
+                });
+            }
 
-</script>
+            html += `</div></div>`;
+            container.innerHTML = html;
+        } catch (e) {
+            console.error("Errore recupero classifica:", e);
+        }
+    }
+
+    // 2. Funzione che invia i dati al cloud (solo quando apri un pacchetto)
+    async function syncProgressToCloud() {
+        const username = getPlayerUsername();
+        if (username === "Rosa") return; // Blocca categoricamente se l'utente è Rosa
+        
+        let collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
+        if (collectedCards.length === 0) {
+            collectedCards = JSON.parse(localStorage.getItem('my_cards')) || [];
+        }
+        
+        const cardsCount = collectedCards.length;
+
+        try {
+            await supabaseClient
+                .from('leaderboard')
+                .upsert(
+                    { username: username, cards_count: cardsCount, created_at: new Date().toISOString() },
+                    { onConflict: 'username' }
+                );
+        } catch (err) {
+            console.error("Errore di connessione:", err);
+        }
+
+        await fetchGlobalLeaderboard();
+    }
+
+    // Carica subito la classifica all'avvio della pagina
+    fetchGlobalLeaderboard();
+  </script>
   
 </body>
 </html>
