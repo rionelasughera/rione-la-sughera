@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rione La Sughera - Orentano</title>
+
+  <!-- Collegamento al Manifest della PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#8B0000">
+
+  <!-- Script per registrare il Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((reg) => console.log('Service Worker registrato con successo!', reg))
+          .catch((err) => console.log('Registrazione Service Worker fallita:', err));
+      });
+    }
+  </script>
+</head>
+
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
