@@ -9,23 +9,10 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#8B0000">
 
-  <!-- Script per registrare il Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then((reg) => console.log('Service Worker registrato con successo!', reg))
-          .catch((err) => console.log('Registrazione Service Worker fallita:', err));
-      });
-    }
-    <!-- Icona per iPhone e iPad (Safari) -->
-<link rel="apple-touch-icon" href="/icon-192.png">
+  <!-- Icona per iPhone, iPad e browser -->
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="icon" type="image/png" href="/icon-192.png">
 
-<!-- Icona generica per i browser -->
-<link rel="icon" type="image/png" href="/icon-192.png">
-</head>
-
-  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -116,15 +103,16 @@
         <p class="mt-5 text-lg text-white/80 max-w-md">
           Siamo la volpe che corre per prima. Siamo rosso, bianco e sughera. Siamo una grande famiglia e il posto accanto a noi è per te.
         </p>
-     <div class="mt-8 flex flex-wrap gap-3">
-  <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition">UNISCITI AL RIONE</a>
-  <a href="#eventi" class="border-2 border-white text-white px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-white hover:text-foreground transition">Prossimi eventi</a>
-  
-  <!-- Pulsante Installa App -->
-  <button id="install-btn" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition cursor-pointer">
-    🦊 INSTALLA APP
-  </button>
-</div>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition">UNISCITI AL RIONE</a>
+          <a href="#eventi" class="border-2 border-white text-white px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-white hover:text-foreground transition">Prossimi eventi</a>
+          
+          <!-- Pulsante Installa App -->
+          <button id="install-btn" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition cursor-pointer">
+            🦊 INSTALLA APP
+          </button>
+        </div>
+      </div>
       <div class="flex justify-center">
         <img src="logo.png" alt="Stemma Rione La Sughera" class="floaty w-64 sm:w-80 md:w-[24rem] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
       </div>
@@ -200,8 +188,8 @@
     </div>
   </section>
 
- <!-- SEZIONE PALMARÈS RIONE LA SUGHERA -->
-<section id="palmares" class="py-16 bg-zinc-950 text-white border-t border-primary/30">
+  <!-- SEZIONE PALMARÈS RIONE LA SUGHERA -->
+  <section id="palmares" class="py-16 bg-zinc-950 text-white border-t border-primary/30">
     <div class="max-w-5xl mx-auto px-4 text-center">
         
         <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
@@ -269,7 +257,7 @@
 
         </div>
     </div>
-</section>
+  </section>
   
   <!-- GALLERIA FOTOGRAFICA ESPANDIBILE -->
   <section id="galleria" class="py-20 md:py-28 bg-secondary">
@@ -600,7 +588,7 @@
         }
     }
 
-// Countdown automatico per il Palio del Quiz
+    // Countdown automatico per il Palio del Quiz
     (function() {
         function runCountdown() {
             const targetDate = new Date('2026-11-02T00:00:00').getTime();
@@ -626,30 +614,46 @@
         runCountdown();
         setInterval(runCountdown, 60000);
     })();
+  </script>
+
+  <!-- Script per Installazione PWA -->
   <script>
-  let deferredPrompt;
-  const installBtn = document.getElementById('install-btn');
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    let deferredPrompt;
+    const installBtn = document.getElementById('install-btn');
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-  });
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
 
-  installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        installBtn.style.display = 'none';
-      }
-      deferredPrompt = null;
-    } else if (isIOS) {
-alert("Per installare l'app su iPhone:\n1. Tocca il tasto Condividi in basso (quadrato con freccia ⬆️)\n2. Seleziona 'Aggiungi alla schermata Home'");
-    } else {
-      alert("Per installare l'app, apri il menu del browser e seleziona 'Aggiungi a schermata Home'.");
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === 'accepted') {
+            installBtn.style.display = 'none';
+          }
+          deferredPrompt = null;
+        } else if (isIOS) {
+          alert("Per installare l'app su iPhone:\n1. Tocca il tasto Condividi in basso (quadrato con freccia ⬆️)\n2. Seleziona 'Aggiungi alla schermata Home'");
+        } else {
+          alert("Per installare l'app, apri il menu del browser e seleziona 'Aggiungi a schermata Home'.");
+        }
+      });
     }
-  });
-</script>
+  </script>
+
+  <!-- Script per registrare il Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((reg) => console.log('Service Worker registrato con successo!', reg))
+          .catch((err) => console.log('Registrazione Service Worker fallita:', err));
+      });
+    }
+  </script>
 </body>
 </html>
