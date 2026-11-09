@@ -686,6 +686,95 @@
           .catch((err) => console.log('Registrazione Service Worker fallita:', err));
       });
     }
+
+<script>
+    const playersDatabase = [
+        { name: "Ferrera #2", img: "ferrera.jpg", weight: 18 },
+        { name: "Pizzi #11", img: "pizzi.jpg", weight: 18 },
+        { name: "Matranga #18 (ATT)", img: "matranga-movimento.jpg", weight: 8 },
+        { name: "Matranga (POR)", img: "matranga-portiere.jpg", weight: 8 },
+        { name: "Ciancia", img: "ciancia.jpg", weight: 8 },
+        { name: "Dariokke #9", img: "dariokke.jpg", weight: 8 },
+        { name: "Maddalena #10", img: "maddalena.jpg", weight: 8 },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", weight: 5 },
+        { name: "Agrestini #7", img: "agrestini.jpg", weight: 4 },
+        { name: "Bertoncini #1", img: "bertoncini.jpg", weight: 4 },
+        { name: "Mucci #3", img: "mucci.jpg", weight: 3 },
+        { name: "Mister", img: "mister.jpg", weight: 1 },
+        { name: "La Sughera", img: "lasughera.jpg", weight: 1 }
+    ];
+
+    function renderAlbum() {
+        const collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
+        const grid = document.getElementById('album-grid');
+        if (!grid) return;
+        
+        grid.innerHTML = "";
+        let unlockedCount = 0;
+
+        playersDatabase.forEach(player => {
+            const isUnlocked = collectedCards.includes(player.name);
+            if (isUnlocked) unlockedCount++;
+
+            grid.innerHTML += `
+                <div class="flex flex-col items-center bg-slate-900 border ${isUnlocked ? 'border-yellow-500/50 shadow-lg' : 'border-slate-800/60 opacity-40'} p-4 rounded-2xl text-center">
+                    <div class="w-28 h-36 sm:w-32 sm:h-40 mb-3 overflow-hidden rounded-xl border border-white/10 bg-slate-950">
+                        <img src="${isUnlocked ? player.img : 'icon-192.png'}" alt="${player.name}" class="w-full h-full object-cover ${isUnlocked ? '' : 'filter grayscale brightness-50'}">
+                    </div>
+                    <h3 class="text-base font-bold ${isUnlocked ? 'text-white' : 'text-slate-500'}">${player.name}</h3>
+                    <span class="text-xs mt-1 font-semibold ${isUnlocked ? 'text-green-400' : 'text-red-400'}">
+                        ${isUnlocked ? '✓ Sbloccata' : '🔒 Bloccata'}
+                    </span>
+                </div>
+            `;
+        });
+
+        const counterEl = document.getElementById('counter');
+        if (counterEl) {
+            counterEl.innerText = `${unlockedCount} / ${playersDatabase.length} Trovate`;
+        }
+    }
+
+    function openPack() {
+        const totalWeight = playersDatabase.reduce((sum, p) => sum + p.weight, 0);
+        let randomNum = Math.random() * totalWeight;
+        for (let player of playersDatabase) {
+            if (randomNum < player.weight) return player;
+            randomNum -= player.weight;
+        }
+        return playersDatabase[0];
+    }
+
+    const openBtn = document.getElementById('open-pack-btn');
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            const wonPlayer = openPack();
+            
+            const container = document.getElementById('card-container');
+            if (container) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center bg-slate-950 border-2 border-yellow-500/70 p-4 rounded-2xl shadow-xl w-full">
+                        <span class="text-[10px] uppercase tracking-widest text-yellow-400 font-bold mb-1">Hai sbustato:</span>
+                        <div class="w-28 h-36 mb-2 overflow-hidden rounded-lg border border-white/10">
+                            <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="w-full h-full object-cover" onerror="this.src='icon-192.png'">
+                        </div>
+                        <h2 class="text-lg font-black text-white">${wonPlayer.name}</h2>
+                    </div>
+                `;
+            }
+
+            let collected = JSON.parse(localStorage.getItem('rione_cards')) || [];
+            if (!collected.includes(wonPlayer.name)) {
+                collected.push(wonPlayer.name);
+                localStorage.setItem('rione_cards', JSON.stringify(collected));
+            }
+
+            renderAlbum();
+        });
+    }
+
+    // Carica l'album all'avvio della pagina
+    renderAlbum();
   </script>
 </body>
 </html>
