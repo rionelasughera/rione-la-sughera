@@ -568,16 +568,16 @@
         <button onclick="closePlayerModal()" class="text-zinc-400 hover:text-white text-xl font-bold">✕</button>
       </div>
       
-      <!-- Tasto opzionale per rimuovere il giocatore dallo slot se presente -->
+      <!-- Tasto per rimuovere il giocatore dallo slot se presente -->
       <div id="remove-player-container" class="mb-6 hidden">
         <button onclick="removePlayerFromSlot()" class="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-2.5 rounded-xl uppercase text-xs tracking-wider transition shadow">
           ❌ Rimuovi giocatore da questo slot (per sostituirlo)
         </button>
       </div>
 
-      <p class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Seleziona un giocatore disponibile:</p>
-      <div id="available-players-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-center">
-        <!-- Lista giocatori sbloccati -->
+      <!-- Reparti divisori nella selezione -->
+      <div id="selection-sections" class="space-y-6">
+        <!-- Generato dinamicamente via JS diviso in Attaccanti, Centrocampisti, Difensori, Portieri -->
       </div>
     </div>
   </div>
@@ -590,8 +590,9 @@
       <div class="space-y-4 text-zinc-300 text-sm leading-relaxed">
         <p>Benvenuto nella modalità <strong>Crea Squadra (Draft)</strong> del Rione La Sughera! Assembla il tuo 11 ideale scegliendo tra i moduli e gestendo i titolari.</p>
         <div>
-          <h4 class="font-bold text-white mb-1">🔓 Disponibilità e Sblocco delle Carte:</h4>
+          <h4 class="font-bold text-white mb-1">🔓 Unicità e Sblocco delle Carte:</h4>
           <ul class="list-disc pl-5 space-y-1 text-xs">
+            <li><strong>Unità singola:</strong> Ciascun giocatore può essere inserito massimo una volta in squadra (anche se ha più versioni o ruoli multipli).</li>
             <li><strong>Carte Base:</strong> Sbloccate e disponibili fin dall'inizio per tutti.</li>
             <li><strong>10 Pacchetti aperti:</strong> Sblocca le carte <span class="text-green-400 font-bold">Heroes</span> e <span class="text-purple-400 font-bold">Future Stars</span>.</li>
             <li><strong>15 Pacchetti aperti:</strong> Sblocca le carte <span class="text-sky-400 font-bold">TOTY</span>.</li>
@@ -599,19 +600,13 @@
           </ul>
         </div>
         <div>
-          <h4 class="font-bold text-white mb-1">⚽ Regole Speciali e Moduli:</h4>
-          <p class="text-xs">Nel modulo <strong>4-4</strong>, la linea di centrocampo accetta eccezionalmente anche gli <strong>attaccanti</strong> senza subire alcuna penalità di fuori ruolo!</p>
-        </div>
-        <div>
-          <h4 class="font-bold text-white mb-1">⚙️ Funzionalità Campo:</h4>
-          <ul class="list-disc pl-5 space-y-1 text-xs">
-            <li><strong>Sostituzione:</strong> Clicca su un giocatore già schierato per rimuoverlo o sostituirlo.</li>
-            <li><strong>Reset:</strong> Usa il tasto rosso "Reset Formazione" per svuotare il campo in un colpo solo.</li>
-          </ul>
+          <h4 class="font-bold text-white mb-1">⚽ Regole Speciali e Selezione:</h4>
+          <p class="text-xs">Nella lista di scelta, i giocatori sono suddivisi per reparto (Attaccanti, Centrocampisti, Difensori, Portieri). Quelli con doppio ruolo compaiono in entrambi i reparti di competenza!</p>
+          <p class="text-xs mt-1">Nel modulo <strong>4-4</strong>, la linea di centrocampo accetta eccezionalmente anche gli <strong>attaccanti</strong> senza penalità.</p>
         </div>
         <div>
           <h4 class="font-bold text-white mb-1">⚖️ Valutazione della Squadra (Rating):</h4>
-          <p class="text-xs">Il rating complessivo calcola la media degli overall. Attenzione a posizionare i giocatori nei reparti corretti per evitare penalità al punteggio!</p>
+          <p class="text-xs">Il rating calcola la media degli overall considerando eventuali penalità per posizioni fuori ruolo.</p>
         </div>
       </div>
     </div>
@@ -1371,28 +1366,69 @@
         rowsContainer.innerHTML = html;
     }
 
+    // Estrae il nome base del giocatore senza la versione (es. "Ciancia" da "Ciancia #6")
+    function getPlayerBaseName(fullName) {
+        if (!fullName) return "";
+        return fullName.split('#')[0].trim().toUpperCase();
+    }
+
+    // Controlla se il giocatore (o un'altra sua carta con lo stesso nome base) è già in campo
+    function isPlayerAlreadyPicked(player, currentSlotKey) {
+        const baseName = getPlayerBaseName(player.name);
+        for (let key in draftSquad) {
+            if (key !== currentSlotKey && draftSquad[key]) {
+                if (getPlayerBaseName(draftSquad[key].name) === baseName) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     function openPlayerSelector(rowIndex, colIndex) {
         activeSlotIndex = `${rowIndex}-${colIndex}`;
         const collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
         const modal = document.getElementById('player-select-modal');
-        const grid = document.getElementById('available-players-grid');
+        const sectionsContainer = document.getElementById('selection-sections');
         const removeContainer = document.getElementById('remove-player-container');
-        if (!modal || !grid || !removeContainer) return;
+        if (!modal || !sectionsContainer || !removeContainer) return;
 
-        // Mostra o nascondi il tasto per rimuovere il giocatore se lo slot è occupato
         if (draftSquad[activeSlotIndex]) {
             removeContainer.classList.remove('hidden');
         } else {
             removeContainer.classList.add('hidden');
         }
 
-        grid.innerHTML = "";
         let availableList = playersDatabase.filter(p => collectedCards.includes(p.name + "_" + p.rating) || (p.typeName === "Base" && getPacksOpened() >= 0));
 
-        if (availableList.length === 0) {
-            grid.innerHTML = `<p class="col-span-full text-xs text-zinc-400 py-6 text-center">Nessuna carta disponibile.</p>`;
-        } else {
-            availableList.forEach(player => {
+        // Raggruppa i giocatori per reparto (Attaccanti, Centrocampisti, Difensori, Portieri)
+        // I doppi ruoli vengono inseriti in entrambi i reparti di pertinenza
+        let attList = [];
+        let ccList = [];
+        let dcList = [];
+        let porList = [];
+
+        availableList.forEach(player => {
+            const pos = player.pos.toUpperCase();
+            const isAtt = pos.includes("ATT") || player.name.includes("MISTER") || player.name.includes("LASUGHERA");
+            const isCC = pos.includes("CC") || player.name.includes("MISTER") || player.name.includes("LASUGHERA");
+            const isDC = pos.includes("DC") || player.name.includes("MISTER") || player.name.includes("LASUGHERA");
+            const isPOR = pos.includes("POR") || player.name.includes("MISTER") || player.name.includes("LASUGHERA");
+
+            if (isAtt) attList.push(player);
+            if (isCC) ccList.push(player);
+            if (isDC) dcList.push(player);
+            if (isPOR) porList.push(player);
+        });
+
+        const renderSectionCards = (list) => {
+            if (list.length === 0) return `<p class="text-xs text-zinc-500 italic">Nessun giocatore in questo reparto.</p>`;
+            let html = `<div class="grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-center">`;
+            list.forEach(player => {
+                const alreadyPicked = isPlayerAlreadyPicked(player, activeSlotIndex);
+                const opacityClass = alreadyPicked ? "opacity-40 grayscale pointer-events-none" : "cursor-pointer transition hover:scale-105";
+                const badgePick = alreadyPicked ? `<div class="absolute inset-0 bg-black/60 rounded-xl grid place-items-center z-20"><span class="text-xs font-bold text-red-400 bg-black/80 px-2 py-1 rounded">GIÀ SCHIERATO</span></div>` : "";
+
                 const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
                 let statsHtml = player.isGK ? `
                     <div class="fut-stats">
@@ -1408,8 +1444,9 @@
                     </div>
                 `;
 
-                grid.innerHTML += `
-                    <div onclick="assignPlayerToSlot('${player.name}', ${player.rating})" class="cursor-pointer transition hover:scale-105 transform scale-75 origin-top">
+                html += `
+                    <div onclick="assignPlayerToSlot('${player.name}', ${player.rating})" class="${opacityClass} relative transform scale-75 origin-top">
+                        ${badgePick}
                         <div class="fut-card ${player.type}">
                             <div class="fut-card-inner">
                                 <div class="fut-top-info">
@@ -1429,7 +1466,28 @@
                     </div>
                 `;
             });
-        }
+            html += `</div>`;
+            return html;
+        };
+
+        sectionsContainer.innerHTML = `
+            <div>
+                <h4 class="text-sm font-bold text-yellow-400 uppercase tracking-widest mb-3 border-b border-white/10 pb-1">⚡ ATTACCANTI</h4>
+                ${renderSectionCards(attList)}
+            </div>
+            <div class="mt-6">
+                <h4 class="text-sm font-bold text-yellow-400 uppercase tracking-widest mb-3 border-b border-white/10 pb-1">⚡ CENTROCAMPISTI</h4>
+                ${renderSectionCards(ccList)}
+            </div>
+            <div class="mt-6">
+                <h4 class="text-sm font-bold text-yellow-400 uppercase tracking-widest mb-3 border-b border-white/10 pb-1">⚡ DIFENSORI</h4>
+                ${renderSectionCards(dcList)}
+            </div>
+            <div class="mt-6">
+                <h4 class="text-sm font-bold text-yellow-400 uppercase tracking-widest mb-3 border-b border-white/10 pb-1">⚡ PORTIERI</h4>
+                ${renderSectionCards(porList)}
+            </div>
+        `;
 
         modal.classList.remove('hidden');
     }
@@ -1450,6 +1508,10 @@
     function assignPlayerToSlot(name, rating) {
         const player = playersDatabase.find(p => p.name === name && p.rating === rating);
         if (player && activeSlotIndex !== null) {
+            if (isPlayerAlreadyPicked(player, activeSlotIndex)) {
+                alert("Questo giocatore è già presente in campo!");
+                return;
+            }
             draftSquad[activeSlotIndex] = player;
         }
         closePlayerModal();
