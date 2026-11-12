@@ -95,7 +95,7 @@
       perspective: 1000px;
     }
 
-    /* --- STRUTTURA GENERALE DELLE CARTE (RIALLINEATA) --- */
+    /* --- STRUTTURA DELLE CARTE PULITA E ORIGINALE --- */
     .fut-card {
       width: 210px;
       height: 310px;
@@ -105,34 +105,19 @@
       flex-direction: column;
       align-items: center;
       font-family: Arial, sans-serif;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    .fut-card-inner {
-      width: 100%;
-      height: 100%;
-      position: relative;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 3px solid #334155;
+      border-radius: 16px;
+      color: #ffffff;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
-
-    /* Sfondi cornici */
-    .card-gold { background-image: url('card-gold.png'); color: #3b2c0d; }
-    .card-icon { background-image: url('card-icon.png'); color: #1e293b; }
-    .card-toty { background-image: url('card-toty.png'); color: #fef08a; }
-    .card-futures { background-image: url('card-futures.png'); color: #fae8ff; }
-    .card-hero { background-image: url('card-hero.png'); color: #dcfce7; }
 
     .fut-card-locked {
       width: 210px;
       height: 310px;
       background: #1e293b;
       border: 2px dashed #475569;
-      border-radius: 12px;
+      border-radius: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -142,22 +127,17 @@
       text-align: center;
     }
 
-    /* Posizione Valore Overall e Ruolo (In alto a sinistra) */
     .fut-top-info {
       position: absolute;
-      top: 32px;
-      left: 30px;
+      top: 14px;
+      left: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       line-height: 1;
       font-weight: 900;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-      z-index: 5;
+      color: #f8fafc;
     }
-
-    .card-gold .fut-top-info, .card-icon .fut-top-info { color: #42310c; }
-    .card-toty .fut-top-info, .card-futures .fut-top-info, .card-hero .fut-top-info { color: #fef08a; }
 
     .fut-rating {
       font-size: 24px;
@@ -170,30 +150,48 @@
       margin-top: 2px;
       letter-spacing: 1px;
       font-weight: bold;
+      color: #cbd5e1;
     }
 
-    /* Foto del giocatore posizionata correttamente nella sagoma della carta */
-    .fut-player-img {
-      width: 95px;
-      height: 110px;
+    /* Badge specifico per il tipo di carta (Base, Icon, TOTY, ecc.) */
+    .fut-type-badge {
       position: absolute;
-      top: 35px;
-      left: 58px;
+      top: 14px;
+      right: 16px;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+    .badge-base { background: #475569; color: #f8fafc; }
+    .badge-icon { background: #eab308; color: #1e293b; }
+    .badge-toty { background: #3b82f6; color: #ffffff; }
+    .badge-futures { background: #a855f7; color: #ffffff; }
+    .badge-hero { background: #22c55e; color: #ffffff; }
+
+    .fut-player-img {
+      width: 100px;
+      height: 115px;
+      position: absolute;
+      top: 50px;
       object-fit: cover;
-      filter: drop-shadow(0 4px 4px rgba(0,0,0,0.6));
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,0.15);
+      background: #0f172a;
     }
 
     .fut-player-img-small {
-      width: 82px !important;
+      width: 85px !important;
       height: 98px !important;
-      top: 40px !important;
-      left: 64px !important;
+      top: 55px !important;
     }
 
-    /* Sezione Inferiore (Nome e Statistiche) */
     .fut-bottom-section {
       position: absolute;
-      bottom: 45px;
+      bottom: 16px;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -202,37 +200,31 @@
     }
 
     .fut-name {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
       text-transform: uppercase;
       text-align: center;
       letter-spacing: 0.5px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
-      width: 80%;
+      color: #ffffff;
+      width: 85%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-    
-    .card-gold .fut-name, .card-icon .fut-name { color: #2c2208; }
-    .card-toty .fut-name, .card-futures .fut-name, .card-hero .fut-name { color: #ffffff; }
 
     .fut-stats {
       display: flex;
-      gap: 16px;
-      font-size: 11px;
-      font-weight: 900;
+      gap: 12px;
+      font-size: 10px;
+      font-weight: bold;
       text-transform: uppercase;
+      color: #e2e8f0;
     }
 
-    .card-gold .fut-stats, .card-icon .fut-stats { color: #3b2c0d; }
-    .card-toty .fut-stats, .card-futures .fut-stats, .card-hero .fut-stats { color: #fef08a; }
-
     .fut-stats span {
-      opacity: 0.75;
+      opacity: 0.7;
       font-size: 9px;
-      font-weight: normal;
     }
   </style>
 </head>
@@ -527,7 +519,7 @@
     </div>
   </section>
 
-  <!-- FAQ (REINTRODOTTA) -->
+  <!-- FAQ -->
   <section id="faq" class="py-16 bg-zinc-950 text-white border-t border-primary/30">
       <div class="max-w-4xl mx-auto px-4">
           <div class="text-center mb-10">
@@ -574,7 +566,7 @@
               <h3 class="text-lg font-bold text-yellow-400 mb-4">PACCHETTO GIORNALIERO 🎁</h3>
               <button id="open-pack-btn" class="w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 text-slate-950 font-black rounded-2xl shadow-lg transition-transform active:scale-95 cursor-pointer text-base sm:text-lg mb-6">APRI PACCHETTO</button>
               <div id="card-container" class="min-h-[320px] w-full flex items-center justify-center">
-                  <p class="text-slate-400 text-sm">Clicca il bottone per sbustare la tua carta in stile FUT!</p>
+                  <p class="text-slate-400 text-sm">Clicca il bottone per sbustare la tua carta!</p>
               </div>
           </div>
 
@@ -685,58 +677,58 @@
     }
 
     const playersDatabase = [
-        { name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false },
-        { name: "LASUGHERA", img: "lasughera.jpg", num: "", weight: 1, rating: 99, pos: "SQD", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false },
+        { name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", typeBadge: "badge-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false },
+        { name: "LASUGHERA", img: "lasughera.jpg", num: "", weight: 1, rating: 99, pos: "SQD", typeBadge: "badge-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false },
         
         // BERTONCINI #1
-        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 4, rating: 94, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 91, s2: 89, s3: 94, s4: 93, s5: 83, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
-        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 93, s2: 91, s3: 99, s4: 94, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
+        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 4, rating: 94, pos: "POR", typeBadge: "badge-base", typeName: "Base", isGK: true, s1: 91, s2: 89, s3: 94, s4: 93, s5: 83, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
+        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 2, rating: 97, pos: "POR", typeBadge: "badge-toty", typeName: "TOTY", isGK: true, s1: 93, s2: 91, s3: 99, s4: 94, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
 
         // CIANCIA #6 (Immagine ridotta)
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89, smallImg: true },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89, smallImg: true },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90, smallImg: true },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89, smallImg: true },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC", typeBadge: "badge-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89, smallImg: true },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90, smallImg: true },
 
         // AGRESTINI #7 (Immagine ridotta)
-        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 4, rating: 92, pos: "CC/DC", type: "card-gold", typeName: "Base", isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93, smallImg: true },
-        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 2, rating: 96, pos: "CC/DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 94, sho: 89, pas: 93, dri: 89, def: 96, phy: 94, smallImg: true },
+        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 4, rating: 92, pos: "CC/DC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93, smallImg: true },
+        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 2, rating: 96, pos: "CC/DC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 94, sho: 89, pas: 93, dri: 89, def: 96, phy: 94, smallImg: true },
 
         // DARIOKKE #9 (Base CC)
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 8, rating: 90, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 85, sho: 89, pas: 89, dri: 87, def: 80, phy: 91, smallImg: true },
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 6, rating: 93, pos: "ATT", type: "card-hero", typeName: "Heroes", isGK: false, pac: 86, sho: 91, pas: 90, dri: 88, def: 82, phy: 94, smallImg: true },
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 2, rating: 97, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 90, sho: 98, pas: 93, dri: 91, def: 83, phy: 94, smallImg: true },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 8, rating: 90, pos: "CC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 85, sho: 89, pas: 89, dri: 87, def: 80, phy: 91, smallImg: true },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 6, rating: 93, pos: "ATT", typeBadge: "badge-hero", typeName: "Heroes", isGK: false, pac: 86, sho: 91, pas: 90, dri: 88, def: 82, phy: 94, smallImg: true },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 2, rating: 97, pos: "ATT", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 90, sho: 98, pas: 93, dri: 91, def: 83, phy: 94, smallImg: true },
 
         // PIZZI #11
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 10, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 91, pas: 88, dri: 85, def: 83, phy: 87, smallImg: false },
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90, smallImg: false },
-        { name: "Pizzi #11", img: "pizzi.jpg", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90, smallImg: false },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 10, rating: 89, pos: "ATT", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 88, sho: 91, pas: 88, dri: 85, def: 83, phy: 87, smallImg: false },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", typeBadge: "badge-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90, smallImg: false },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90, smallImg: false },
 
         // MADDALENA #10
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90, smallImg: false },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93, smallImg: false },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC", type: "card-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93, smallImg: false },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90, smallImg: false },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93, smallImg: false },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC", typeBadge: "badge-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93, smallImg: false },
 
         // MUCCI #3
-        { name: "Mucci #3", img: "mucci.jpg", num: "#3", weight: 3, rating: 98, pos: "DC", type: "card-icon", typeName: "Icon", isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99, smallImg: false },
+        { name: "Mucci #3", img: "mucci.jpg", num: "#3", weight: 3, rating: 98, pos: "DC", typeBadge: "badge-icon", typeName: "Icon", isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99, smallImg: false },
 
         // ROSAMILIA #5
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 5, rating: 90, pos: "DC", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 89, pas: 91, dri: 84, def: 96, phy: 90, smallImg: false },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 4, rating: 93, pos: "DC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 90, pas: 92, dri: 86, def: 96, phy: 91, smallImg: false },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 2, rating: 97, pos: "DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 91, pas: 96, dri: 88, def: 99, phy: 93, smallImg: false },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 5, rating: 90, pos: "DC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 88, sho: 89, pas: 91, dri: 84, def: 96, phy: 90, smallImg: false },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 4, rating: 93, pos: "DC", typeBadge: "badge-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 90, pas: 92, dri: 86, def: 96, phy: 91, smallImg: false },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 2, rating: 97, pos: "DC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 91, pas: 96, dri: 88, def: 99, phy: 93, smallImg: false },
 
         // MATRANGA #18
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 8, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82, smallImg: false },
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 5, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 92, pas: 87, dri: 90, def: 84, phy: 83, smallImg: false },
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 91, sho: 92, pas: 88, dri: 90, def: 85, phy: 88, smallImg: false },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 8, rating: 89, pos: "ATT", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82, smallImg: false },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 5, rating: 91, pos: "ATT", typeBadge: "badge-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 92, pas: 87, dri: 90, def: 84, phy: 83, smallImg: false },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 2, rating: 94, pos: "ATT", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 91, sho: 92, pas: 88, dri: 90, def: 85, phy: 88, smallImg: false },
 
         // FERRERA #2
-        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 12, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90, smallImg: false },
-        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 4, rating: 91, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 89, sho: 91, pas: 90, dri: 87, def: 88, phy: 91, smallImg: false },
+        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 12, rating: 88, pos: "CC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90, smallImg: false },
+        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 4, rating: 91, pos: "CC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 89, sho: 91, pas: 90, dri: 87, def: 88, phy: 91, smallImg: false },
 
         // MATRANGA #99
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 6, rating: 93, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 4, rating: 95, pos: "POR", type: "card-futures", typeName: "Future Stars", isGK: true, s1: 97, s2: 94, s3: 91, s4: 97, s5: 90, s6: 96, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false }
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 6, rating: 93, pos: "POR", typeBadge: "badge-base", typeName: "Base", isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 4, rating: 95, pos: "POR", typeBadge: "badge-futures", typeName: "Future Stars", isGK: true, s1: 97, s2: 94, s3: 91, s4: 97, s5: 90, s6: 96, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", typeBadge: "badge-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false }
     ];
 
     function createFutCardHTML(player) {
@@ -768,17 +760,16 @@
         `;
 
         return `
-            <div class="fut-card ${player.type}">
-                <div class="fut-card-inner">
-                    <div class="fut-top-info">
-                        <span class="fut-rating">${player.rating}</span>
-                        <span class="fut-position">${player.pos}</span>
-                    </div>
-                    <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
-                    <div class="fut-bottom-section">
-                        <div class="fut-name">${player.name}</div>
-                        ${statsHtml}
-                    </div>
+            <div class="fut-card">
+                <div class="fut-top-info">
+                    <span class="fut-rating">${player.rating}</span>
+                    <span class="fut-position">${player.pos}</span>
+                </div>
+                <div class="fut-type-badge ${player.typeBadge}">${player.typeName}</div>
+                <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
+                <div class="fut-bottom-section">
+                    <div class="fut-name">${player.name}</div>
+                    ${statsHtml}
                 </div>
             </div>
         `;
@@ -824,18 +815,17 @@
 
             if (isUnlocked) {
                 grid.innerHTML += `
-                    <div class="fut-card ${player.type} transition-transform hover:scale-105">
-                        <div class="fut-card-inner">
-                            <div class="fut-top-info">
-                                <span class="fut-rating">${player.rating}</span>
-                                <span class="fut-position">${player.pos}</span>
-                            </div>
-                            <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
-                            <div class="fut-bottom-section">
-                                <div class="fut-name">${player.name}</div>
-                                ${statsHtml}
-                                <span class="text-[9px] text-green-400 font-bold mt-1">✓ Sbloccata</span>
-                            </div>
+                    <div class="fut-card transition-transform hover:scale-105">
+                        <div class="fut-top-info">
+                            <span class="fut-rating">${player.rating}</span>
+                            <span class="fut-position">${player.pos}</span>
+                        </div>
+                        <div class="fut-type-badge ${player.typeBadge}">${player.typeName}</div>
+                        <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
+                        <div class="fut-bottom-section">
+                            <div class="fut-name">${player.name}</div>
+                            ${statsHtml}
+                            <span class="text-[9px] text-green-400 font-bold mt-1">✓ Sbloccata</span>
                         </div>
                     </div>
                 `;
@@ -957,17 +947,16 @@
                 container.innerHTML = `
                     <div class="flex flex-col items-center w-full animate-reveal">
                         <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold mb-3">🎉 HAI SBUSTATO:</span>
-                        <div class="fut-card ${wonPlayer.type} shadow-2xl scale-105">
-                            <div class="fut-card-inner">
-                                <div class="fut-top-info">
-                                    <span class="fut-rating">${wonPlayer.rating}</span>
-                                    <span class="fut-position">${wonPlayer.pos}</span>
-                                </div>
-                                <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
-                                <div class="fut-bottom-section">
-                                    <div class="fut-name">${wonPlayer.name}</div>
-                                    ${wonStatsHtml}
-                                </div>
+                        <div class="fut-card shadow-2xl scale-105">
+                            <div class="fut-top-info">
+                                <span class="fut-rating">${wonPlayer.rating}</span>
+                                <span class="fut-position">${wonPlayer.pos}</span>
+                            </div>
+                            <div class="fut-type-badge ${wonPlayer.typeBadge}">${wonPlayer.typeName}</div>
+                            <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
+                            <div class="fut-bottom-section">
+                                <div class="fut-name">${wonPlayer.name}</div>
+                                ${wonStatsHtml}
                             </div>
                         </div>
                     </div>
