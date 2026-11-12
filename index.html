@@ -69,7 +69,6 @@
       .fut-pitch .fut-card:hover {
         transform: scale(0.75);
       }
-      /* Ridimensionamenti adattivi in base al modulo selezionato */
       .fut-pitch.scale-compact .fut-card {
         transform: scale(0.52);
         margin: -62px -46px;
@@ -214,7 +213,6 @@
       letter-spacing: 1px;
     }
 
-    /* Badge specifico per il tipo di carta posizionato in alto a destra */
     .fut-type-badge {
       position: absolute;
       top: 12px;
@@ -300,12 +298,13 @@
         <img src="logo.png" alt="Stemma Rione La Sughera" class="h-12 w-auto object-contain">
         <span class="font-display text-2xl text-white leading-none hidden sm:block">RIONE LA SUGHERA</span>
       </a>
-      <nav class="hidden md:flex items-center gap-6">
+      <nav class="hidden md:flex items-center gap-5">
           <a href="#storia" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Storia</a>
           <a href="#eventi" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Eventi</a>
           <a href="#unisciti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Unisciti</a>
           <a href="#palmares" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palmarès</a>
           <a href="#rosa" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Rosa 2026</a>
+          <a href="#draft-section" class="text-sm font-semibold uppercase tracking-wider text-yellow-400 hover:underline transition">Crea Squadra</a>
           <a href="#galleria" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Galleria</a>
           <a href="#palio-quiz" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Quiz</a>
           <a href="#faq" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">FAQ</a>
@@ -323,6 +322,7 @@
         <a href="#unisciti" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Unisciti</a>
         <a href="#palmares" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palmarès</a>
         <a href="#rosa" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Rosa 2026</a>
+        <a href="#draft-section" class="mobile-link block py-3 font-display text-2xl text-yellow-400 border-b border-white/10">Crea Squadra (Draft)</a>
         <a href="#galleria" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Galleria</a>
         <a href="#palio-quiz" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palio del Quiz</a>
         <a href="#faq" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">FAQ</a>
@@ -529,16 +529,21 @@
         </div>
       </div>
 
-      <!-- SELETTORE MODULO -->
-      <div class="mb-8 flex flex-wrap justify-center gap-2">
-        <span class="text-xs font-bold text-zinc-400 self-center mr-2 uppercase">Modulo:</span>
-        <button onclick="changeFormation('2-3-2')" class="formation-btn bg-primary text-white px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="2-3-2">2-3-2</button>
-        <button onclick="changeFormation('3-2-2')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="3-2-2">3-2-2</button>
-        <button onclick="changeFormation('2-2-3')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="2-2-3">2-2-3</button>
-        <button onclick="changeFormation('4-4')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="4-4">4-4</button>
-        <button onclick="changeFormation('2-4-1')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="2-4-1">2-4-1</button>
-        <button onclick="changeFormation('3-3-1')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="3-3-1">3-3-1</button>
-        <button onclick="changeFormation('1-4-2')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="1-4-2">1-4-2</button>
+      <!-- SELETTORE MODULO & RESET -->
+      <div class="mb-8 flex flex-wrap justify-between items-center gap-4">
+        <div class="flex flex-wrap gap-2 items-center">
+          <span class="text-xs font-bold text-zinc-400 mr-2 uppercase">Modulo:</span>
+          <button onclick="changeFormation('2-3-2')" class="formation-btn bg-primary text-white px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="2-3-2">2-3-2</button>
+          <button onclick="changeFormation('3-2-2')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="3-2-2">3-2-2</button>
+          <button onclick="changeFormation('2-2-3')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="2-2-3">2-2-3</button>
+          <button onclick="changeFormation('4-4')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="4-4">4-4</button>
+          <button onclick="changeFormation('2-4-1')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="2-4-1">2-4-1</button>
+          <button onclick="changeFormation('3-3-1')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="3-3-1">3-3-1</button>
+          <button onclick="changeFormation('1-4-2')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="1-4-2">1-4-2</button>
+        </div>
+        <button onclick="resetDraftSquad()" class="bg-red-600/80 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow">
+          🗑️ Reset Formazione
+        </button>
       </div>
 
       <!-- CAMPO DRAFT -->
@@ -555,13 +560,22 @@
     </div>
   </section>
 
-  <!-- MODALE SELEZIONE GIOCATORE (DRAFT) -->
+  <!-- MODALE GESTIONE / SELEZIONE GIOCATORE (DRAFT) -->
   <div id="player-select-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="font-display text-2xl text-yellow-400">SELEZIONA GIOCATORE</h3>
+      <div class="flex justify-between items-center mb-4">
+        <h3 id="modal-title" class="font-display text-2xl text-yellow-400">GESTISCI POSIZIONE</h3>
         <button onclick="closePlayerModal()" class="text-zinc-400 hover:text-white text-xl font-bold">✕</button>
       </div>
+      
+      <!-- Tasto opzionale per rimuovere il giocatore dallo slot se presente -->
+      <div id="remove-player-container" class="mb-6 hidden">
+        <button onclick="removePlayerFromSlot()" class="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-2.5 rounded-xl uppercase text-xs tracking-wider transition shadow">
+          ❌ Rimuovi giocatore da questo slot (per sostituirlo)
+        </button>
+      </div>
+
+      <p class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Seleziona un giocatore disponibile:</p>
       <div id="available-players-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-center">
         <!-- Lista giocatori sbloccati -->
       </div>
@@ -570,23 +584,34 @@
 
   <!-- MODALE COME SI GIOCA -->
   <div id="how-to-play-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85vh] overflow-y-auto">
       <button onclick="closeHowToPlayModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white text-xl font-bold">✕</button>
       <h3 class="font-display text-2xl text-yellow-400 mb-4">📖 COME SI GIOCA</h3>
       <div class="space-y-4 text-zinc-300 text-sm leading-relaxed">
-        <p>Benvenuto nella modalità <strong>Draft</strong> del Rione La Sughera! Qui puoi creare la tua formazione ideale combinando i giocatori che hai trovato sbustando i pacchetti.</p>
+        <p>Benvenuto nella modalità <strong>Crea Squadra (Draft)</strong> del Rione La Sughera! Assembla il tuo 11 ideale scegliendo tra i moduli e gestendo i titolari.</p>
         <div>
-          <h4 class="font-bold text-white mb-1">🎁 Sblocco delle Carte Speciali:</h4>
+          <h4 class="font-bold text-white mb-1">🔓 Disponibilità e Sblocco delle Carte:</h4>
           <ul class="list-disc pl-5 space-y-1 text-xs">
-            <li><strong>Base:</strong> Disponibili fin dal primo pacchetto.</li>
+            <li><strong>Carte Base:</strong> Sbloccate e disponibili fin dall'inizio per tutti.</li>
             <li><strong>10 Pacchetti aperti:</strong> Sblocca le carte <span class="text-green-400 font-bold">Heroes</span> e <span class="text-purple-400 font-bold">Future Stars</span>.</li>
             <li><strong>15 Pacchetti aperti:</strong> Sblocca le carte <span class="text-sky-400 font-bold">TOTY</span>.</li>
             <li><strong>20 Pacchetti aperti:</strong> Sblocca l'Iconica carta <span class="text-slate-200 font-bold">Icon di Mucci</span>.</li>
           </ul>
         </div>
         <div>
+          <h4 class="font-bold text-white mb-1">⚽ Regole Speciali e Moduli:</h4>
+          <p class="text-xs">Nel modulo <strong>4-4</strong>, la linea di centrocampo accetta eccezionalmente anche gli <strong>attaccanti</strong> senza subire alcuna penalità di fuori ruolo!</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-white mb-1">⚙️ Funzionalità Campo:</h4>
+          <ul class="list-disc pl-5 space-y-1 text-xs">
+            <li><strong>Sostituzione:</strong> Clicca su un giocatore già schierato per rimuoverlo o sostituirlo.</li>
+            <li><strong>Reset:</strong> Usa il tasto rosso "Reset Formazione" per svuotare il campo in un colpo solo.</li>
+          </ul>
+        </div>
+        <div>
           <h4 class="font-bold text-white mb-1">⚖️ Valutazione della Squadra (Rating):</h4>
-          <p class="text-xs">Il rating viene calcolato facendo la media degli overall in campo. Attenzione ai fuori ruolo: posizionare un giocatore nel reparto sbagliato applicherà delle penalità al rating totale della squadra in base al ruolo!</p>
+          <p class="text-xs">Il rating complessivo calcola la media degli overall. Attenzione a posizionare i giocatori nei reparti corretti per evitare penalità al punteggio!</p>
         </div>
       </div>
     </div>
@@ -931,6 +956,21 @@
         return parseInt(localStorage.getItem('rione_packs_count')) || 0;
     }
 
+    function initBaseCards() {
+        let collected = JSON.parse(localStorage.getItem('rione_cards')) || [];
+        let updated = false;
+        playersDatabase.forEach(p => {
+            if (p.typeName === "Base" && !collected.includes(p.name + "_" + p.rating)) {
+                collected.push(p.name + "_" + p.rating);
+                updated = true;
+            }
+        });
+        if (updated) {
+            localStorage.setItem('rione_cards', JSON.stringify(collected));
+        }
+    }
+    initBaseCards();
+
     function createFutCardHTML(player) {
         if (!player) return '';
         const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
@@ -992,7 +1032,7 @@
 
         playersDatabase.forEach(player => {
             const cardKey = player.name + "_" + player.rating;
-            const isUnlocked = collectedCards.includes(cardKey);
+            const isUnlocked = collectedCards.includes(cardKey) || (player.typeName === "Base" && getPacksOpened() >= 0);
             if (isUnlocked) unlockedCount++;
 
             const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
@@ -1219,7 +1259,6 @@
 
     // --- LOGICA MODALITÀ DRAFT ---
     let currentFormation = '2-3-2';
-    // Mappa delle posizioni nei vari moduli: riga -> array di ruoli ('ATT', 'CC', 'DC', 'POR')
     const formationsConfig = {
         '2-3-2': [
             ['ATT', 'ATT'],
@@ -1264,13 +1303,12 @@
         ]
     };
 
-    // Stato delle posizioni selezionate nel draft { "0-0": playerObject, ... }
     let draftSquad = {};
     let activeSlotIndex = null;
 
     function changeFormation(formName) {
         currentFormation = formName;
-        draftSquad = {}; // resetta squadra al cambio modulo
+        draftSquad = {};
         
         document.querySelectorAll('.formation-btn').forEach(btn => {
             if (btn.getAttribute('data-form') === formName) {
@@ -1284,12 +1322,17 @@
         calculateDraftRating();
     }
 
+    function resetDraftSquad() {
+        draftSquad = {};
+        renderDraftPitch();
+        calculateDraftRating();
+    }
+
     function renderDraftPitch() {
         const rowsContainer = document.getElementById('draft-rows');
         const pitchEl = document.getElementById('draft-pitch');
         if (!rowsContainer || !pitchEl) return;
 
-        // Gestione classi CSS adattive per la grandezza delle carte
         pitchEl.className = "fut-pitch rounded-3xl py-8 px-2 sm:px-6 overflow-hidden max-w-4xl mx-auto";
         if (currentFormation === '4-4' || currentFormation === '2-4-1' || currentFormation === '1-4-2') {
             pitchEl.classList.add('scale-compact');
@@ -1333,13 +1376,21 @@
         const collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
         const modal = document.getElementById('player-select-modal');
         const grid = document.getElementById('available-players-grid');
-        if (!modal || !grid) return;
+        const removeContainer = document.getElementById('remove-player-container');
+        if (!modal || !grid || !removeContainer) return;
+
+        // Mostra o nascondi il tasto per rimuovere il giocatore se lo slot è occupato
+        if (draftSquad[activeSlotIndex]) {
+            removeContainer.classList.remove('hidden');
+        } else {
+            removeContainer.classList.add('hidden');
+        }
 
         grid.innerHTML = "";
-        let availableList = playersDatabase.filter(p => collectedCards.includes(p.name + "_" + p.rating));
+        let availableList = playersDatabase.filter(p => collectedCards.includes(p.name + "_" + p.rating) || (p.typeName === "Base" && getPacksOpened() >= 0));
 
         if (availableList.length === 0) {
-            grid.innerHTML = `<p class="col-span-full text-xs text-zinc-400 py-6 text-center">Non hai ancora sbloccato nessuna carta! Apri i pacchetti per trovarne.</p>`;
+            grid.innerHTML = `<p class="col-span-full text-xs text-zinc-400 py-6 text-center">Nessuna carta disponibile.</p>`;
         } else {
             availableList.forEach(player => {
                 const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
@@ -1383,6 +1434,15 @@
         modal.classList.remove('hidden');
     }
 
+    function removePlayerFromSlot() {
+        if (activeSlotIndex !== null) {
+            delete draftSquad[activeSlotIndex];
+        }
+        closePlayerModal();
+        renderDraftPitch();
+        calculateDraftRating();
+    }
+
     function closePlayerModal() {
         document.getElementById('player-select-modal').classList.add('hidden');
     }
@@ -1397,7 +1457,6 @@
         calculateDraftRating();
     }
 
-    // Calcolo Rating Squadra con penalità fuori ruolo
     function calculateDraftRating() {
         const structure = formationsConfig[currentFormation];
         let totalRating = 0;
@@ -1413,13 +1472,11 @@
                 let playerOverall = player.rating;
                 let penalty = 0;
 
-                // Determina il reparto in cui si trova lo slot (basato su rowIndex o struttura)
-                // Nell'array formationsConfig, l'ultima riga è sempre il POR, la prima o le prime sono ATT, mezzo CC, retro DC.
-                let slotType = slotRole; // 'ATT', 'CC', 'DC', 'POR'
+                let slotType = slotRole;
                 if (rowIndex === structure.length - 1) slotType = 'POR';
                 else if (rowIndex === 0 && currentFormation !== '2-4-1' && currentFormation !== '3-3-1') slotType = 'ATT';
 
-                const pPos = player.pos; // 'POR', 'DC', 'CC', 'ATT', 'CC/DC', 'ATT/CC', 'ALL', 'SQD'
+                const pPos = player.pos;
                 const isAgrestini = player.name.includes("Agrestini");
                 const isDariokke = player.name.includes("Dariokke");
                 const isMisterOrSughera = player.name.includes("MISTER") || player.name.includes("LASUGHERA");
@@ -1429,37 +1486,35 @@
                     return;
                 }
 
-                // 1. Portiere in campo fuori porta
-                if (pPos === 'POR') {
-                    if (slotType === 'DC') penalty = 3;
-                    else if (slotType === 'CC') penalty = 5;
-                    else if (slotType === 'ATT') penalty = 7;
-                } 
-                // 2. Giocatore di movimento in porta
-                else if (slotType === 'POR') {
-                    penalty = 7;
-                }
-                // 3. Difensore (escluso Agrestini)
-                else if (pPos === 'DC' && !isAgrestini) {
-                    if (slotType === 'CC') penalty = 3;
-                    else if (slotType === 'ATT') penalty = 5;
-                }
-                // 4. Agrestini (CC/DC)
-                else if (isAgrestini) {
-                    if (slotType === 'ATT') penalty = 3;
-                }
-                // 5. Centrocampista / Altro (escluso Dariokke per attacco)
-                else if ((pPos === 'CC' || pPos === 'CC/DC') && !isDariokke) {
-                    if (slotType === 'ATT' || slotType === 'DC') penalty = 3;
-                }
-                // 6. Dariokke (ATT/CC)
-                else if (isDariokke) {
-                    if (slotType === 'DC') penalty = 3;
-                }
-                // 7. Attaccante puro
-                else if (pPos === 'ATT') {
-                    if (slotType === 'CC') penalty = 3;
-                    else if (slotType === 'DC') penalty = 5;
+                // Regola speciale modulo 4-4: attaccanti a centrocampo nessun fuori ruolo
+                if (currentFormation === '4-4' && slotType === 'CC' && pPos === 'ATT') {
+                    // Nessuna penalità
+                } else {
+                    if (pPos === 'POR') {
+                        if (slotType === 'DC') penalty = 3;
+                        else if (slotType === 'CC') penalty = 5;
+                        else if (slotType === 'ATT') penalty = 7;
+                    } 
+                    else if (slotType === 'POR') {
+                        penalty = 7;
+                    }
+                    else if (pPos === 'DC' && !isAgrestini) {
+                        if (slotType === 'CC') penalty = 3;
+                        else if (slotType === 'ATT') penalty = 5;
+                    }
+                    else if (isAgrestini) {
+                        if (slotType === 'ATT') penalty = 3;
+                    }
+                    else if ((pPos === 'CC' || pPos === 'CC/DC') && !isDariokke) {
+                        if (slotType === 'ATT' || slotType === 'DC') penalty = 3;
+                    }
+                    else if (isDariokke) {
+                        if (slotType === 'DC') penalty = 3;
+                    }
+                    else if (pPos === 'ATT') {
+                        if (slotType === 'CC') penalty = 3;
+                        else if (slotType === 'DC') penalty = 5;
+                    }
                 }
 
                 let finalPlayerRating = Math.max(0, playerOverall - penalty);
