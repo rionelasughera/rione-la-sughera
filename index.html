@@ -1095,6 +1095,98 @@
         }
     }
 
+// Funzione per generare l'HTML di una singola carta FUT
+    function createFutCardHTML(player) {
+        let statsHtml = player.isGK ? `
+            <div class="fut-stats">
+                <div>${player.s1} <span>${player.l1}</span></div>
+                <div>${player.s2} <span>${player.l2}</span></div>
+                <div>${player.s3} <span>${player.l3}</span></div>
+            </div>
+            <div class="fut-stats mt-1">
+                <div>${player.s4} <span>${player.l4}</span></div>
+                <div>${player.s5} <span>${player.l5}</span></div>
+                <div>${player.s6} <span>${player.l6}</span></div>
+            </div>
+        ` : `
+            <div class="fut-stats">
+                <div>${player.pac} <span>PAC</span></div>
+                <div>${player.sho} <span>SHO</span></div>
+                <div>${player.pas} <span>PAS</span></div>
+            </div>
+            <div class="fut-stats mt-1">
+                <div>${player.dri} <span>DRI</span></div>
+                <div>${player.def} <span>DEF</span></div>
+                <div>${player.phy} <span>PHY</span></div>
+            </div>
+        `;
+
+        return `
+            <div class="fut-card ${player.type}">
+                <div class="fut-card-inner">
+                    <div class="fut-top-info">
+                        <span class="fut-rating">${player.rating}</span>
+                        <span class="fut-position">${player.pos}</span>
+                        <img src="logo.png" alt="Logo La Sughera" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
+                        <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${player.num}</span>
+                    </div>
+                    <img src="${player.img}" alt="${player.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
+                    <div class="fut-bottom-section">
+                        <div class="fut-name">${player.name}</div>
+                        ${statsHtml}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Popola la formazione titolare (2-3-2) e la panchina
+    function renderRosa2026() {
+        const findCard = (name, typeName) => playersDatabase.find(p => p.name === name && p.typeName === typeName);
+
+        // Titolari richiesti
+        const gk = [findCard("BERTONCINI #1", "Base")];
+        const def = [findCard("Rosamilia #5", "Base"), findCard("Mucci #3", "Icon")];
+        const mid = [findCard("Dariokke #9", "Base"), findCard("Ciancia #6", "Base"), findCard("Agrestini #7", "Base")];
+        const att = [findCard("Pizzi #11", "Base"), findCard("Matranga #18", "Base")];
+
+        // Riserve + Mister (tutti gli altri giocatori non titolari)
+        const bench = [
+            findCard("Maddalena #10", "Base"),
+            findCard("Ferrera #2", "Base"),
+            findCard("MATRANGA #99", "Base"),
+            findCard("MISTER", "Icon")
+        ];
+
+        const renderLine = (id, list) => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = list.filter(Boolean).map(createFutCardHTML).join('');
+        };
+
+        renderLine('pitch-gk', gk);
+        renderLine('pitch-def', def);
+        renderLine('pitch-mid', mid);
+        renderLine('pitch-att', att);
+        renderLine('bench-grid', bench);
+    }
+
+    // Apri / Chiudi menu a tendina delle riserve
+    function toggleBench() {
+        const bench = document.getElementById('bench-container');
+        const btn = document.getElementById('toggleBenchBtn');
+        if (!bench || !btn) return;
+
+        if (bench.classList.contains('hidden')) {
+            bench.classList.remove('hidden');
+            btn.innerHTML = '<span id="benchArrow">▲</span> Nascondi Panchina e Mister';
+        } else {
+            bench.classList.add('hidden');
+            btn.innerHTML = '<span id="benchArrow">▼</span> Mostra Panchina e Mister (4)';
+        }
+    }
+
+    renderRosa2026();
+    
     // Controlla il timer delle 24 ore
     function checkPackTimer() {
         const lastOpenTime = localStorage.getItem('rione_last_pack_time');
