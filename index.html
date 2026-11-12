@@ -69,6 +69,15 @@
       .fut-pitch .fut-card:hover {
         transform: scale(0.75);
       }
+      /* Ridimensionamenti adattivi in base al modulo selezionato */
+      .fut-pitch.scale-compact .fut-card {
+        transform: scale(0.52);
+        margin: -62px -46px;
+      }
+      .fut-pitch.scale-tight .fut-card {
+        transform: scale(0.44);
+        margin: -72px -54px;
+      }
     }
 
     html { scroll-behavior: smooth; }
@@ -230,6 +239,12 @@
       top: 28px;
       object-fit: cover;
       filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));
+    }
+
+    .fut-player-img-small {
+      width: 90px !important;
+      height: 105px !important;
+      top: 38px !important;
     }
 
     .fut-bottom-section {
@@ -494,6 +509,88 @@
       </div>
     </div>
   </section>
+
+  <!-- SEZIONE CREA LA TUA FORMAZIONE / DRAFT -->
+  <section id="draft-section" class="py-16 bg-zinc-900 text-white border-t border-primary/30">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+        <div>
+          <span class="inline-block bg-yellow-500/20 text-yellow-400 font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-2 shadow">Modalità Draft</span>
+          <h2 class="font-display text-3xl sm:text-4xl text-white">CREA LA TUA FORMAZIONE</h2>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="openHowToPlayModal()" class="bg-slate-800 hover:bg-slate-700 text-yellow-400 px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider border border-yellow-400/40 shadow transition">
+            📖 Come si gioca
+          </button>
+          <div class="bg-slate-950 border-2 border-yellow-400 px-5 py-2.5 rounded-2xl shadow-xl text-center">
+            <span class="text-[10px] text-zinc-400 uppercase tracking-widest block">Rating Squadra</span>
+            <span id="draft-rating" class="font-display text-2xl text-yellow-400">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SELETTORE MODULO -->
+      <div class="mb-8 flex flex-wrap justify-center gap-2">
+        <span class="text-xs font-bold text-zinc-400 self-center mr-2 uppercase">Modulo:</span>
+        <button onclick="changeFormation('2-3-2')" class="formation-btn bg-primary text-white px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="2-3-2">2-3-2</button>
+        <button onclick="changeFormation('3-2-2')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="3-2-2">3-2-2</button>
+        <button onclick="changeFormation('2-2-3')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="2-2-3">2-2-3</button>
+        <button onclick="changeFormation('4-4')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="4-4">4-4</button>
+        <button onclick="changeFormation('2-4-1')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="2-4-1">2-4-1</button>
+        <button onclick="changeFormation('3-3-1')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="3-3-1">3-3-1</button>
+        <button onclick="changeFormation('1-4-2')" class="formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition" data-form="1-4-2">1-4-2</button>
+      </div>
+
+      <!-- CAMPO DRAFT -->
+      <div id="draft-pitch" class="fut-pitch rounded-3xl py-8 px-2 sm:px-6 overflow-hidden max-w-4xl mx-auto">
+        <div class="absolute inset-x-0 top-1/2 border-t-2 border-white/30 pointer-events-none"></div>
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-44 sm:h-44 rounded-full border-2 border-white/30 pointer-events-none"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 sm:w-64 h-20 border-b-2 border-x-2 border-white/30 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 sm:w-64 h-20 border-t-2 border-x-2 border-white/30 pointer-events-none"></div>
+
+        <div id="draft-rows" class="relative z-10 flex flex-col gap-6 sm:gap-10">
+          <!-- Righe generate via JS in base al modulo -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODALE SELEZIONE GIOCATORE (DRAFT) -->
+  <div id="player-select-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="font-display text-2xl text-yellow-400">SELEZIONA GIOCATORE</h3>
+        <button onclick="closePlayerModal()" class="text-zinc-400 hover:text-white text-xl font-bold">✕</button>
+      </div>
+      <div id="available-players-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-center">
+        <!-- Lista giocatori sbloccati -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALE COME SI GIOCA -->
+  <div id="how-to-play-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closeHowToPlayModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white text-xl font-bold">✕</button>
+      <h3 class="font-display text-2xl text-yellow-400 mb-4">📖 COME SI GIOCA</h3>
+      <div class="space-y-4 text-zinc-300 text-sm leading-relaxed">
+        <p>Benvenuto nella modalità <strong>Draft</strong> del Rione La Sughera! Qui puoi creare la tua formazione ideale combinando i giocatori che hai trovato sbustando i pacchetti.</p>
+        <div>
+          <h4 class="font-bold text-white mb-1">🎁 Sblocco delle Carte Speciali:</h4>
+          <ul class="list-disc pl-5 space-y-1 text-xs">
+            <li><strong>Base:</strong> Disponibili fin dal primo pacchetto.</li>
+            <li><strong>10 Pacchetti aperti:</strong> Sblocca le carte <span class="text-green-400 font-bold">Heroes</span> e <span class="text-purple-400 font-bold">Future Stars</span>.</li>
+            <li><strong>15 Pacchetti aperti:</strong> Sblocca le carte <span class="text-sky-400 font-bold">TOTY</span>.</li>
+            <li><strong>20 Pacchetti aperti:</strong> Sblocca l'Iconica carta <span class="text-slate-200 font-bold">Icon di Mucci</span>.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-white mb-1">⚖️ Valutazione della Squadra (Rating):</h4>
+          <p class="text-xs">Il rating viene calcolato facendo la media degli overall in campo. Attenzione ai fuori ruolo: posizionare un giocatore nel reparto sbagliato applicherà delle penalità al rating totale della squadra in base al ruolo!</p>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <!-- GALLERIA -->
   <section id="galleria" class="py-20 md:py-28 bg-secondary">
@@ -636,6 +733,7 @@
         
           <div class="w-full max-w-md bg-slate-900/90 border border-slate-800 p-6 rounded-3xl shadow-xl flex flex-col items-center text-center mb-12">
               <h3 class="text-lg font-bold text-yellow-400 mb-4">PACCHETTO GIORNALIERO 🎁</h3>
+              <div class="text-xs text-zinc-400 mb-3"><span id="packs-opened-count" class="text-yellow-400 font-bold">0</span> pacchetti aperti</div>
               <button id="open-pack-btn" class="w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 text-slate-950 font-black rounded-2xl shadow-lg transition-transform active:scale-95 cursor-pointer text-base sm:text-lg mb-6">APRI PACCHETTO</button>
               <div id="card-container" class="min-h-[320px] w-full flex items-center justify-center">
                   <p class="text-slate-400 text-sm">Clicca il bottone per sbustare la tua carta!</p>
@@ -744,6 +842,13 @@
         }
     }
 
+    function openHowToPlayModal() {
+        document.getElementById('how-to-play-modal').classList.remove('hidden');
+    }
+    function closeHowToPlayModal() {
+        document.getElementById('how-to-play-modal').classList.add('hidden');
+    }
+
     (function() {
         function runCountdown() {
             const targetDate = new Date('2026-11-02T00:00:00').getTime();
@@ -765,65 +870,71 @@
     })();
   </script>
 
-  <!-- Script per Gestione Carte & Rosa 2026 -->
+  <!-- Script per Gestione Carte, Rosa & Draft -->
   <script>
     const playersDatabase = [
-        { name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 },
-        { name: "LASUGHERA", img: "lasughera.jpg", num: "", weight: 1, rating: 99, pos: "SQD", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 },
+        { name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false, unlockPack: 20 },
+        { name: "LASUGHERA", img: "lasughera.jpg", num: "", weight: 1, rating: 99, pos: "SQD", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false, unlockPack: 20 },
         
         // BERTONCINI #1
-        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 4, rating: 94, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 91, s2: 89, s3: 94, s4: 93, s5: 83, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
-        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 93, s2: 91, s3: 99, s4: 94, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
+        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 4, rating: 94, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 91, s2: 89, s3: 94, s4: 93, s5: 83, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 0 },
+        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 93, s2: 91, s3: 99, s4: 94, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 15 },
 
         // CIANCIA #6
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89 },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89 },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90 },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89, smallImg: true, unlockPack: 0 },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89, smallImg: true, unlockPack: 10 },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90, smallImg: true, unlockPack: 15 },
 
         // AGRESTINI #7
-        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 4, rating: 92, pos: "CC/DC", type: "card-gold", typeName: "Base", isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93 },
-        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 2, rating: 96, pos: "CC/DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 94, sho: 89, pas: 93, dri: 89, def: 96, phy: 94 },
+        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 4, rating: 92, pos: "CC/DC", type: "card-gold", typeName: "Base", isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93, smallImg: true, unlockPack: 0 },
+        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 2, rating: 96, pos: "CC/DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 94, sho: 89, pas: 93, dri: 89, def: 96, phy: 94, smallImg: true, unlockPack: 15 },
 
         // DARIOKKE #9
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 8, rating: 90, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 85, sho: 89, pas: 89, dri: 87, def: 80, phy: 91 },
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 6, rating: 93, pos: "ATT", type: "card-hero", typeName: "Heroes", isGK: false, pac: 86, sho: 91, pas: 90, dri: 88, def: 82, phy: 94 },
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 2, rating: 97, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 90, sho: 98, pas: 93, dri: 91, def: 83, phy: 94 },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 8, rating: 90, pos: "ATT/CC", type: "card-gold", typeName: "Base", isGK: false, pac: 85, sho: 89, pas: 89, dri: 87, def: 80, phy: 91, smallImg: true, unlockPack: 0 },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 6, rating: 93, pos: "ATT/CC", type: "card-hero", typeName: "Heroes", isGK: false, pac: 86, sho: 91, pas: 90, dri: 88, def: 82, phy: 94, smallImg: true, unlockPack: 10 },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 2, rating: 97, pos: "ATT/CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 90, sho: 98, pas: 93, dri: 91, def: 83, phy: 94, smallImg: true, unlockPack: 15 },
 
         // PIZZI #11
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 10, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 91, pas: 88, dri: 85, def: 83, phy: 87 },
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90 },
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90 },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 10, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 91, pas: 88, dri: 85, def: 83, phy: 87, smallImg: false, unlockPack: 0 },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90, smallImg: false, unlockPack: 10 },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90, smallImg: false, unlockPack: 15 },
 
         // MADDALENA #10
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90 },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93 },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC", type: "card-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93 },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90, smallImg: false, unlockPack: 0 },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93, smallImg: false, unlockPack: 15 },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC", type: "card-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93, smallImg: false, unlockPack: 10 },
 
         // MUCCI #3
-        { name: "Mucci #3", img: "mucci.jpg", num: "#3", weight: 3, rating: 98, pos: "DC", type: "card-icon", typeName: "Icon", isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99 },
+        { name: "Mucci #3", img: "mucci.jpg", num: "#3", weight: 3, rating: 98, pos: "DC", type: "card-icon", typeName: "Icon", isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99, smallImg: false, unlockPack: 20 },
 
         // ROSAMILIA #5
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 5, rating: 90, pos: "DC", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 89, pas: 91, dri: 84, def: 96, phy: 90 },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 4, rating: 93, pos: "DC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 90, pas: 92, dri: 86, def: 96, phy: 91 },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 2, rating: 97, pos: "DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 91, pas: 96, dri: 88, def: 99, phy: 93 },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 5, rating: 90, pos: "DC", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 89, pas: 91, dri: 84, def: 96, phy: 90, smallImg: false, unlockPack: 0 },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 4, rating: 93, pos: "DC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 90, pas: 92, dri: 86, def: 96, phy: 91, smallImg: false, unlockPack: 10 },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 2, rating: 97, pos: "DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 91, pas: 96, dri: 88, def: 99, phy: 93, smallImg: false, unlockPack: 15 },
 
         // MATRANGA #18
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 8, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82 },
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 5, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 92, pas: 87, dri: 90, def: 84, phy: 83 },
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 91, sho: 92, pas: 88, dri: 90, def: 85, phy: 88 },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 8, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82, smallImg: false, unlockPack: 0 },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 5, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 92, pas: 87, dri: 90, def: 84, phy: 83, smallImg: false, unlockPack: 10 },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 91, sho: 92, pas: 88, dri: 90, def: 85, phy: 88, smallImg: false, unlockPack: 15 },
 
         // FERRERA #2
-        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 12, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90 },
-        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 4, rating: 91, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 89, sho: 91, pas: 90, dri: 87, def: 88, phy: 91 },
+        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 12, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90, smallImg: false, unlockPack: 0 },
+        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 4, rating: 91, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 89, sho: 91, pas: 90, dri: 87, def: 88, phy: 91, smallImg: false, unlockPack: 15 },
 
         // MATRANGA #99
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 6, rating: 93, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 4, rating: 95, pos: "POR", type: "card-futures", typeName: "Future Stars", isGK: true, s1: 97, s2: 94, s3: 91, s4: 97, s5: 90, s6: 96, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" }
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 6, rating: 93, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 0 },
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 4, rating: 95, pos: "POR", type: "card-futures", typeName: "Future Stars", isGK: true, s1: 97, s2: 94, s3: 91, s4: 97, s5: 90, s6: 96, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 10 },
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 15 }
     ];
+
+    function getPacksOpened() {
+        return parseInt(localStorage.getItem('rione_packs_count')) || 0;
+    }
 
     function createFutCardHTML(player) {
         if (!player) return '';
+        const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
+        
         let statsHtml = player.isGK ? `
             <div class="fut-stats">
                 <div>${player.s1} <span>${player.l1}</span></div>
@@ -858,7 +969,7 @@
                         <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${player.num}</span>
                     </div>
                     <div class="fut-type-badge">${player.typeName}</div>
-                    <img src="${player.img}" alt="${player.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
+                    <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
                     <div class="fut-bottom-section">
                         <div class="fut-name">${player.name}</div>
                         ${statsHtml}
@@ -871,6 +982,9 @@
     function renderAlbum() {
         const collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
         const grid = document.getElementById('album-grid');
+        const packsCountEl = document.getElementById('packs-opened-count');
+        if (packsCountEl) packsCountEl.innerText = getPacksOpened();
+
         if (!grid) return;
         
         grid.innerHTML = "";
@@ -881,6 +995,7 @@
             const isUnlocked = collectedCards.includes(cardKey);
             if (isUnlocked) unlockedCount++;
 
+            const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
             let statsHtml = player.isGK ? `
                 <div class="fut-stats">
                     <div>${player.s1} <span>${player.l1}</span></div>
@@ -916,7 +1031,7 @@
                                 <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${player.num}</span>
                             </div>
                             <div class="fut-type-badge">${player.typeName}</div>
-                            <img src="${player.img}" alt="${player.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
+                            <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
                             <div class="fut-bottom-section">
                                 <div class="fut-name">${player.name}</div>
                                 ${statsHtml}
@@ -926,12 +1041,13 @@
                     </div>
                 `;
             } else {
+                let reqText = player.unlockPack > 0 ? `Sblocca a ${player.unlockPack} pacchetti` : 'Non trovata';
                 grid.innerHTML += `
                     <div class="fut-card-locked">
                         <div class="text-3xl mb-1">🔒</div>
                         <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wide mb-1">${player.name}</h3>
                         <span class="text-xs font-extrabold text-amber-400 uppercase tracking-widest bg-slate-900/80 px-2 py-0.5 rounded border border-slate-700">${player.typeName}</span>
-                        <span class="text-[10px] text-red-400 font-semibold mt-2">Non trovata</span>
+                        <span class="text-[10px] text-red-400 font-semibold mt-2">${reqText}</span>
                     </div>
                 `;
             }
@@ -1017,21 +1133,28 @@
     }
 
     function openPack() {
-        const totalWeight = playersDatabase.reduce((sum, p) => sum + p.weight, 0);
+        const packsOpened = getPacksOpened();
+        const availablePool = playersDatabase.filter(p => packsOpened >= p.unlockPack);
+
+        const totalWeight = availablePool.reduce((sum, p) => sum + p.weight, 0);
         let randomNum = Math.random() * totalWeight;
-        for (let player of playersDatabase) {
+        for (let player of availablePool) {
             if (randomNum < player.weight) return player;
             randomNum -= player.weight;
         }
-        return playersDatabase[0];
+        return availablePool[0];
     }
 
     const openBtn = document.getElementById('open-pack-btn');
     if (openBtn) {
         openBtn.addEventListener('click', () => {
+            const currentPacks = getPacksOpened() + 1;
+            localStorage.setItem('rione_packs_count', currentPacks.toString());
             localStorage.setItem('rione_last_pack_time', new Date().getTime().toString());
 
             const wonPlayer = openPack();
+            const imgClass = wonPlayer.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
+            
             let wonStatsHtml = wonPlayer.isGK ? `
                 <div class="fut-stats">
                     <div>${wonPlayer.s1} <span>${wonPlayer.l1}</span></div>
@@ -1070,7 +1193,7 @@
                                     <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${wonPlayer.num}</span>
                                 </div>
                                 <div class="fut-type-badge">${wonPlayer.typeName}</div>
-                                <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
+                                <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
                                 <div class="fut-bottom-section">
                                     <div class="fut-name">${wonPlayer.name}</div>
                                     ${wonStatsHtml}
@@ -1094,8 +1217,270 @@
         });
     }
 
+    // --- LOGICA MODALITÀ DRAFT ---
+    let currentFormation = '2-3-2';
+    // Mappa delle posizioni nei vari moduli: riga -> array di ruoli ('ATT', 'CC', 'DC', 'POR')
+    const formationsConfig = {
+        '2-3-2': [
+            ['ATT', 'ATT'],
+            ['CC', 'CC', 'CC'],
+            ['DC', 'DC'],
+            ['POR']
+        ],
+        '3-2-2': [
+            ['ATT', 'ATT'],
+            ['CC', 'CC'],
+            ['DC', 'DC', 'DC'],
+            ['POR']
+        ],
+        '2-2-3': [
+            ['ATT', 'ATT', 'ATT'],
+            ['CC', 'CC'],
+            ['DC', 'DC'],
+            ['POR']
+        ],
+        '4-4': [
+            ['ATT', 'ATT', 'ATT', 'ATT'],
+            ['CC', 'CC', 'CC', 'CC'],
+            ['POR']
+        ],
+        '2-4-1': [
+            ['ATT'],
+            ['CC', 'CC', 'CC', 'CC'],
+            ['DC', 'DC'],
+            ['POR']
+        ],
+        '3-3-1': [
+            ['ATT'],
+            ['CC', 'CC', 'CC'],
+            ['DC', 'DC', 'DC'],
+            ['POR']
+        ],
+        '1-4-2': [
+            ['ATT', 'ATT'],
+            ['CC', 'CC', 'CC', 'CC'],
+            ['DC'],
+            ['POR']
+        ]
+    };
+
+    // Stato delle posizioni selezionate nel draft { "0-0": playerObject, ... }
+    let draftSquad = {};
+    let activeSlotIndex = null;
+
+    function changeFormation(formName) {
+        currentFormation = formName;
+        draftSquad = {}; // resetta squadra al cambio modulo
+        
+        document.querySelectorAll('.formation-btn').forEach(btn => {
+            if (btn.getAttribute('data-form') === formName) {
+                btn.className = "formation-btn bg-primary text-white px-4 py-2 rounded-xl text-xs font-bold uppercase transition";
+            } else {
+                btn.className = "formation-btn bg-slate-800 hover:bg-slate-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition";
+            }
+        });
+
+        renderDraftPitch();
+        calculateDraftRating();
+    }
+
+    function renderDraftPitch() {
+        const rowsContainer = document.getElementById('draft-rows');
+        const pitchEl = document.getElementById('draft-pitch');
+        if (!rowsContainer || !pitchEl) return;
+
+        // Gestione classi CSS adattive per la grandezza delle carte
+        pitchEl.className = "fut-pitch rounded-3xl py-8 px-2 sm:px-6 overflow-hidden max-w-4xl mx-auto";
+        if (currentFormation === '4-4' || currentFormation === '2-4-1' || currentFormation === '1-4-2') {
+            pitchEl.classList.add('scale-compact');
+        }
+        if (currentFormation === '4-4') {
+            pitchEl.classList.add('scale-tight');
+        }
+
+        const structure = formationsConfig[currentFormation];
+        let html = '';
+
+        structure.forEach((row, rowIndex) => {
+            let gapClass = row.length >= 4 ? 'gap-2 sm:gap-6' : (row.length === 3 ? 'gap-3 sm:gap-8' : 'gap-4 sm:gap-12');
+            html += `<div class="flex justify-center items-center ${gapClass}">`;
+            
+            row.forEach((slotRole, colIndex) => {
+                const slotKey = `${rowIndex}-${colIndex}`;
+                const player = draftSquad[slotKey];
+
+                if (player) {
+                    html += `<div onclick="openPlayerSelector(${rowIndex}, '${colIndex}')" class="cursor-pointer transition hover:scale-105">${createFutCardHTML(player)}</div>`;
+                } else {
+                    html += `
+                        <div onclick="openPlayerSelector(${rowIndex}, '${colIndex}')" class="fut-card border-2 border-dashed border-white/50 bg-black/40 flex flex-col items-center justify-center cursor-pointer hover:bg-black/60 transition group">
+                            <span class="text-3xl text-yellow-400 font-bold mb-1 group-hover:scale-110 transition">+</span>
+                            <span class="text-xs uppercase font-extrabold text-white tracking-widest">${slotRole}</span>
+                            <span class="text-[9px] text-zinc-400 mt-1">Seleziona</span>
+                        </div>
+                    `;
+                }
+            });
+
+            html += `</div>`;
+        });
+
+        rowsContainer.innerHTML = html;
+    }
+
+    function openPlayerSelector(rowIndex, colIndex) {
+        activeSlotIndex = `${rowIndex}-${colIndex}`;
+        const collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
+        const modal = document.getElementById('player-select-modal');
+        const grid = document.getElementById('available-players-grid');
+        if (!modal || !grid) return;
+
+        grid.innerHTML = "";
+        let availableList = playersDatabase.filter(p => collectedCards.includes(p.name + "_" + p.rating));
+
+        if (availableList.length === 0) {
+            grid.innerHTML = `<p class="col-span-full text-xs text-zinc-400 py-6 text-center">Non hai ancora sbloccato nessuna carta! Apri i pacchetti per trovarne.</p>`;
+        } else {
+            availableList.forEach(player => {
+                const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
+                let statsHtml = player.isGK ? `
+                    <div class="fut-stats">
+                        <div>${player.s1} <span>${player.l1}</span></div>
+                        <div>${player.s2} <span>${player.l2}</span></div>
+                        <div>${player.s3} <span>${player.l3}</span></div>
+                    </div>
+                ` : `
+                    <div class="fut-stats">
+                        <div>${player.pac} <span>PAC</span></div>
+                        <div>${player.sho} <span>SHO</span></div>
+                        <div>${player.pas} <span>PAS</span></div>
+                    </div>
+                `;
+
+                grid.innerHTML += `
+                    <div onclick="assignPlayerToSlot('${player.name}', ${player.rating})" class="cursor-pointer transition hover:scale-105 transform scale-75 origin-top">
+                        <div class="fut-card ${player.type}">
+                            <div class="fut-card-inner">
+                                <div class="fut-top-info">
+                                    <span class="fut-rating">${player.rating}</span>
+                                    <span class="fut-position">${player.pos}</span>
+                                    <img src="logo.png" alt="Logo" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
+                                    <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${player.num}</span>
+                                </div>
+                                <div class="fut-type-badge">${player.typeName}</div>
+                                <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
+                                <div class="fut-bottom-section">
+                                    <div class="fut-name">${player.name}</div>
+                                    ${statsHtml}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        modal.classList.remove('hidden');
+    }
+
+    function closePlayerModal() {
+        document.getElementById('player-select-modal').classList.add('hidden');
+    }
+
+    function assignPlayerToSlot(name, rating) {
+        const player = playersDatabase.find(p => p.name === name && p.rating === rating);
+        if (player && activeSlotIndex !== null) {
+            draftSquad[activeSlotIndex] = player;
+        }
+        closePlayerModal();
+        renderDraftPitch();
+        calculateDraftRating();
+    }
+
+    // Calcolo Rating Squadra con penalità fuori ruolo
+    function calculateDraftRating() {
+        const structure = formationsConfig[currentFormation];
+        let totalRating = 0;
+        let count = 0;
+
+        structure.forEach((row, rowIndex) => {
+            row.forEach((slotRole, colIndex) => {
+                const slotKey = `${rowIndex}-${colIndex}`;
+                const player = draftSquad[slotKey];
+                if (!player) return;
+
+                count++;
+                let playerOverall = player.rating;
+                let penalty = 0;
+
+                // Determina il reparto in cui si trova lo slot (basato su rowIndex o struttura)
+                // Nell'array formationsConfig, l'ultima riga è sempre il POR, la prima o le prime sono ATT, mezzo CC, retro DC.
+                let slotType = slotRole; // 'ATT', 'CC', 'DC', 'POR'
+                if (rowIndex === structure.length - 1) slotType = 'POR';
+                else if (rowIndex === 0 && currentFormation !== '2-4-1' && currentFormation !== '3-3-1') slotType = 'ATT';
+
+                const pPos = player.pos; // 'POR', 'DC', 'CC', 'ATT', 'CC/DC', 'ATT/CC', 'ALL', 'SQD'
+                const isAgrestini = player.name.includes("Agrestini");
+                const isDariokke = player.name.includes("Dariokke");
+                const isMisterOrSughera = player.name.includes("MISTER") || player.name.includes("LASUGHERA");
+
+                if (isMisterOrSughera) {
+                    totalRating += playerOverall;
+                    return;
+                }
+
+                // 1. Portiere in campo fuori porta
+                if (pPos === 'POR') {
+                    if (slotType === 'DC') penalty = 3;
+                    else if (slotType === 'CC') penalty = 5;
+                    else if (slotType === 'ATT') penalty = 7;
+                } 
+                // 2. Giocatore di movimento in porta
+                else if (slotType === 'POR') {
+                    penalty = 7;
+                }
+                // 3. Difensore (escluso Agrestini)
+                else if (pPos === 'DC' && !isAgrestini) {
+                    if (slotType === 'CC') penalty = 3;
+                    else if (slotType === 'ATT') penalty = 5;
+                }
+                // 4. Agrestini (CC/DC)
+                else if (isAgrestini) {
+                    if (slotType === 'ATT') penalty = 3;
+                }
+                // 5. Centrocampista / Altro (escluso Dariokke per attacco)
+                else if ((pPos === 'CC' || pPos === 'CC/DC') && !isDariokke) {
+                    if (slotType === 'ATT' || slotType === 'DC') penalty = 3;
+                }
+                // 6. Dariokke (ATT/CC)
+                else if (isDariokke) {
+                    if (slotType === 'DC') penalty = 3;
+                }
+                // 7. Attaccante puro
+                else if (pPos === 'ATT') {
+                    if (slotType === 'CC') penalty = 3;
+                    else if (slotType === 'DC') penalty = 5;
+                }
+
+                let finalPlayerRating = Math.max(0, playerOverall - penalty);
+                totalRating += finalPlayerRating;
+            });
+        });
+
+        const ratingEl = document.getElementById('draft-rating');
+        if (!ratingEl) return;
+
+        if (count === 0) {
+            ratingEl.innerText = "0";
+        } else {
+            const avg = Math.round(totalRating / count);
+            ratingEl.innerText = avg;
+        }
+    }
+
     renderAlbum();
     renderRosa2026();
+    renderDraftPitch();
     checkPackTimer();
     setInterval(checkPackTimer, 60000);
   </script>
