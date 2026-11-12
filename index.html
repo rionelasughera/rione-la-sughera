@@ -128,7 +128,6 @@
       align-items: center;
     }
 
-    /* 1. CARTE NORMALI / BASE (ORO) */
     .card-gold {
       background: linear-gradient(135deg, #f5d77f 0%, #d4af37 40%, #aa771c 100%);
       color: #3b2c0d;
@@ -137,7 +136,6 @@
       background: linear-gradient(180deg, #2a2008 0%, #0d1117 60%);
     }
 
-    /* 2. CARTE ICON (BIANCO / GRIGIO) */
     .card-icon {
       background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #64748b 100%);
       color: #0f172a;
@@ -146,7 +144,6 @@
       background: linear-gradient(180deg, #334155 0%, #0f172a 60%);
     }
 
-    /* 3. CARTE TOTY / TOTS (BLU) */
     .card-toty {
       background: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #1e3a8a 100%);
       color: #e0f2fe;
@@ -155,7 +152,6 @@
       background: linear-gradient(180deg, #0c4a6e 0%, #030712 60%);
     }
 
-    /* 4. CARTE HEROES (VERDI) */
     .card-hero {
       background: linear-gradient(135deg, #4ade80 0%, #16a34a 50%, #14532d 100%);
       color: #dcfce7;
@@ -164,7 +160,6 @@
       background: linear-gradient(180deg, #14532d 0%, #051c0f 60%);
     }
 
-    /* 5. CARTE FUTURE STARS (VIOLA ACCESO) */
     .card-futures {
       background: linear-gradient(135deg, #e879f9 0%, #a855f7 50%, #6b21a8 100%);
       color: #fae8ff;
@@ -384,7 +379,7 @@
     </div>
   </section>
 
-  <!-- EVENTI & SCHEDINA ALBERI DI NATALE -->
+  <!-- EVENTI & SCHEDINA ALBERI DI NATALE CON PERCENTUALI -->
   <section id="eventi" class="py-20 md:py-28 bg-primary text-primary-foreground relative overflow-hidden">
     <div class="relative max-w-6xl mx-auto px-4">
       <p class="font-bold uppercase tracking-[0.2em] text-sm text-white/80">Segnati la data</p>
@@ -404,32 +399,59 @@
           </div>
         </article>
 
-        <!-- BACHECA PRONOSTICI (SOLO ALBERI DI NATALE) -->
+        <!-- BACHECA PRONOSTICI CON % E NUOVI NOMI/EMOJI -->
         <div id="pronostici" class="bg-zinc-950 text-white rounded-2xl p-6 sm:p-8 shadow-2xl border-2 border-yellow-400/60 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between gap-2 mb-3">
-              <span class="bg-yellow-400 text-slate-950 font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded-full">🎄 Schedina Rionale</span>
+              <span class="bg-yellow-400 text-slate-950 font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded-full">🎄 Schedina Rionale & % Voti</span>
               <span class="text-xs text-yellow-400 font-bold">Premio: +2 Pacchetti Extra!</span>
             </div>
             <h3 class="font-display text-3xl text-white">CHI VINCERÀ GLI ALBERI DI NATALE?</h3>
-            <p class="text-zinc-400 text-xs sm:text-sm mt-2">Fai il tuo pronostico ufficiale per la sfida dell'8 Dicembre! Chi indovina il rione vincitore riceverà pacchetti bonus nell'album.</p>
+            <p class="text-zinc-400 text-xs sm:text-sm mt-2">Fai il tuo pronostico ufficiale per la sfida dell'8 Dicembre! Guarda le percentuali in tempo reale basate sui voti della community.</p>
 
-            <div id="christmas-poll-options" class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <button onclick="voteChristmasTree('Rione La Sughera')" class="poll-btn text-left p-3.5 rounded-xl border border-white/15 bg-white/5 hover:border-red-500 hover:bg-red-500/20 transition flex items-center justify-between font-bold text-sm">
-                <span>🦊 Rione La Sughera</span>
-                <span class="text-xs text-zinc-400">Vota</span>
+            <div id="christmas-poll-options" class="mt-5 space-y-3">
+              <!-- RIONE LA SUGHERA -->
+              <button onclick="voteChristmasTree('Rione La Sughera')" class="poll-btn w-full text-left p-3.5 rounded-xl border border-white/15 bg-white/5 hover:border-red-500 hover:bg-red-500/20 transition flex flex-col gap-1.5 font-bold text-sm">
+                <div class="flex justify-between items-center w-full">
+                  <span>🦊 Rione La Sughera</span>
+                  <span id="pct-sughera" class="text-xs text-yellow-400 font-mono">0% (0 voti)</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div id="bar-sughera" class="bg-red-600 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
               </button>
-              <button onclick="voteChristmasTree('Rione Borgovalle')" class="poll-btn text-left p-3.5 rounded-xl border border-white/15 bg-white/5 hover:border-yellow-400 hover:bg-yellow-400/10 transition flex items-center justify-between font-bold text-sm">
-                <span>🏰 Rione Borgovalle</span>
-                <span class="text-xs text-zinc-400">Vota</span>
+
+              <!-- RIONE BORGOVALLE -->
+              <button onclick="voteChristmasTree('Rione Borgovalle')" class="poll-btn w-full text-left p-3.5 rounded-xl border border-white/15 bg-white/5 hover:border-yellow-400 hover:bg-yellow-400/10 transition flex flex-col gap-1.5 font-bold text-sm">
+                <div class="flex justify-between items-center w-full">
+                  <span>🏰 Rione Borgovalle</span>
+                  <span id="pct-borgovalle" class="text-xs text-yellow-400 font-mono">0% (0 voti)</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div id="bar-borgovalle" class="bg-amber-500 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
               </button>
-              <button onclick="voteChristmasTree('Rione Padule')" class="poll-btn text-left p-3.5 rounded-xl border border-white/15 bg-white/5 hover:border-yellow-400 hover:bg-yellow-400/10 transition flex items-center justify-between font-bold text-sm">
-                <span>🌿 Rione Padule</span>
-                <span class="text-xs text-zinc-400">Vota</span>
+
+              <!-- RIONE PADULE (CON CINGHIALE 🐗) -->
+              <button onclick="voteChristmasTree('Rione Padule')" class="poll-btn w-full text-left p-3.5 rounded-xl border border-white/15 bg-white/5 hover:border-yellow-400 hover:bg-yellow-400/10 transition flex flex-col gap-1.5 font-bold text-sm">
+                <div class="flex justify-between items-center w-full">
+                  <span>🐗 Rione Padule</span>
+                  <span id="pct-padule" class="text-xs text-yellow-400 font-mono">0% (0 voti)</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div id="bar-padule" class="bg-emerald-600 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
               </button>
-              <button onclick="voteChristmasTree('Quarto Rione')" class="poll-btn text-left p-3.5 rounded-xl border border-white/15 bg-white/5 hover:border-yellow-400 hover:bg-yellow-400/10 transition flex items-center justify-between font-bold text-sm">
-                <span>⭐ Quarto Rione</span>
-                <span class="text-xs text-zinc-400">Vota</span>
+
+              <!-- RIONE LA SELVA (CON LUPO 🐺) -->
+              <button onclick="voteChristmasTree('Rione La Selva')" class="poll-btn w-full text-left p-3.5 rounded-xl border border-white/15 bg-white/5 hover:border-yellow-400 hover:bg-yellow-400/10 transition flex flex-col gap-1.5 font-bold text-sm">
+                <div class="flex justify-between items-center w-full">
+                  <span>🐺 Rione La Selva</span>
+                  <span id="pct-selva" class="text-xs text-yellow-400 font-mono">0% (0 voti)</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div id="bar-selva" class="bg-sky-600 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
               </button>
             </div>
           </div>
@@ -547,7 +569,7 @@
     <div class="max-w-5xl mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
         <div>
-          <span class="inline-block bg-yellow-500/20 text-yellow-400 font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-2 shadow">Modalità Draft & Sfida</span>
+          <span class="inline-block bg-yellow-500/20 text-yellow-400 font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-2 shadow">Modalità Draft & Battle</span>
           <h2 class="font-display text-3xl sm:text-4xl text-white">CREA LA TUA FORMAZIONE</h2>
         </div>
         <div class="flex items-center gap-3">
@@ -590,25 +612,24 @@
         </div>
       </div>
 
-      <!-- DRAFT BATTLE (SOLO GIOCATORI DELLA SUGHERA) -->
+      <!-- DRAFT BATTLE (SIMULAZIONE SCONTRO DIRETTO TRA SQUADRE) -->
       <div class="mt-10 bg-slate-950 border-2 border-primary/50 rounded-3xl p-6 sm:p-8 shadow-2xl">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
-            <span class="bg-primary text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">⚔️ Draft Battle · Derby della Sughera</span>
-            <h3 class="font-display text-2xl sm:text-3xl text-white mt-2">SFIDA LA SUGHERA O UN AMICO</h3>
-            <p class="text-zinc-400 text-xs sm:text-sm mt-1">Metti alla prova la tua formazione contro una selezione dei giocatori del Rione La Sughera oppure condividi la tua rosa su WhatsApp per sfidare un altro contradaiolo!</p>
+            <span class="bg-primary text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">⚔️ Draft Battle · Scontro sul Campo</span>
+            <h3 class="font-display text-2xl sm:text-3xl text-white mt-2">SIMULA SFIDA SQUADRE</h3>
+            <p class="text-zinc-400 text-xs sm:text-sm mt-1">Fai scendere in campo la tua formazione e simula lo scontro diretto contro l'AI della Sughera oppure sfida un amico!</p>
           </div>
           <div class="flex flex-wrap gap-3">
             <button onclick="simulateSugheraBattle()" class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 text-white font-black px-6 py-3 rounded-2xl text-xs uppercase tracking-wider shadow-lg transition cursor-pointer">
               ⚽ Simula Partita (vs Sughera AI)
             </button>
             <button onclick="shareDraftBattleWhatsApp()" class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-black px-5 py-3 rounded-2xl text-xs uppercase tracking-wider shadow-lg transition cursor-pointer">
-              📲 Sfida un Amico su WhatsApp
+              📲 Sfida Amico su WhatsApp
             </button>
           </div>
         </div>
 
-        <!-- RISULTATO SIMULAZIONE DRAFT BATTLE -->
         <div id="battle-result-box" class="hidden bg-slate-900 border border-white/10 rounded-2xl p-5 mt-4"></div>
       </div>
     </div>
@@ -621,7 +642,7 @@
         <h3 id="modal-title" class="font-display text-2xl text-yellow-400">GESTISCI POSIZIONE</h3>
         <button onclick="closePlayerModal()" class="text-zinc-400 hover:text-white text-xl font-bold">✕</button>
       </div>
-      <p class="text-xs text-zinc-400 mb-4">Nel Draft sono disponibili subito le carte <strong>Base</strong> e tutte le carte speciali che hai già sbloccato nei pacchetti.</p>
+      <p class="text-xs text-zinc-400 mb-4">Puoi schierare tutte le carte <strong>Base</strong> e mano a mano tutte le carte rare/speciali che sblocchi nei pacchetti.</p>
       
       <div id="remove-player-container" class="mb-6 hidden">
         <button onclick="removePlayerFromSlot()" class="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-2.5 rounded-xl uppercase text-xs tracking-wider transition shadow">
@@ -633,7 +654,7 @@
     </div>
   </div>
 
-  <!-- MODALE COME SI GIOCA -->
+  <!-- MODALE COME SI GIOCA AGGIORNATO -->
   <div id="how-to-play-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85vh] overflow-y-auto">
       <button onclick="closeHowToPlayModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white text-xl font-bold">✕</button>
@@ -643,20 +664,20 @@
         <div>
           <h4 class="font-bold text-white mb-1">🔓 Carte Disponibili nel Draft:</h4>
           <ul class="list-disc pl-5 space-y-1 text-xs">
-            <li><strong>All'inizio (Subito):</strong> Nel Draft puoi schierare tutte le carte <strong>Base</strong> della Sughera.</li>
-            <li><strong>Carte Speciali (TOTY, Heroes, Future Stars, Icon):</strong> Per usarle nel Draft devi prima trovarle nei pacchetti giornalieri o tramite il Mercato Rionale!</li>
-            <li><strong>Unicità:</strong> Ogni giocatore può essere schierato massimo una volta nella rosa.</li>
+            <li><strong>Carte Base:</strong> Sempre utilizzabili fin dall'inizio.</li>
+            <li><strong>Carte Rare e Speciali (TOTY, Heroes, Future Stars, Icon):</strong> Man mano che le sblocchi aprendo i pacchetti, potrai inserirle subito nella tua squadra del Draft!</li>
+            <li><strong>Unicità:</strong> Ciascun giocatore può essere schierato massimo una volta in campo.</li>
           </ul>
         </div>
         <div>
-          <h4 class="font-bold text-white mb-1">⚔️ Draft Battle (Sughera vs Sughera):</h4>
-          <p class="text-xs">Una volta schierati almeno 5 giocatori, puoi simulare una sfida contro una rosa rivale composta dai giocatori della Sughera oppure inviare il link della tua squadra su WhatsApp per confrontare i rating con i tuoi amici!</p>
+          <h4 class="font-bold text-white mb-1">⚔️ Draft Battle (Scontro Squadre):</h4>
+          <p class="text-xs">Schiera almeno 5 giocatori e avvia la simulazione di partita: le due squadre si affronteranno sul campo calcolando rating, gol e miglior in campo (MVP)!</p>
         </div>
       </div>
     </div>
   </div>
   
-  <!-- SEZIONE COLLEZIONA LE CARTE, BADGE E MERCATO RIONALE -->
+  <!-- SEZIONE COLLEZIONA LE CARTE, CLASSIFICA E MERCATO -->
   <section id="carte" class="py-16 bg-slate-950 text-white border-t border-primary/30">
       <div class="w-full max-w-5xl mx-auto py-8 px-4 flex flex-col items-center">
           <div class="w-full max-w-4xl flex flex-wrap justify-between items-center gap-3 mb-8">
@@ -667,10 +688,10 @@
               </div>
           </div>
 
-          <!-- CLASSIFICA GLOBALE CON BADGE -->
+          <!-- CLASSIFICA GENERALE SUPABASE -->
           <div id="friend-stats" class="w-full max-w-lg mb-8"></div>
         
-          <!-- PACCHETTO GIORNALIERO (RESET A MEZZANOTTE) -->
+          <!-- PACCHETTO GIORNALIERO (MEZZANOTTE) -->
           <div class="w-full max-w-md bg-slate-900/90 border border-slate-800 p-6 rounded-3xl shadow-xl flex flex-col items-center text-center mb-12">
               <h3 class="text-lg font-bold text-yellow-400 mb-1">PACCHETTO GIORNALIERO 🎁</h3>
               <p class="text-[11px] text-zinc-400 mb-3">Si ricarica ogni giorno a <strong>Mezzanotte (00:00)</strong> · Tutte le rarità disponibili subito!</p>
@@ -684,13 +705,13 @@
               </div>
           </div>
 
-          <!-- SISTEMA DI SCAMBIO CARTE (MERCATO RIONALE) -->
+          <!-- MERCATO RIONALE (FUSIONE E SCAMBIO) -->
           <div class="w-full max-w-5xl bg-slate-900/90 border-2 border-amber-500/40 rounded-3xl p-6 sm:p-8 mb-12 shadow-2xl">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
               <div>
                 <span class="bg-amber-500/20 text-amber-400 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">🤝 Mercato Rionale</span>
                 <h3 class="font-display text-2xl sm:text-3xl text-white mt-2">SCAMBIA & FONDI DOPPIONI</h3>
-                <p class="text-zinc-400 text-xs sm:text-sm mt-1">Hai trovato carte doppie nei pacchetti? Fondi <strong>3 doppioni</strong> per aprire subito un pacchetto extra oppure genera un codice scambio da mandare su WhatsApp!</p>
+                <p class="text-zinc-400 text-xs sm:text-sm mt-1">Hai trovato carte doppie nei pacchetti? Fondi <strong>3 doppioni</strong> per aprire subito un pacchetto extra oppure genera un codice scambio!</p>
               </div>
               <button id="fuse-duplicates-btn" onclick="fuseDuplicatesForPack()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 text-white font-black px-5 py-3.5 rounded-2xl text-xs uppercase tracking-wider shadow-lg transition cursor-pointer">
                 ⚗️ Fondi 3 Doppioni = 1 Pacchetto Extra
@@ -698,10 +719,9 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
-              <!-- COLONNA 1: INVIA / GENERA CODICE SCAMBIO -->
               <div class="bg-slate-950 border border-slate-800 rounded-2xl p-5">
                 <h4 class="text-sm font-bold text-yellow-400 uppercase tracking-wider mb-2">📤 Cedi un Doppione (Genera Codice)</h4>
-                <p class="text-xs text-zinc-400 mb-3">Seleziona una carta di cui possiedi almeno 1 doppione per creare il codice regalo/scambio:</p>
+                <p class="text-xs text-zinc-400 mb-3">Seleziona una carta di cui possiedi almeno 1 doppione:</p>
                 <div class="flex flex-col sm:flex-row gap-2">
                   <select id="duplicate-select" class="flex-1 bg-slate-900 border border-slate-700 text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-yellow-400">
                     <option value="">Nessun doppione disponibile</option>
@@ -711,7 +731,7 @@
                   </button>
                 </div>
                 <div id="generated-code-box" class="hidden mt-3 p-3 bg-slate-900 border border-yellow-400/50 rounded-xl">
-                  <p class="text-[11px] text-zinc-300 mb-1">Codice generato (il doppione è stato scalato dal tuo inventario):</p>
+                  <p class="text-[11px] text-zinc-300 mb-1">Codice generato:</p>
                   <div class="flex items-center justify-between gap-2">
                     <code id="trade-code-output" class="text-xs font-mono text-yellow-400 font-bold select-all break-all"></code>
                     <button onclick="copyTradeCode()" class="bg-slate-800 hover:bg-slate-700 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg uppercase">Copia</button>
@@ -719,10 +739,9 @@
                 </div>
               </div>
 
-              <!-- COLONNA 2: RISCATTA CODICE SCAMBIO -->
               <div class="bg-slate-950 border border-slate-800 rounded-2xl p-5">
                 <h4 class="text-sm font-bold text-green-400 uppercase tracking-wider mb-2">📥 Riscatta Codice da un Amico</h4>
-                <p class="text-xs text-zinc-400 mb-3">Incolla qui il codice univoco ricevuto da un altro contradaiolo per aggiungere la carta al tuo album:</p>
+                <p class="text-xs text-zinc-400 mb-3">Incolla qui il codice univoco ricevuto da un altro contradaiolo:</p>
                 <div class="flex flex-col sm:flex-row gap-2">
                   <input id="redeem-code-input" type="text" placeholder="Es. SUGHERA-..." class="flex-1 bg-slate-900 border border-slate-700 text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-green-400">
                   <button onclick="redeemTradeCode()" class="bg-green-600 hover:bg-green-500 text-white font-bold px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer">
@@ -734,13 +753,13 @@
             </div>
           </div>
 
-          <!-- BADGE E OBIETTIVI DELL'ALBUM -->
+          <!-- BADGE E OBIETTIVI -->
           <div class="w-full max-w-5xl mb-12">
             <h3 class="text-lg font-bold text-yellow-400 mb-4 text-center sm:text-left">🏅 BADGE & OBIETTIVI RIONALI</h3>
             <div id="badges-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
           </div>
 
-          <!-- ALBUM COMPLETO -->
+          <!-- ALBUM -->
           <div class="w-full max-w-5xl">
               <h3 class="text-lg font-bold text-yellow-400 mb-6 text-center sm:text-left">ALBUM DEL RIONE</h3>
               <div id="album-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center"></div>
@@ -1003,7 +1022,7 @@
     })();
   </script>
 
-  <!-- SCRIPT CARTE, BUSTINE MEZZANOTTE, MERCATO, BADGE, DRAFT & BATTLE -->
+  <!-- SCRIPT CARTE, BUSTINE MEZZANOTTE, MERCATO, BADGE, DRAFT & BATTLE CONCENTRATE -->
   <script>
     const playersDatabase = [
         { id: "mister_99", name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false },
@@ -1060,11 +1079,8 @@
         { id: "matranga99_97", name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false }
     ];
 
-    // --- GESTIONE INVENTARIO E DOPPIONI ---
-    // rione_inventory = { "cardKey": count }
     function getInventory() {
         let inv = JSON.parse(localStorage.getItem('rione_inventory')) || {};
-        // Migrazione da vecchio formato rione_cards se necessario
         let oldCollected = JSON.parse(localStorage.getItem('rione_cards')) || [];
         let changed = false;
         oldCollected.forEach(k => {
@@ -1079,7 +1095,6 @@
 
     function saveInventory(inv) {
         localStorage.setItem('rione_inventory', JSON.stringify(inv));
-        // Mantieni sincronizzato anche rione_cards (lista chiavi uniche valide)
         const validUniqueKeys = Object.keys(inv).filter(k => inv[k] > 0 && playersDatabase.some(p => (p.name + "_" + p.rating) === k));
         localStorage.setItem('rione_cards', JSON.stringify(validUniqueKeys));
     }
@@ -1107,7 +1122,6 @@
         localStorage.setItem('rione_extra_packs', Math.max(0, n).toString());
     }
 
-    // --- GESTIONE STREAK (FEDELISSIMO 5 GIORNI DI FILA) ---
     function getLocalDateString(dateObj = new Date()) {
         const y = dateObj.getFullYear();
         const m = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -1120,10 +1134,7 @@
         const lastDateStr = localStorage.getItem('rione_last_pack_date');
         let streak = parseInt(localStorage.getItem('rione_pack_streak')) || 0;
 
-        if (lastDateStr === todayStr) {
-            // Già aggiornato oggi
-            return streak;
-        }
+        if (lastDateStr === todayStr) return streak;
 
         const yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
@@ -1144,7 +1155,7 @@
         return parseInt(localStorage.getItem('rione_pack_streak')) || 0;
     }
 
-    // --- BADGE E OBIETTIVI DELL'ALBUM ---
+    // --- BADGE E OBIETTIVI ---
     const badgesDefinition = [
         {
             id: "difesa_ferro",
@@ -1227,35 +1238,66 @@
         }).join('');
     }
 
-    // --- BACHECA PRONOSTICI ALBERI DI NATALE ---
+    // --- SCHEDINA PRONOSTICI CON % DI VOTO ---
     function voteChristmasTree(rioneName) {
         const username = getPlayerUsername();
         localStorage.setItem('rione_xmas_vote', rioneName);
+
+        // Salvataggio voti simulati globali su localStorage per calcolare le %
+        let allVotes = JSON.parse(localStorage.getItem('rione_all_xmas_votes')) || { "Rione La Sughera": 2, "Rione Borgovalle": 2, "Rione Padule": 2, "Rione La Selva": 2 };
+        
+        // Traccia che questo utente ha votato
+        const hasVotedBefore = localStorage.getItem('rione_has_voted_xmas');
+        if (!hasVotedBefore) {
+            allVotes[rioneName] = (allVotes[rioneName] || 0) + 1;
+            localStorage.setItem('rione_has_voted_xmas', 'true');
+            localStorage.setItem('rione_all_xmas_votes', JSON.stringify(allVotes));
+        } else {
+            // Se cambia voto
+            let prevVote = localStorage.getItem('rione_prev_xmas_vote');
+            if (prevVote && prevVote !== rioneName) {
+                if (allVotes[prevVote]) allVotes[prevVote] = Math.max(0, allVotes[prevVote] - 1);
+                allVotes[rioneName] = (allVotes[rioneName] || 0) + 1;
+                localStorage.setItem('rione_all_xmas_votes', JSON.stringify(allVotes));
+            }
+        }
+        localStorage.setItem('rione_prev_xmas_vote', rioneName);
+
         renderChristmasPoll();
-        alert(`Pronostico salvato per ${username}: hai votato ${rioneName} per gli Alberi di Natale dell'8 Dicembre!`);
+        alert(`Pronostico salvato per ${username}: hai votato ${rioneName}!`);
     }
 
     function renderChristmasPoll() {
         const savedVote = localStorage.getItem('rione_xmas_vote');
         const statusEl = document.getElementById('christmas-poll-status');
-        const buttons = document.querySelectorAll('.poll-btn');
-        buttons.forEach(btn => {
-            if (savedVote && btn.innerText.includes(savedVote)) {
-                btn.classList.add('border-yellow-400', 'bg-yellow-400/20', 'text-yellow-300');
-            } else {
-                btn.classList.remove('border-yellow-400', 'bg-yellow-400/20', 'text-yellow-300');
-            }
-        });
+        let allVotes = JSON.parse(localStorage.getItem('rione_all_xmas_votes')) || { "Rione La Sughera": 2, "Rione Borgovalle": 2, "Rione Padule": 2, "Rione La Selva": 2 };
+
+        const totalVotes = Object.values(allVotes).reduce((a, b) => a + b, 0) || 1;
+
+        const updateBar = (rioneKey, labelId, barId) => {
+            const v = allVotes[rioneKey] || 0;
+            const pct = Math.round((v / totalVotes) * 100);
+            const lbl = document.getElementById(labelId);
+            const bar = document.getElementById(barId);
+            if (lbl) lbl.innerText = `${pct}% (${v} voti)`;
+            if (bar) bar.style.width = `${pct}%`;
+        };
+
+        updateBar("Rione La Sughera", "pct-sughera", "bar-sughera");
+        updateBar("Rione Borgovalle", "pct-borgovalle", "bar-borgovalle");
+        updateBar("Rione Padule", "pct-padule", "bar-padule");
+        updateBar("Rione La Selva", "pct-selva", "bar-selva");
+
         if (statusEl) {
             if (savedVote) {
-                statusEl.innerHTML = `✅ Il tuo pronostico ufficiale: <strong class="text-yellow-400">${savedVote}</strong> (puoi cambiarlo fino all'8 Dicembre).`;
+                statusEl.innerHTML = `✅ Il tuo pronostico ufficiale: <strong class="text-yellow-400">${savedVote}</strong>. Guarda le percentuali aggiornate della community!`;
             } else {
-                statusEl.innerHTML = `Nessun pronostico ancora registrato per il tuo profilo.`;
+                statusEl.innerHTML = `Nessun pronostico ancora registrato per il tuo profilo. Vota qui sopra!`;
             }
         }
     }
 
-    // --- CREAZIONE HTML CARTA ---
+    // --- CREAZIONE CARTA HTML ---
     function createFutCardHTML(player) {
         if (!player) return '';
         const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
@@ -1304,7 +1346,7 @@
         `;
     }
 
-    // --- RENDER ALBUM & CONTATORI ---
+    // --- RENDER ALBUM ---
     function renderAlbum() {
         const inv = getInventory();
         const grid = document.getElementById('album-grid');
@@ -1395,7 +1437,7 @@
         }
     }
 
-    // --- MERCATO RIONALE: FUSIONE E SCAMBIO ---
+    // --- MERCATO RIONALE ---
     function updateDuplicatesDropdown() {
         const select = document.getElementById('duplicate-select');
         if (!select) return;
@@ -1456,12 +1498,10 @@
             return;
         }
 
-        // Scala 1 doppione dall'inventario
         inv[key] -= 1;
         saveInventory(inv);
         localStorage.setItem('rione_market_used', 'true');
 
-        // Genera codice univoco (Base64 di cardId + salt casuale)
         const salt = Math.random().toString(36).substring(2, 7).toUpperCase();
         const rawPayload = `${cardId}|${salt}`;
         const code = "SUGHERA-" + btoa(rawPayload);
@@ -1505,9 +1545,7 @@
             const [cardId, salt] = decoded.split("|");
             const player = playersDatabase.find(p => p.id === cardId);
 
-            if (!player || !salt) {
-                throw new Error("Carta non trovata");
-            }
+            if (!player || !salt) throw new Error("Carta non trovata");
 
             const key = player.name + "_" + player.rating;
             const inv = getInventory();
@@ -1530,7 +1568,7 @@
         }
     }
 
-    // --- TIMER PACCHETTO: SBLOCCO ALLO SCATTARE DELLA MEZZANOTTE ---
+    // --- PACCHETTI A MEZZANOTTE ---
     function checkPackTimer() {
         const openBtn = document.getElementById('open-pack-btn');
         const container = document.getElementById('card-container');
@@ -1549,7 +1587,6 @@
         const todayStr = getLocalDateString();
 
         if (lastPackDate === todayStr) {
-            // Calcola quanto manca alla prossima mezzanotte (00:00:00 di domani)
             const now = new Date();
             const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
             const diffMs = midnight - now;
@@ -1572,7 +1609,6 @@
         }
     }
 
-    // Estrazione pacchetto: TUTTI I TIPI DI CARTE DISPONIBILI SUBITO
     function openPack() {
         const totalWeight = playersDatabase.reduce((sum, p) => sum + p.weight, 0);
         let randomNum = Math.random() * totalWeight;
@@ -1663,7 +1699,7 @@
         });
     }
 
-    // --- RENDER ROSA 2026 ---
+    // --- ROSA 2026 ---
     function renderRosa2026() {
         const findCard = (name, typeName) => playersDatabase.find(p => p.name === name && p.typeName === typeName);
 
@@ -1705,7 +1741,7 @@
         }
     }
 
-    // --- LOGICA MODALITÀ DRAFT (SOLO CARTE BASE ALL'INIZIO, SPECIALI SE SBLOCCATE) ---
+    // --- LOGICA DRAFT (BASE + RARE SBLOCCATE) ---
     let currentFormation = '2-3-2';
     const formationsConfig = {
         '2-3-2': [['ATT', 'ATT'], ['CC', 'CC', 'CC'], ['DC', 'DC'], ['POR']],
@@ -1794,9 +1830,7 @@
         const identity = getPlayerIdentity(player);
         for (let key in draftSquad) {
             if (key !== currentSlotKey && draftSquad[key]) {
-                if (getPlayerIdentity(draftSquad[key]) === identity) {
-                    return true;
-                }
+                if (getPlayerIdentity(draftSquad[key]) === identity) return true;
             }
         }
         return false;
@@ -1816,16 +1850,13 @@
             removeContainer.classList.add('hidden');
         }
 
-        // SOLO NEL DRAFT: Disponibili subito tutte le carte Base, mentre le speciali solo se sbloccate nell'inventario
+        // PUNTO 1: Carte Base + carte rare/speciali MAN MANO CHE LE SBLOCCHI
         let availableList = playersDatabase.filter(p => {
             const key = p.name + "_" + p.rating;
             return p.typeName === "Base" || (inv[key] && inv[key] > 0);
         });
 
-        let attList = [];
-        let ccList = [];
-        let dcList = [];
-        let porList = [];
+        let attList = [], ccList = [], dcList = [], porList = [];
 
         availableList.forEach(player => {
             const pos = player.pos.toUpperCase();
@@ -1841,7 +1872,7 @@
         });
 
         const renderSectionCards = (list) => {
-            if (list.length === 0) return `<p class="text-xs text-zinc-500 italic">Nessun giocatore disponibile in questo reparto.</p>`;
+            if (list.length === 0) return `<p class="text-xs text-zinc-500 italic">Nessun giocatore disponibile in questo reparto (sblocca carte rare nei pacchetti per usarle qui!).</p>`;
             let html = `<div class="grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-center">`;
             list.forEach(player => {
                 const alreadyPicked = isPlayerAlreadyPicked(player, activeSlotIndex);
@@ -2012,7 +2043,7 @@
         }
     }
 
-    // --- DRAFT BATTLE (SOLO GIOCATORI DELLA SUGHERA) ---
+    // --- DRAFT BATTLE & SFIDA SQUADRE ---
     function simulateSugheraBattle() {
         const pickedPlayers = Object.values(draftSquad);
         if (pickedPlayers.length < 5) {
@@ -2023,7 +2054,6 @@
         const userRating = calculateDraftRating();
         const username = getPlayerUsername();
 
-        // Genera una rosa rivale composta esclusivamente da giocatori della Sughera
         const sugheraPool = playersDatabase.filter(p => !p.name.includes("MISTER") && !p.name.includes("LASUGHERA"));
         const shuffled = [...sugheraPool].sort(() => 0.5 - Math.random());
         const rivalTeam = [];
@@ -2038,10 +2068,9 @@
 
         const rivalRating = Math.round(rivalTeam.reduce((s, p) => s + p.rating, 0) / rivalTeam.length);
 
-        // Calcolo gol basato sul Rating + fattore campo casuale
         let userGoals = Math.floor(Math.random() * 4) + (userRating > rivalRating ? 2 : 0);
         let rivalGoals = Math.floor(Math.random() * 4) + (rivalRating > userRating ? 2 : 0);
-        if (userGoals === rivalGoals) userGoals += 1; // Niente pareggi nel derby!
+        if (userGoals === rivalGoals) userGoals += 1;
 
         const won = userGoals > rivalGoals;
         const scorers = pickedPlayers.filter(p => !p.isGK);
@@ -2059,17 +2088,17 @@
                     </div>
                     <div class="bg-slate-950 px-6 py-2 rounded-2xl border-2 ${won ? 'border-green-500' : 'border-red-500'} text-center">
                         <span class="font-display text-3xl text-white">${userGoals} - ${rivalGoals}</span>
-                        <span class="block text-[10px] font-black uppercase ${won ? 'text-green-400' : 'text-red-400'}">${won ? 'VITTORIA! 🏆' : 'SCONFITTA'}</span>
+                        <span class="block text-[10px] font-black uppercase ${won ? 'text-green-400' : 'text-red-400'}">${won ? 'VITTORIA SUL CAMPO! 🏆' : 'SCONFITTA'}</span>
                     </div>
                     <div class="text-center sm:text-right">
-                        <span class="text-[10px] uppercase tracking-widest text-zinc-400 block">Avversario Rionale</span>
-                        <span class="font-display text-xl text-primary">SUGHERA ALL-STARS</span>
+                        <span class="text-[10px] uppercase tracking-widest text-zinc-400 block">Squadra Avversaria AI</span>
+                        <span class="font-display text-xl text-primary">SUGHERA RIVALS</span>
                         <span class="text-xs text-yellow-400 font-bold block">Rating: ${rivalRating}</span>
                     </div>
                 </div>
                 <div class="text-xs text-zinc-300 flex flex-wrap justify-between items-center gap-2">
                     <span>⭐ Migliore in campo (MVP): <strong class="text-yellow-400">${mvp}</strong></span>
-                    <span class="text-zinc-400">Avversari schierati: ${rivalTeam.slice(0, 4).map(p => p.name).join(', ')}...</span>
+                    <span class="text-zinc-400">Formazione avversaria: ${rivalTeam.slice(0, 4).map(p => p.name).join(', ')}...</span>
                 </div>
             `;
         }
@@ -2078,17 +2107,17 @@
     function shareDraftBattleWhatsApp() {
         const pickedPlayers = Object.values(draftSquad);
         if (pickedPlayers.length === 0) {
-            alert("Schiera prima i giocatori della Sughera nella tua formazione!");
+            alert("Schiera prima i giocatori nella tua formazione!");
             return;
         }
         const userRating = calculateDraftRating();
         const username = getPlayerUsername();
         const namesList = pickedPlayers.map(p => `${p.name} (${p.rating})`).join(', ');
-        const text = `🦊 *DRAFT BATTLE - RIONE LA SUGHERA* ⚽\n\nCiao! Sono *${username}* e ho creato la mia formazione con modulo *${currentFormation}* (Rating Squadra: *${userRating}*):\n\n📋 *Titolari:* ${namesList}\n\nRiesci a battere il mio Rating? Crea la tua squadra qui: https://rionelasughera.github.io/rione-la-sughera/#draft-section`;
+        const text = `🦊 *DRAFT BATTLE - RIONE LA SUGHERA* ⚽\n\nCiao! Sono *${username}* e ho creato la mia squadra con modulo *${currentFormation}* (Rating Squadra: *${userRating}*):\n\n📋 *Titolari:* ${namesList}\n\nRiesci a battere la mia formazione in un scontro diretto? Crea la tua squadra qui: https://rionelasughera.github.io/rione-la-sughera/#draft-section`;
         window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
     }
 
-    // Inizializzazione al caricamento
+    // Inizializzazione
     renderAlbum();
     renderRosa2026();
     renderDraftPitch();
@@ -2097,7 +2126,7 @@
     setInterval(checkPackTimer, 60000);
   </script>
 
-  <!-- SDK Supabase (CLASSIFICA CON BADGE E FILTRO PULITO) -->
+  <!-- SDK Supabase (CLASSIFICA GENERALE RIPRISTINATA E PULITA) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const SUPABASE_URL = "https://vuhgzhyamdkiciuueyhp.supabase.co";
@@ -2134,7 +2163,7 @@
 
             let html = `
                 <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-left w-full mx-auto shadow-xl">
-                    <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-3 text-center">🏆 TOP 10 COLLEZIONISTI RIONE LA SUGHERA</h4>
+                    <h4 class="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-3 text-center">🏆 CLASSIFICA GENERALE COLLEZIONISTI</h4>
                     <div class="space-y-2">
             `;
 
@@ -2169,7 +2198,7 @@
                                     <span class="text-xs font-bold text-white truncate">${user.username}</span>
                                     ${userBadges}
                                 </div>
-                                <span class="text-xs font-extrabold text-amber-400 shrink-0">${safeCount} / ${playersDatabase.length}</span>
+                                <span class="text-xs font-extrabold text-amber-400 shrink-0">${safeCount} / ${playersDatabase.length} carte</span>
                             </div>
                         `;
                     });
@@ -2199,12 +2228,11 @@
                     { onConflict: 'username' }
                 );
         } catch (err) {
-            console.error("Errore di connessione:", err);
+            console.error("Errore di sincronizzazione:", err);
         }
         await fetchGlobalLeaderboard();
     }
 
-    // Sincronizza all'avvio per riallineare eventuali conteggi vecchi sul DB
     if (localStorage.getItem('rione_user_nickname')) {
         syncProgressToCloud();
     } else {
