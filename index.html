@@ -1014,6 +1014,21 @@
         { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" }
     ];
 
+    // Gestione Username permanente associato all'account/dispositivo
+    function getPlayerUsername() {
+        let username = localStorage.getItem('rione_user_nickname');
+        if (!username || username.trim() === "") {
+            username = prompt("Inserisci il tuo nome/soprannome per la Classifica del Rione (verrà salvato per il tuo account):");
+            if (username && username.trim() !== "") {
+                username = username.trim();
+            } else {
+                username = "Collezionista_" + Math.floor(1000 + Math.random() * 9000);
+            }
+            localStorage.setItem('rione_user_nickname', username);
+        }
+        return username;
+    }
+
     function renderAlbum() {
         const collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
         const grid = document.getElementById('album-grid');
@@ -1093,7 +1108,6 @@
         }
     }
 
-    // Funzione per generare l'HTML di una singola carta FUT (per il campo e la panchina)
     function createFutCardHTML(player) {
         if (!player) return '';
         let statsHtml = player.isGK ? `
@@ -1139,7 +1153,6 @@
         `;
     }
 
-    // Popola la formazione titolare (2-3-2) e la panchina
     function renderRosa2026() {
         const findCard = (name, typeName) => playersDatabase.find(p => p.name === name && p.typeName === typeName);
 
@@ -1167,7 +1180,6 @@
         renderLine('bench-grid', bench);
     }
 
-    // Apri / Chiudi menu a tendina delle riserve
     function toggleBench() {
         const bench = document.getElementById('bench-container');
         const btn = document.getElementById('toggleBenchBtn');
@@ -1182,30 +1194,24 @@
         }
     }
 
-    // Controlla il timer delle 24 ore
+    // PACCHETTO GIORNALIERO AZZERATO A MEZZANOTTE (Controllo per Data)
     function checkPackTimer() {
-        const lastOpenTime = localStorage.getItem('rione_last_pack_time');
+        const lastOpenDate = localStorage.getItem('rione_last_open_date');
         const openBtn = document.getElementById('open-pack-btn');
         const container = document.getElementById('card-container');
         
-        if (!lastOpenTime || !openBtn) return;
+        if (!openBtn) return;
 
-        const now = new Date().getTime();
-        const oneDayInMs = 24 * 60 * 60 * 1000;
-        const timeElapsed = now - parseInt(lastOpenTime);
+        const todayStr = new Date().toDateString();
 
-        if (timeElapsed < oneDayInMs) {
-            const timeLeft = oneDayInMs - timeElapsed;
-            const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
-            const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-
+        if (lastOpenDate === todayStr) {
             openBtn.disabled = true;
             openBtn.classList.add('opacity-55', 'cursor-not-allowed');
             openBtn.classList.remove('hover:from-yellow-400', 'cursor-pointer');
-            openBtn.innerText = `⏳ PROSSIMO PACCHETTO TRA ${hoursLeft}h ${minutesLeft}m`;
+            openBtn.innerText = `⏳ PACCHETTO GIORNALIERO GIÀ APERTO`;
 
             if (container && container.innerHTML.trim() === '') {
-                container.innerHTML = `<p class="text-amber-400/80 text-xs font-semibold">Hai già aperto un pacchetto di recente. Torna domani per il prossimo!</p>`;
+                container.innerHTML = `<p class="text-amber-400/80 text-xs font-semibold">Hai già aperto il pacchetto oggi! Torna dopo mezzanotte per il prossimo.</p>`;
             }
         } else {
             openBtn.disabled = false;
@@ -1228,7 +1234,11 @@
     const openBtn = document.getElementById('open-pack-btn');
     if (openBtn) {
         openBtn.addEventListener('click', () => {
-            localStorage.setItem('rione_last_pack_time', new Date().getTime().toString());
+            // Salva la data odierna per bloccare fino a mezzanotte
+            localStorage.setItem('rione_last_open_date', new Date().toDateString());
+
+            // Assicura che l'utente abbia inserito il nome una sola volta e lo associa all'account
+            getPlayerUsername();
 
             const wonPlayer = openPack();
             
@@ -1301,7 +1311,6 @@
     renderAlbum();
     renderRosa2026();
     checkPackTimer();
-    setInterval(checkPackTimer, 60000);
   </script>
 
   <!-- SDK Supabase -->
@@ -1312,20 +1321,6 @@
     const SUPABASE_ANON_KEY = "sb_publishable_cH_SxDLZnkbImYu6r_MPyQ_QPBvzi4F"; 
 
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    function getPlayerUsername() {
-        let username = localStorage.getItem('rione_user_nickname');
-        if (!username || username.trim() === "") {
-            username = prompt("Inserisci il tuo nome/soprannome per la Classifica del Rione:");
-            if (username && username.trim() !== "") {
-                username = username.trim();
-            } else {
-                username = "Collezionista_" + Math.floor(1000 + Math.random() * 9000);
-            }
-            localStorage.setItem('rione_user_nickname', username);
-        }
-        return username;
-    }
 
     async function fetchGlobalLeaderboard() {
         const container = document.getElementById('friend-stats');
@@ -1347,7 +1342,6 @@
             if (error || !leaderboard) {
                 html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato.</p>`;
             } else {
-                // Filtro per escludere Rosa
                 const filteredList = leaderboard.filter(user => 
                     user.username && user.username.toLowerCase() !== "rosa"
                 );
