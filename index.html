@@ -95,7 +95,7 @@
       perspective: 1000px;
     }
 
-    /* --- STRUTTURA GENERALE DELLE CARTE --- */
+    /* --- STRUTTURA GENERALE DELLE CARTE (RIALLINEATA) --- */
     .fut-card {
       width: 210px;
       height: 310px;
@@ -120,35 +120,12 @@
       align-items: center;
     }
 
-    /* 1. CARTE ORO (BASE) */
-    .card-gold {
-      background-image: url('card-gold.png');
-      color: #3b2c0d;
-    }
-
-    /* 2. CARTE ICONA (ICON) */
-    .card-icon {
-      background-image: url('card-icon.png');
-      color: #1e293b;
-    }
-
-    /* 3. CARTE TOTY */
-    .card-toty {
-      background-image: url('card-toty.png');
-      color: #fef08a;
-    }
-
-    /* 4. CARTE FUTURE STARS / SPECIALI */
-    .card-futures {
-      background-image: url('card-futures.png');
-      color: #fae8ff;
-    }
-
-    /* 5. CARTE HEROES */
-    .card-hero {
-      background-image: url('card-hero.png');
-      color: #dcfce7;
-    }
+    /* Sfondi cornici */
+    .card-gold { background-image: url('card-gold.png'); color: #3b2c0d; }
+    .card-icon { background-image: url('card-icon.png'); color: #1e293b; }
+    .card-toty { background-image: url('card-toty.png'); color: #fef08a; }
+    .card-futures { background-image: url('card-futures.png'); color: #fae8ff; }
+    .card-hero { background-image: url('card-hero.png'); color: #dcfce7; }
 
     .fut-card-locked {
       width: 210px;
@@ -165,16 +142,18 @@
       text-align: center;
     }
 
+    /* Posizione Valore Overall e Ruolo (In alto a sinistra) */
     .fut-top-info {
       position: absolute;
-      top: 18px;
-      left: 22px;
+      top: 32px;
+      left: 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
       line-height: 1;
       font-weight: 900;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      z-index: 5;
     }
 
     .card-gold .fut-top-info, .card-icon .fut-top-info { color: #42310c; }
@@ -193,25 +172,28 @@
       font-weight: bold;
     }
 
+    /* Foto del giocatore posizionata correttamente nella sagoma della carta */
     .fut-player-img {
-      width: 105px;
-      height: 120px;
+      width: 95px;
+      height: 110px;
       position: absolute;
-      top: 32px;
+      top: 35px;
+      left: 58px;
       object-fit: cover;
-      filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));
+      filter: drop-shadow(0 4px 4px rgba(0,0,0,0.6));
     }
 
-    /* Versione ridotta per Agrestini, Ciancia e Dariokke */
     .fut-player-img-small {
-      width: 88px !important;
-      height: 100px !important;
+      width: 82px !important;
+      height: 98px !important;
       top: 40px !important;
+      left: 64px !important;
     }
 
+    /* Sezione Inferiore (Nome e Statistiche) */
     .fut-bottom-section {
       position: absolute;
-      bottom: 22px;
+      bottom: 45px;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -220,17 +202,17 @@
     }
 
     .fut-name {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
       text-transform: uppercase;
       text-align: center;
       letter-spacing: 0.5px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
-      width: 85%;
+      width: 80%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     
     .card-gold .fut-name, .card-icon .fut-name { color: #2c2208; }
@@ -238,9 +220,9 @@
 
     .fut-stats {
       display: flex;
-      gap: 14px;
-      font-size: 10px;
-      font-weight: bold;
+      gap: 16px;
+      font-size: 11px;
+      font-weight: 900;
       text-transform: uppercase;
     }
 
@@ -250,6 +232,7 @@
     .fut-stats span {
       opacity: 0.75;
       font-size: 9px;
+      font-weight: normal;
     }
   </style>
 </head>
@@ -269,6 +252,7 @@
           <a href="#rosa" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Rosa 2026</a>
           <a href="#galleria" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Galleria</a>
           <a href="#palio-quiz" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Quiz</a>
+          <a href="#faq" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">FAQ</a>
           <a href="#carte" class="text-xs font-semibold uppercase tracking-wider text-yellow-400 hover:underline transition">Carte</a>
           <a href="#orentano-news" class="text-xs font-semibold uppercase tracking-wider text-primary hover:underline transition">News</a>
           <a href="#contatti" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Contatti</a>
@@ -280,7 +264,6 @@
     <div id="mobileMenu" class="hidden md:hidden bg-foreground border-t border-white/10 px-4 pb-4">
         <a href="#storia" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Storia</a>
         <a href="#eventi" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Eventi</a>
-        <a href="#unisciti" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Unisciti</a>
         <a href="#palmares" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palmarès</a>
         <a href="#rosa" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Rosa 2026</a>
         <a href="#galleria" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Galleria</a>
@@ -309,9 +292,6 @@
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition">UNISCITI AL RIONE</a>
           <a href="#eventi" class="border-2 border-white text-white px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-white hover:text-foreground transition">Prossimi eventi</a>
-          <button id="install-btn" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition cursor-pointer">
-            🦊 INSTALLA APP
-          </button>
         </div>
       </div>
       <div class="flex justify-center">
@@ -366,25 +346,6 @@
             <p class="mt-3 text-muted-foreground">Ogni rione addobba il suo albero. Il nostro dovrà brillare più di tutti: il vincitore verrà decretato il giorno stesso da una giuria scelta e qualificata.</p>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- UNISCITI -->
-  <section id="unisciti" class="py-20 md:py-28">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <p class="text-primary font-bold uppercase tracking-[0.2em] text-sm">Vuoi essere dei nostri?</p>
-      <h2 class="font-display text-5xl md:text-7xl mt-2 leading-none">ENTRA NELLA <span class="text-primary">FAMIGLIA</span></h2>
-      <p class="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-        Chiunque voglia far parte del Rione La Sughera è il benvenuto. Non servono tessere né requisiti: basta scrivere al numero qui sotto e sei dentro.
-      </p>
-      <div class="mt-8 flex flex-col md:flex-row md:justify-center md:gap-10 gap-3">
-        <a href="tel:+393331645269" class="inline-block font-display text-4xl md:text-5xl text-foreground hover:text-primary transition">333 16 45 269</a>
-        <a href="tel:+393711260190" class="inline-block font-display text-4xl md:text-5xl text-foreground hover:text-primary transition">371 12 60 190</a>
-      </div>
-      <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="inline-block bg-[#25D366] text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide shadow-lg hover:brightness-105">Scrivici su WhatsApp</a>
-        <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" target="_blank" rel="noopener" class="inline-block border-2 border-primary text-primary px-8 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-primary hover:text-primary-foreground transition">Entra nel gruppo</a>
       </div>
     </div>
   </section>
@@ -566,7 +527,7 @@
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- FAQ (REINTRODOTTA) -->
   <section id="faq" class="py-16 bg-zinc-950 text-white border-t border-primary/30">
       <div class="max-w-4xl mx-auto px-4">
           <div class="text-center mb-10">
@@ -748,7 +709,7 @@
         // PIZZI #11
         { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 10, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 91, pas: 88, dri: 85, def: 83, phy: 87, smallImg: false },
         { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90, smallImg: false },
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90, smallImg: false },
+        { name: "Pizzi #11", img: "pizzi.jpg", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90, smallImg: false },
 
         // MADDALENA #10
         { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90, smallImg: false },
