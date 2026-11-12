@@ -592,7 +592,7 @@
         <div>
           <h4 class="font-bold text-white mb-1">🔓 Unicità e Sblocco delle Carte:</h4>
           <ul class="list-disc pl-5 space-y-1 text-xs">
-            <li><strong>Unità singola:</strong> Ciascun giocatore può essere inserito massimo una volta in squadra (anche se ha più versioni o ruoli multipli).</li>
+            <li><strong>Unità singola:</strong> Ciascun giocatore (stessa persona) può essere inserito massimo una volta in squadra, anche se possiede versioni diverse. Le varianti di ruolo (es. Matranga portiere e Matranga attaccante) sono gestite separatamente.</li>
             <li><strong>Carte Base:</strong> Sbloccate e disponibili fin dall'inizio per tutti.</li>
             <li><strong>10 Pacchetti aperti:</strong> Sblocca le carte <span class="text-green-400 font-bold">Heroes</span> e <span class="text-purple-400 font-bold">Future Stars</span>.</li>
             <li><strong>15 Pacchetti aperti:</strong> Sblocca le carte <span class="text-sky-400 font-bold">TOTY</span>.</li>
@@ -601,7 +601,7 @@
         </div>
         <div>
           <h4 class="font-bold text-white mb-1">⚽ Regole Speciali e Selezione:</h4>
-          <p class="text-xs">Nella lista di scelta, i giocatori sono suddivisi per reparto (Attaccanti, Centrocampisti, Difensori, Portieri). Quelli con doppio ruolo compaiono in entrambi i reparti di competenza!</p>
+          <p class="text-xs">Nella lista di scelta, i giocatori sono suddivisi per reparto (Attaccanti, Centrocampisti, Difensori, Portieri). I giocatori con doppio ruolo (es. Maddalena e Ciancia come CC/DC) compaiono in entrambi i reparti di competenza!</p>
           <p class="text-xs mt-1">Nel modulo <strong>4-4</strong>, la linea di centrocampo accetta eccezionalmente anche gli <strong>attaccanti</strong> senza penalità.</p>
         </div>
         <div>
@@ -900,10 +900,10 @@
         { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 4, rating: 94, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 91, s2: 89, s3: 94, s4: 93, s5: 83, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 0 },
         { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 93, s2: 91, s3: 99, s4: 94, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 15 },
 
-        // CIANCIA #6
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89, smallImg: true, unlockPack: 0 },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89, smallImg: true, unlockPack: 10 },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90, smallImg: true, unlockPack: 15 },
+        // CIANCIA #6 (Aggiornato a CC/DC)
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC/DC", type: "card-gold", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89, smallImg: true, unlockPack: 0 },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC/DC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89, smallImg: true, unlockPack: 10 },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC/DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90, smallImg: true, unlockPack: 15 },
 
         // AGRESTINI #7
         { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 4, rating: 92, pos: "CC/DC", type: "card-gold", typeName: "Base", isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93, smallImg: true, unlockPack: 0 },
@@ -919,10 +919,10 @@
         { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90, smallImg: false, unlockPack: 10 },
         { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90, smallImg: false, unlockPack: 15 },
 
-        // MADDALENA #10
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90, smallImg: false, unlockPack: 0 },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93, smallImg: false, unlockPack: 15 },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC", type: "card-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93, smallImg: false, unlockPack: 10 },
+        // MADDALENA #10 (Aggiornato a CC/DC)
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC/DC", type: "card-gold", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90, smallImg: false, unlockPack: 0 },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC/DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93, smallImg: false, unlockPack: 15 },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC/DC", type: "card-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93, smallImg: false, unlockPack: 10 },
 
         // MUCCI #3
         { name: "Mucci #3", img: "mucci.jpg", num: "#3", weight: 3, rating: 98, pos: "DC", type: "card-icon", typeName: "Icon", isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99, smallImg: false, unlockPack: 20 },
@@ -932,7 +932,7 @@
         { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 4, rating: 93, pos: "DC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 90, pas: 92, dri: 86, def: 96, phy: 91, smallImg: false, unlockPack: 10 },
         { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 2, rating: 97, pos: "DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 91, pas: 96, dri: 88, def: 99, phy: 93, smallImg: false, unlockPack: 15 },
 
-        // MATRANGA #18
+        // MATRANGA #18 (Attaccante)
         { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 8, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82, smallImg: false, unlockPack: 0 },
         { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 5, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 92, pas: 87, dri: 90, def: 84, phy: 83, smallImg: false, unlockPack: 10 },
         { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 91, sho: 92, pas: 88, dri: 90, def: 85, phy: 88, smallImg: false, unlockPack: 15 },
@@ -941,7 +941,7 @@
         { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 12, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90, smallImg: false, unlockPack: 0 },
         { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 4, rating: 91, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 89, sho: 91, pas: 90, dri: 87, def: 88, phy: 91, smallImg: false, unlockPack: 15 },
 
-        // MATRANGA #99
+        // MATRANGA #99 (Portiere)
         { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 6, rating: 93, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 0 },
         { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 4, rating: 95, pos: "POR", type: "card-futures", typeName: "Future Stars", isGK: true, s1: 97, s2: 94, s3: 91, s4: 97, s5: 90, s6: 96, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 10 },
         { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false, unlockPack: 15 }
@@ -1366,18 +1366,20 @@
         rowsContainer.innerHTML = html;
     }
 
-    // Estrae il nome base del giocatore senza la versione (es. "Ciancia" da "Ciancia #6")
-    function getPlayerBaseName(fullName) {
-        if (!fullName) return "";
-        return fullName.split('#')[0].trim().toUpperCase();
+    // Estrae l'identificativo unico della persona basato sul nome d'arte principale (es. "MATRANGA" per distinguere #18 e #99)
+    function getPlayerIdentity(player) {
+        if (!player) return "";
+        // Se ha il numero di maglia o un identificatore specifico nel nome (es. #18 o #99), lo usiamo insieme al nome base
+        return player.name.trim().toUpperCase();
     }
 
-    // Controlla se il giocatore (o un'altra sua carta con lo stesso nome base) è già in campo
+    // Controlla se la specifica carta o un'altra versione dello stesso esatto giocatore è già in campo
     function isPlayerAlreadyPicked(player, currentSlotKey) {
-        const baseName = getPlayerBaseName(player.name);
+        const identity = getPlayerIdentity(player);
         for (let key in draftSquad) {
             if (key !== currentSlotKey && draftSquad[key]) {
-                if (getPlayerBaseName(draftSquad[key].name) === baseName) {
+                // Per Matranga, #18 e #99 sono carte differenti, quindi controlliamo se l'identificativo completo coincide
+                if (getPlayerIdentity(draftSquad[key]) === identity) {
                     return true;
                 }
             }
@@ -1401,8 +1403,6 @@
 
         let availableList = playersDatabase.filter(p => collectedCards.includes(p.name + "_" + p.rating) || (p.typeName === "Base" && getPacksOpened() >= 0));
 
-        // Raggruppa i giocatori per reparto (Attaccanti, Centrocampisti, Difensori, Portieri)
-        // I doppi ruoli vengono inseriti in entrambi i reparti di pertinenza
         let attList = [];
         let ccList = [];
         let dcList = [];
@@ -1549,10 +1549,10 @@
                 }
 
                 // Regola speciale modulo 4-4: attaccanti a centrocampo nessun fuori ruolo
-                if (currentFormation === '4-4' && slotType === 'CC' && pPos === 'ATT') {
+                if (currentFormation === '4-4' && slotType === 'CC' && pPos.includes('ATT')) {
                     // Nessuna penalità
                 } else {
-                    if (pPos === 'POR') {
+                    if (pPos.includes('POR')) {
                         if (slotType === 'DC') penalty = 3;
                         else if (slotType === 'CC') penalty = 5;
                         else if (slotType === 'ATT') penalty = 7;
@@ -1560,20 +1560,17 @@
                     else if (slotType === 'POR') {
                         penalty = 7;
                     }
-                    else if (pPos === 'DC' && !isAgrestini) {
+                    else if (pPos.includes('DC') && !isAgrestini && !pPos.includes('CC')) {
                         if (slotType === 'CC') penalty = 3;
                         else if (slotType === 'ATT') penalty = 5;
                     }
-                    else if (isAgrestini) {
-                        if (slotType === 'ATT') penalty = 3;
-                    }
-                    else if ((pPos === 'CC' || pPos === 'CC/DC') && !isDariokke) {
+                    else if (pPos.includes('CC') && !isDariokke) {
                         if (slotType === 'ATT' || slotType === 'DC') penalty = 3;
                     }
                     else if (isDariokke) {
                         if (slotType === 'DC') penalty = 3;
                     }
-                    else if (pPos === 'ATT') {
+                    else if (pPos.includes('ATT') && !pPos.includes('CC')) {
                         if (slotType === 'CC') penalty = 3;
                         else if (slotType === 'DC') penalty = 5;
                     }
