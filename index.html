@@ -38,7 +38,7 @@
   </script>
 
   <style>
-    /* --- CAMPO DA CALCIOTTO STILE FUT --- */
+    /* --- CAMPO DA GIOCO STILE FUT --- */
     .fut-pitch {
       background: repeating-linear-gradient(
         to bottom,
@@ -95,24 +95,24 @@
       perspective: 1000px;
     }
 
-    /* --- VERA SAGOMA GEOMETRICA STILE FUT --- */
+    /* --- STRUTTURA GENERALE DELLE CARTE --- */
     .fut-card {
       width: 210px;
       height: 310px;
-      clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
-      padding: 3px;
       position: relative;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.7);
       display: flex;
       flex-direction: column;
       align-items: center;
       font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .fut-card-inner {
       width: 100%;
       height: 100%;
-      clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
       position: relative;
       overflow: hidden;
       display: flex;
@@ -120,49 +120,34 @@
       align-items: center;
     }
 
-    /* 1. CARTE NORMALI / BASE (ORO) */
+    /* 1. CARTE ORO (BASE) */
     .card-gold {
-      background: linear-gradient(135deg, #f5d77f 0%, #d4af37 40%, #aa771c 100%);
+      background-image: url('card-gold.png');
       color: #3b2c0d;
     }
-    .card-gold .fut-card-inner {
-      background: linear-gradient(180deg, #2a2008 0%, #0d1117 60%);
-    }
 
-    /* 2. CARTE ICON (BIANCO / GRIGIO) */
+    /* 2. CARTE ICONA (ICON) */
     .card-icon {
-      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #64748b 100%);
-      color: #0f172a;
-    }
-    .card-icon .fut-card-inner {
-      background: linear-gradient(180deg, #334155 0%, #0f172a 60%);
+      background-image: url('card-icon.png');
+      color: #1e293b;
     }
 
-    /* 3. CARTE TOTY / TOTS (BLU) */
+    /* 3. CARTE TOTY */
     .card-toty {
-      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #1e3a8a 100%);
-      color: #e0f2fe;
-    }
-    .card-toty .fut-card-inner {
-      background: linear-gradient(180deg, #0c4a6e 0%, #030712 60%);
+      background-image: url('card-toty.png');
+      color: #fef08a;
     }
 
-    /* 4. CARTE HEROES (VERDI) */
-    .card-hero {
-      background: linear-gradient(135deg, #4ade80 0%, #16a34a 50%, #14532d 100%);
-      color: #dcfce7;
-    }
-    .card-hero .fut-card-inner {
-      background: linear-gradient(180deg, #14532d 0%, #051c0f 60%);
-    }
-
-    /* 5. CARTE FUTURE STARS (VIOLA ACCESO) */
+    /* 4. CARTE FUTURE STARS / SPECIALI */
     .card-futures {
-      background: linear-gradient(135deg, #e879f9 0%, #a855f7 50%, #6b21a8 100%);
+      background-image: url('card-futures.png');
       color: #fae8ff;
     }
-    .card-futures .fut-card-inner {
-      background: linear-gradient(180deg, #581c87 0%, #0f051d 60%);
+
+    /* 5. CARTE HEROES */
+    .card-hero {
+      background-image: url('card-hero.png');
+      color: #dcfce7;
     }
 
     .fut-card-locked {
@@ -170,7 +155,7 @@
       height: 310px;
       background: #1e293b;
       border: 2px dashed #475569;
-      clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
+      border-radius: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -182,56 +167,62 @@
 
     .fut-top-info {
       position: absolute;
-      top: 10px;
-      left: 14px;
+      top: 18px;
+      left: 22px;
       display: flex;
       flex-direction: column;
       align-items: center;
       line-height: 1;
       font-weight: 900;
-      color: #fef08a;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
 
+    .card-gold .fut-top-info, .card-icon .fut-top-info { color: #42310c; }
+    .card-toty .fut-top-info, .card-futures .fut-top-info, .card-hero .fut-top-info { color: #fef08a; }
+
     .fut-rating {
-      font-size: 26px;
+      font-size: 24px;
       font-family: 'Impact', sans-serif;
       letter-spacing: 1px;
     }
 
     .fut-position {
-      font-size: 11px;
+      font-size: 10px;
       margin-top: 2px;
       letter-spacing: 1px;
+      font-weight: bold;
     }
 
     .fut-player-img {
-      width: 110px;
-      height: 125px;
+      width: 105px;
+      height: 120px;
       position: absolute;
-      top: 28px;
+      top: 32px;
       object-fit: cover;
       filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));
     }
 
+    /* Versione ridotta per Agrestini, Ciancia e Dariokke */
+    .fut-player-img-small {
+      width: 88px !important;
+      height: 100px !important;
+      top: 40px !important;
+    }
+
     .fut-bottom-section {
       position: absolute;
-      bottom: 0;
+      bottom: 22px;
       width: 100%;
-      height: 125px;
-      background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.95) 35%, #090d16 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
-      padding-bottom: 12px;
     }
 
     .fut-name {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
       text-transform: uppercase;
-      color: #ffffff;
       text-align: center;
       letter-spacing: 0.5px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
@@ -239,22 +230,26 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-      padding-bottom: 3px;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
+    
+    .card-gold .fut-name, .card-icon .fut-name { color: #2c2208; }
+    .card-toty .fut-name, .card-futures .fut-name, .card-hero .fut-name { color: #ffffff; }
 
     .fut-stats {
       display: flex;
-      gap: 8px;
+      gap: 14px;
       font-size: 10px;
       font-weight: bold;
-      color: #fef08a;
       text-transform: uppercase;
     }
 
+    .card-gold .fut-stats, .card-icon .fut-stats { color: #3b2c0d; }
+    .card-toty .fut-stats, .card-futures .fut-stats, .card-hero .fut-stats { color: #fef08a; }
+
     .fut-stats span {
-      color: #94a3b8;
+      opacity: 0.75;
+      font-size: 9px;
     }
   </style>
 </head>
@@ -267,19 +262,17 @@
         <img src="logo.png" alt="Stemma Rione La Sughera" class="h-12 w-auto object-contain">
         <span class="font-display text-2xl text-white leading-none hidden sm:block">RIONE LA SUGHERA</span>
       </a>
-      <nav class="hidden md:flex items-center gap-6">
-          <a href="#storia" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Storia</a>
-          <a href="#eventi" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Eventi</a>
-          <a href="#unisciti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Unisciti</a>
-          <a href="#palmares" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palmarès</a>
-          <a href="#rosa" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Rosa 2026</a>
-          <a href="#galleria" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Galleria</a>
-          <a href="#palio-quiz" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palio del Quiz</a>
-          <a href="#faq" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">FAQ</a>
-          <a href="#carte" class="text-sm font-semibold uppercase tracking-wider text-yellow-400 hover:underline transition">Carte</a>
-          <a href="#orentano-news" class="text-sm font-semibold uppercase tracking-wider text-primary hover:underline transition">Orentano News</a>
-          <a href="#contatti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Contatti</a>
-          <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold uppercase text-xs tracking-wider">Unisciti</a>
+      <nav class="hidden md:flex items-center gap-5">
+          <a href="#storia" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Storia</a>
+          <a href="#eventi" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Eventi</a>
+          <a href="#palmares" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palmarès</a>
+          <a href="#rosa" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Rosa 2026</a>
+          <a href="#galleria" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Galleria</a>
+          <a href="#palio-quiz" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Quiz</a>
+          <a href="#carte" class="text-xs font-semibold uppercase tracking-wider text-yellow-400 hover:underline transition">Carte</a>
+          <a href="#orentano-news" class="text-xs font-semibold uppercase tracking-wider text-primary hover:underline transition">News</a>
+          <a href="#contatti" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Contatti</a>
+          <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-3.5 py-2 rounded-full font-bold uppercase text-[11px] tracking-wider">Unisciti</a>
       </nav>
       <button id="menuBtn" aria-label="Menu" class="md:hidden text-white w-10 h-10 grid place-items-center text-2xl">☰</button>
     </div>
@@ -316,8 +309,6 @@
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition">UNISCITI AL RIONE</a>
           <a href="#eventi" class="border-2 border-white text-white px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-white hover:text-foreground transition">Prossimi eventi</a>
-          
-          <!-- Pulsante Installa App -->
           <button id="install-btn" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition cursor-pointer">
             🦊 INSTALLA APP
           </button>
@@ -398,196 +389,136 @@
     </div>
   </section>
 
-  <!-- SEZIONE PALMARÈS RIONE LA SUGHERA -->
+  <!-- SEZIONE PALMARÈS -->
   <section id="palmares" class="py-16 bg-zinc-950 text-white border-t border-primary/30">
     <div class="max-w-5xl mx-auto px-4 text-center">
-        
-        <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
-            Albo d'Oro
-        </span>
-        
-        <h2 class="font-display text-4xl sm:text-5xl text-white font-bold tracking-tight mb-4">
-            IL PALMARÈS
-        </h2>
-        
-        <p class="text-white/80 max-w-2xl mx-auto mb-10 text-sm sm:text-base">
-            I trofei, i podi e la storia dei piazzamenti del Rione La Sughera nelle competizioni locali.
-        </p>
+        <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">Albo d'Oro</span>
+        <h2 class="font-display text-4xl sm:text-5xl text-white font-bold tracking-tight mb-4">IL PALMARÈS</h2>
+        <p class="text-white/80 max-w-2xl mx-auto mb-10 text-sm sm:text-base">I trofei, i podi e la storia dei piazzamenti del Rione La Sughera nelle competizioni locali.</p>
 
-        <!-- GRID PALMARÈS (4 ELEMENTI) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-            
-            <!-- MEDAGLIE D'ARGENTO -->
             <div class="bg-white/5 border border-primary/40 rounded-2xl p-6 backdrop-blur transition hover:border-primary flex flex-col justify-between">
                 <div>
                     <div class="text-4xl mb-3">🥈</div>
                     <span class="text-primary font-bold text-xs uppercase tracking-wider">3 Medaglie d'Argento</span>
                     <h3 class="text-xl font-bold text-white mt-1">Palio del Quiz</h3>
-                    <p class="text-zinc-400 text-xs sm:text-sm mt-2">
-                        Tre secondi posti conquistati con orgoglio nella sfida di cultura, storia e tradizioni.
-                    </p>
+                    <p class="text-zinc-400 text-xs sm:text-sm mt-2">Tre secondi posti conquistati con orgoglio nella sfida di cultura, storia e tradizioni.</p>
                 </div>
             </div>
-
-            <!-- MEDAGLIA DI BRONZO -->
             <div class="bg-white/5 border border-primary/40 rounded-2xl p-6 backdrop-blur transition hover:border-primary flex flex-col justify-between">
                 <div>
                     <div class="text-4xl mb-3">🥉</div>
                     <span class="text-primary font-bold text-xs uppercase tracking-wider">1 Medaglia di Bronzo</span>
                     <h3 class="text-xl font-bold text-white mt-1">Palio del Quiz</h3>
-                    <p class="text-zinc-400 text-xs sm:text-sm mt-2">
-                        Terzo posto sul podio a testimonianza della continuità e della preparazione del Rione.
-                    </p>
+                    <p class="text-zinc-400 text-xs sm:text-sm mt-2">Terzo posto sul podio a testimonianza della continuità e della preparazione del Rione.</p>
                 </div>
             </div>
-
-            <!-- MEDAGLIA DI LEGNO - PALIO DEL QUIZ LIVE -->
             <div class="bg-white/5 border border-primary/40 rounded-2xl p-6 backdrop-blur transition hover:border-primary flex flex-col justify-between">
                 <div>
                     <div class="text-4xl mb-3">🪵</div>
                     <span class="text-primary font-bold text-xs uppercase tracking-wider">1 Medaglia di Legno</span>
                     <h3 class="text-xl font-bold text-white mt-1">Palio del Quiz Live</h3>
-                    <p class="text-zinc-400 text-xs sm:text-sm mt-2">
-                        4° posto conquistato sul campo durante l'appassionante versione dal vivo del quiz.
-                    </p>
+                    <p class="text-zinc-400 text-xs sm:text-sm mt-2">4° posto conquistato sul campo durante l'appassionante versione dal vivo del quiz.</p>
                 </div>
             </div>
-
-            <!-- MEDAGLIA DI LEGNO - TORNEO DEI RIONI -->
             <div class="bg-white/5 border border-primary/40 rounded-2xl p-6 backdrop-blur transition hover:border-primary flex flex-col justify-between">
                 <div>
                     <div class="text-4xl mb-3">🪵</div>
                     <span class="text-primary font-bold text-xs uppercase tracking-wider">1 Medaglia di Legno</span>
                     <h3 class="text-xl font-bold text-white mt-1">Torneo dei Rioni</h3>
-                    <p class="text-zinc-400 text-xs sm:text-sm mt-2">
-                        4° posto ottenuto lottando fino all'ultimo minuto nel torneo di calcio interrionale.
-                    </p>
+                    <p class="text-zinc-400 text-xs sm:text-sm mt-2">4° posto ottenuto lottando fino all'ultimo minuto nel torneo di calcio interrionale.</p>
                 </div>
             </div>
-
         </div>
     </div>
   </section>
 
-  <!-- SEZIONE ROSA 2026 (MODULO 2-3-2 STILE FIFA) -->
+  <!-- SEZIONE ROSA 2026 -->
   <section id="rosa" class="py-16 bg-slate-950 text-white border-t border-primary/30">
     <div class="max-w-5xl mx-auto px-4 text-center">
       <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
-        1ª Edizione Torneo dei Rioni · Calciotto
+        1ª Edizione Torneo dei Rioni
       </span>
-      <h2 class="font-display text-4xl sm:text-5xl text-white font-bold tracking-tight mb-2">
-        LA ROSA <span class="text-primary">2026</span>
-      </h2>
-      <p class="text-yellow-400 font-bold text-xs sm:text-sm uppercase tracking-widest mb-8">
-        Modulo 2 - 3 - 2
-      </p>
+      <h2 class="font-display text-4xl sm:text-5xl text-white font-bold tracking-tight mb-2">LA ROSA <span class="text-primary">2026</span></h2>
+      <p class="text-yellow-400 font-bold text-xs sm:text-sm uppercase tracking-widest mb-8">Modulo 2 - 3 - 2</p>
 
       <!-- CAMPO DA GIOCO -->
       <div class="fut-pitch rounded-3xl py-8 px-2 sm:px-6 overflow-hidden max-w-4xl mx-auto">
-        <!-- Linee grafiche del campo (Cerchio di centrocampo e aree) -->
         <div class="absolute inset-x-0 top-1/2 border-t-2 border-white/30 pointer-events-none"></div>
         <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-44 sm:h-44 rounded-full border-2 border-white/30 pointer-events-none"></div>
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 sm:w-64 h-20 border-b-2 border-x-2 border-white/30 pointer-events-none"></div>
         <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 sm:w-64 h-20 border-t-2 border-x-2 border-white/30 pointer-events-none"></div>
 
-        <!-- DISPOSIZIONE GIOCATORI (Dall'Attacco al Portiere) -->
         <div class="relative z-10 flex flex-col gap-6 sm:gap-10">
-          
-          <!-- ATTACCO (2): Pizzi, Matranga #18 -->
           <div id="pitch-att" class="flex justify-center items-center gap-4 sm:gap-12"></div>
-
-          <!-- CENTROCAMPO (3): Dariokke, Ciancia, Agrestini -->
           <div id="pitch-mid" class="flex justify-center items-center gap-2 sm:gap-8"></div>
-
-          <!-- DIFESA (2): Rosamilia, Mucci (Icon) -->
           <div id="pitch-def" class="flex justify-center items-center gap-4 sm:gap-12"></div>
-
-          <!-- PORTA (1): Bertoncini -->
           <div id="pitch-gk" class="flex justify-center items-center"></div>
-
         </div>
       </div>
 
-      <!-- PULSANTE MENU A TENDINA RISERVE -->
       <div class="mt-8">
         <button id="toggleBenchBtn" onclick="toggleBench()" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-primary text-yellow-400 hover:text-white font-bold px-7 py-3.5 rounded-full border-2 border-yellow-400/50 hover:border-primary transition duration-300 uppercase text-xs sm:text-sm tracking-widest shadow-lg cursor-pointer">
           <span id="benchArrow">▼</span> Mostra Panchina e Mister (4)
         </button>
       </div>
 
-      <!-- CONTENITORE RISERVE (INIZIALMENTE NASCOSTO) -->
       <div id="bench-container" class="hidden mt-8 bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 transition-all">
         <h3 class="font-display text-2xl text-white tracking-wider mb-6">A DISPOSIZIONE & STAFF</h3>
         <div id="bench-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-items-center"></div>
       </div>
-
     </div>
   </section>
   
-  <!-- GALLERIA FOTOGRAFICA ESPANDIBILE -->
+  <!-- GALLERIA -->
   <section id="galleria" class="py-20 md:py-28 bg-secondary">
     <div class="max-w-6xl mx-auto px-4 text-center">
-      <span class="inline-block bg-primary/10 text-primary font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
-          Momenti rossi e bianchi
-      </span>
+      <span class="inline-block bg-primary/10 text-primary font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">Momenti rossi e bianchi</span>
       <h2 class="font-display text-5xl md:text-6xl mt-2 leading-none">GALLERIA DEL RIONE</h2>
-      <p class="text-muted-foreground max-w-2xl mx-auto mb-10 text-sm sm:text-base mt-3">
-        I momenti più belli, le feste, i preparativi e le sfilate che raccontano la storia del Rione La Sughera.
-      </p>
+      <p class="text-muted-foreground max-w-2xl mx-auto mb-10 text-sm sm:text-base mt-3">I momenti più belli, le feste, i preparativi e le sfilate che raccontano la storia del Rione La Sughera.</p>
       
-      <!-- GRIGLIA FOTO VISIBILI SUBITO -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
-        
         <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
             <img src="NOME_PRIMA_FOTO.jpg" alt="Pizzata dei Rioni - Sala" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
                 <p class="text-white font-bold text-sm">Pizzata dei Rioni - Sala</p>
             </div>
         </div>
-
         <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
             <img src="NOME_SECONDA_FOTO.jpg" alt="Festa dei Rioni" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
                 <p class="text-white font-bold text-sm">Festa dei Rioni</p>
             </div>
         </div>
-
         <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
             <img src="torneo.jpg" alt="Torneo dei Rioni" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
                 <p class="text-white font-bold text-sm">Torneo dei Rioni in Campo</p>
             </div>
         </div>
-
       </div>
 
-      <!-- GRIGLIA FOTO EXTRA (NASCOSTE ALL'AVVIO) -->
       <div id="extra-photos" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 text-left">
-          
           <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
               <img src="foto4.jpg" alt="Palio del Quiz" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
                   <p class="text-white font-bold text-sm">Palio del Quiz</p>
               </div>
           </div>
-
           <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
               <img src="foto5.jpg" alt="Eventi Rionali" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
                   <p class="text-white font-bold text-sm">Eventi e Tradizioni</p>
               </div>
           </div>
-
           <div class="group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-black aspect-video sm:aspect-square">
               <img src="foto6.jpg" alt="Sfilata e Allestimenti" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
                   <p class="text-white font-bold text-sm">Sfilata Rionale</p>
               </div>
           </div>
-
       </div>
 
-      <!-- PULSANTE CARICA ALTRE FOTO -->
       <div class="mt-8">
           <button id="toggleGalleryBtn" onclick="toggleGallery()" class="inline-block bg-foreground hover:bg-primary text-white font-bold px-8 py-3 rounded-full border border-primary/40 transition duration-300 uppercase text-xs tracking-widest shadow">
               Mostra altre foto
@@ -597,43 +528,32 @@
       <p class="mt-8 mb-4 text-center text-muted-foreground">Seguici sui social del Rione per non perdere neanche uno scatto.</p>
       
       <div class="flex flex-wrap justify-center gap-3">
-        <a href="https://www.instagram.com/rionelasughera?rpxt=MXNpeG93NmM3Z29ueA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide shadow hover:brightness-110 transition">Instagram</a>
+        <a href="https://www.instagram.com/rionelasughera" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide shadow hover:brightness-110 transition">Instagram</a>
         <a href="https://www.facebook.com/share/1D3WoTb2c1/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide shadow hover:brightness-110 transition">Facebook</a>
-        <a href="https://www.tiktok.com/@rionelasughera?_r=1&_t=ZN-9AuVEf30owo" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide shadow hover:brightness-110 transition">TikTok</a>
+        <a href="https://www.tiktok.com/@rionelasughera" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide shadow hover:brightness-110 transition">TikTok</a>
         <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide shadow hover:brightness-110 transition">Gruppo WhatsApp</a>
       </div>
     </div>
   </section>
 
-  <!-- SEZIONE PALIO DEL QUIZ -->
+  <!-- PALIO DEL QUIZ -->
   <section id="palio-quiz" class="py-16 bg-gradient-to-br from-foreground via-zinc-900 to-black text-white border-y-4 border-primary relative overflow-hidden">
     <div class="max-w-5xl mx-auto px-4">
       <div class="grid md:grid-cols-12 gap-8 items-center">
-        
-        <!-- LOGO DEL PALIO -->
         <div class="md:col-span-5 flex justify-center">
           <div class="relative group">
             <div class="absolute -inset-1 bg-gradient-to-r from-primary to-white rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000"></div>
             <img src="palio-quiz.jpg" alt="Il Palio del Quiz Logo" class="relative w-64 h-64 md:w-80 md:h-80 object-contain rounded-full bg-black p-2 border-2 border-primary shadow-2xl">
           </div>
         </div>
-
-        <!-- TESTO E COUNTDOWN -->
         <div class="md:col-span-7 text-center md:text-left">
-          <span class="inline-block bg-primary text-primary-foreground font-bold text-xs uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full mb-3 shadow">
-            4ª Edizione · Orentano News
-          </span>
+          <span class="inline-block bg-primary text-primary-foreground font-bold text-xs uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full mb-3 shadow">4ª Edizione · Orentano News</span>
           <h2 class="font-display text-5xl sm:text-6xl text-white leading-none">IL PALIO DEL QUIZ</h2>
-          <p class="mt-3 text-white/80 text-base md:text-lg">
-            La grande sfida sulla storia, le tradizioni e le curiosità di Orentano! Metti alla prova le tue conoscenze e porta in alto i colori del Rione La Sughera.
-          </p>
+          <p class="mt-3 text-white/80 text-base md:text-lg">La grande sfida sulla storia, le tradizioni e le curiosità di Orentano! Metti alla prova le tue conoscenze e porta in alto i colori del Rione La Sughera.</p>
 
-          <!-- BOX COUNTDOWN AUTOMATICO -->
           <div class="mt-6 bg-white/5 border-2 border-primary/40 rounded-2xl p-4 sm:p-5 backdrop-blur shadow-inner inline-block w-full max-w-md">
               <p class="text-xs uppercase tracking-widest text-primary font-bold mb-2">Mancano all'inizio:</p>
-              <div id="palio-countdown-finale" class="font-display text-4xl sm:text-5xl text-white tracking-wide">
-                  Calcolo in corso...
-              </div>
+              <div id="palio-countdown-finale" class="font-display text-4xl sm:text-5xl text-white tracking-wide">Calcolo in corso...</div>
           </div>
 
           <div class="mt-6 flex flex-wrap gap-3 justify-center md:justify-start">
@@ -642,140 +562,69 @@
             </a>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- SEZIONE FAQ (DOMANDE FREQUENTI) -->
+  <!-- FAQ -->
   <section id="faq" class="py-16 bg-zinc-950 text-white border-t border-primary/30">
       <div class="max-w-4xl mx-auto px-4">
-          
           <div class="text-center mb-10">
-              <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
-                  Dubbi e Info
-              </span>
-              <h2 class="font-display text-4xl sm:text-5xl text-white font-bold tracking-tight mb-4">
-                  DOMANDE FREQUENTI
-              </h2>
-              <p class="text-white/80 text-sm sm:text-base max-w-xl mx-auto">
-                  Tutto quello che c'è da sapere per entrare a far parte della famiglia del Rione La Sughera.
-              </p>
+              <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">Dubbi e Info</span>
+              <h2 class="font-display text-4xl sm:text-5xl text-white font-bold tracking-tight mb-4">DOMANDE FREQUENTI</h2>
+              <p class="text-white/80 text-sm sm:text-base max-w-xl mx-auto">Tutto quello che c'è da sapere per entrare a far parte della famiglia del Rione La Sughera.</p>
           </div>
 
-          <!-- GRIGLIA DOMANDE -->
           <div class="space-y-6">
-              
-              <!-- DOMANDA 1 -->
               <div class="bg-white/5 border border-primary/30 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
-                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                      <span class="text-primary">❓</span> Chi può partecipare alle attività del Rione?
-                  </h3>
-                  <p class="text-zinc-300 text-sm leading-relaxed pl-8">
-                      Le attività del Rione La Sughera sono aperte a tutti coloro che desiderano partecipare, mettersi in gioco e dare una mano per sostenere la nostra comunità!
-                  </p>
+                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3"><span class="text-primary">❓</span> Chi può partecipare alle attività del Rione?</h3>
+                  <p class="text-zinc-300 text-sm leading-relaxed pl-8">Le attività del Rione La Sughera sono aperte a tutti coloro che desiderano partecipare, mettersi in gioco e dare una mano per sostenere la nostra comunità!</p>
               </div>
-
-              <!-- DOMANDA 2 -->
               <div class="bg-white/5 border border-primary/30 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
-                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                      <span class="text-primary">🤝</span> Come posso tesserarmi o dare il mio contributo?
-                  </h3>
+                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3"><span class="text-primary">🤝</span> Come posso tesserarmi o dare il mio contributo?</h3>
                   <div class="text-zinc-300 text-sm leading-relaxed pl-8 space-y-3">
-                      <p>
-                          Non esiste ancora un vero e proprio tesseramento formalizzato. Per partecipare alle attività del Rione basta abitare all'interno del territorio rionale (o esserne stati residenti in passato) e unirsi al nostro gruppo WhatsApp ufficiale, dove ci organizziamo per ogni evento.
-                      </p>
+                      <p>Non esiste ancora un vero e proprio tesseramento formalizzato. Per partecipare alle attività del Rione basta abitare all'interno del territorio rionale e unirsi al nostro gruppo WhatsApp ufficiale.</p>
                       <div class="pt-2">
-                          <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" 
-                             target="_blank" 
-                             rel="noopener noreferrer" 
-                             class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-5 py-2.5 rounded-full text-xs uppercase tracking-wider transition duration-300 shadow-md hover:scale-105">
-                              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                              </svg>
+                          <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-5 py-2.5 rounded-full text-xs uppercase tracking-wider transition duration-300 shadow-md">
                               <span>Unisciti al Gruppo WhatsApp</span>
                           </a>
                       </div>
                   </div>
               </div>
-
-              <!-- DOMANDA 3 (SOCIAL) -->
               <div class="bg-white/5 border border-primary/30 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
-                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                      <span class="text-primary">📢</span> Come posso rimanere aggiornato sugli eventi e le iniziative?
-                  </h3>
-                  <div class="text-zinc-300 text-sm leading-relaxed pl-8 space-y-3">
-                      <p>
-                          Basta seguirci sui nostri canali social ufficiali per non perderti nessuna novità, data o comunicato!
-                      </p>
-                      <div class="flex flex-wrap gap-3 pt-2">
-                          <a href="https://www.instagram.com/rionelasughera" 
-                             target="_blank" 
-                             rel="noopener noreferrer" 
-                             class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-500 hover:opacity-90 text-white font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider transition duration-300 shadow">
-                              Instagram
-                          </a>
-                          <a href="https://www.facebook.com/share/1D3WoTb2c1/?mibextid=wwXIfr" 
-                             target="_blank" 
-                             rel="noopener noreferrer" 
-                             class="inline-flex items-center gap-2 bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold px-4 py-2 rounded-full text-xs uppercase tracking-wider transition duration-300 shadow">
-                              Facebook
-                          </a>
-                      </div>
-                  </div>
+                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3"><span class="text-primary">📢</span> Come posso rimanere aggiornato sugli eventi e le iniziative?</h3>
+                  <p class="text-zinc-300 text-sm leading-relaxed pl-8">Basta seguirci sui nostri canali social ufficiali per non perderti nessuna novità, data o comunicato!</p>
               </div>
-
-              <!-- DOMANDA 4 -->
-              <div class="bg-white/5 border border-primary/30 rounded-2xl p-6 backdrop-blur transition hover:border-primary">
-                  <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                      <span class="text-primary">💡</span> Posso proporre nuove idee o aiutare nell'organizzazione?
-                  </h3>
-                  <p class="text-zinc-300 text-sm leading-relaxed pl-8">
-                      Assolutamente sì! Ogni proposta per valorizzare il Rione o organizzare nuovi eventi è benvenuta. Puoi condividerla direttamente nel gruppo WhatsApp o parlarne con gli altri ragazzi del rione.
-                  </p>
-              </div>
-
           </div>
       </div>
   </section>
 
-  <!-- SEZIONE COLLEZIONA LE CARTE (STILE FUT FIFA) -->
+  <!-- SEZIONE COLLEZIONA LE CARTE -->
   <section id="carte" class="py-16 bg-slate-950 text-white border-t border-primary/30">
       <div class="w-full max-w-5xl mx-auto py-8 px-4 flex flex-col items-center">
           <div class="w-full max-w-4xl flex justify-between items-center mb-8">
               <h2 class="text-xl sm:text-2xl font-extrabold text-yellow-400 tracking-wider">COLLEZIONA LE CARTE</h2>
-              <div id="counter" class="text-xs sm:text-sm font-bold text-slate-300 bg-slate-900 px-4 py-2 rounded-xl border border-slate-800 shadow">
-                  0 / 23 Trovate
-              </div>
+              <div id="counter" class="text-xs sm:text-sm font-bold text-slate-300 bg-slate-900 px-4 py-2 rounded-xl border border-slate-800 shadow">0 / 23 Trovate</div>
           </div>
 
-          <!-- Posizione Classifica -->
           <div id="friend-stats" class="w-full max-w-md mb-8"></div>
         
-          <!-- Box Apertura Pacchetto -->
           <div class="w-full max-w-md bg-slate-900/90 border border-slate-800 p-6 rounded-3xl shadow-xl flex flex-col items-center text-center mb-12">
               <h3 class="text-lg font-bold text-yellow-400 mb-4">PACCHETTO GIORNALIERO 🎁</h3>
-              
-              <button id="open-pack-btn" class="w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 text-slate-950 font-black rounded-2xl shadow-lg transition-transform active:scale-95 cursor-pointer text-base sm:text-lg mb-6">
-                  APRI PACCHETTO
-              </button>
-
+              <button id="open-pack-btn" class="w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 text-slate-950 font-black rounded-2xl shadow-lg transition-transform active:scale-95 cursor-pointer text-base sm:text-lg mb-6">APRI PACCHETTO</button>
               <div id="card-container" class="min-h-[320px] w-full flex items-center justify-center">
                   <p class="text-slate-400 text-sm">Clicca il bottone per sbustare la tua carta in stile FUT!</p>
               </div>
           </div>
 
-          <!-- Griglia Album -->
           <div class="w-full max-w-5xl">
               <h3 class="text-lg font-bold text-yellow-400 mb-6 text-center sm:text-left">ALBUM DEL RIONE</h3>
-              <div id="album-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
-                  <!-- Generato via JavaScript -->
-              </div>
+              <div id="album-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center"></div>
           </div>
       </div>
   </section>
   
-  <!-- SEZIONE ORENTANO NEWS -->
+  <!-- ORENTANO NEWS -->
   <section id="orentano-news" class="py-20 md:py-28 bg-foreground text-white relative overflow-hidden">
     <div class="absolute -left-32 top-0 w-[26rem] h-[26rem] rounded-full bg-primary/30 blur-3xl"></div>
     <div class="absolute -right-32 bottom-0 w-[26rem] h-[26rem] rounded-full bg-white/10 blur-3xl"></div>
@@ -788,19 +637,15 @@
         <img src="orentano-news.png" alt="Orentano News Logo" class="h-48 w-48 md:h-56 md:w-56 object-contain rounded-3xl border-4 border-primary shadow-2xl bg-white p-3">
       </div>
 
-      <p class="mt-8 text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
-        Rimani sempre aggiornato su tutte le notizie, gli eventi, le sagre e la vita del nostro paese. Scarica l'applicazione ufficiale o visita il portale web dedicato per non perdere nessuna novità!
-      </p>
+      <p class="mt-8 text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">Rimani sempre aggiornato su tutte le notizie, gli eventi, le sagre e la vita del nostro paese. Scarica l'applicazione ufficiale!</p>
 
       <div class="mt-10">
-        <a href="https://orentano.news/" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary text-primary-foreground px-10 py-4 rounded-full font-bold uppercase tracking-wide shadow-xl hover:brightness-110 transition text-lg border-2 border-white">
-          Visita Orentano News ↗
-        </a>
+        <a href="https://orentano.news/" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary text-primary-foreground px-10 py-4 rounded-full font-bold uppercase tracking-wide shadow-xl hover:brightness-110 transition text-lg border-2 border-white">Visita Orentano News ↗</a>
       </div>
     </div>
   </section>
 
-  <!-- CONTATTI & CONDIVISIONE RAPIDA -->
+  <!-- CONTATTI -->
   <section id="contatti" class="py-20 md:py-28">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
       <div>
@@ -820,22 +665,10 @@
         <div class="rounded-2xl overflow-hidden border-4 border-primary shadow-xl bg-card">
           <img src="contatti.jpg" alt="Rione La Sughera" class="w-full h-auto object-cover">
         </div>
-
-        <!-- PULSANTE CONDIVISIONE RAPIDA -->
         <div class="bg-foreground border border-white/10 rounded-2xl p-6 text-center shadow-lg">
-            <h3 class="font-display text-xl text-white font-bold mb-2">
-                Porta la Sughera con te! 🔴⚪
-            </h3>
-            <p class="text-zinc-400 text-xs mb-4">
-                Condividi il sito ufficiale del Rione con un click!
-            </p>
-            <a href="https://api.whatsapp.com/send?text=Guarda%20il%20sito%20ufficiale%20del%20Rione%20La%20Sughera!%20🔴⚪%20Tutte%20le%20news,%20il%20Palmar%C3%A8s%20e%20gli%20eventi%20aggiornati:%20https://rionelasughera.github.io/rione-la-sughera/" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-5 py-3 rounded-full shadow transition duration-300 hover:scale-105 uppercase text-xs tracking-wider">
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                </svg>
+            <h3 class="font-display text-xl text-white font-bold mb-2">Porta la Sughera con te! 🔴⚪</h3>
+            <p class="text-zinc-400 text-xs mb-4">Condividi il sito ufficiale del Rione con un click!</p>
+            <a href="https://api.whatsapp.com/send?text=Guarda%20il%20sito%20ufficiale%20del%20Rione%20La%20Sughera!%20🔴⚪%20https://rionelasughera.github.io/rione-la-sughera/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-5 py-3 rounded-full shadow uppercase text-xs tracking-wider">
                 <span>Condividi su WhatsApp</span>
             </a>
         </div>
@@ -866,159 +699,20 @@
     </div>
   </footer>
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT UNIFICATO E ORGANIZZATO -->
+  <!-- ========================================== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
-    // Menu mobile toggle
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (menuBtn && mobileMenu) {
-      menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    }
+    const SUPABASE_URL = "https://vuhgzhyamdkiciuueyhp.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_cH_SxDLZnkbImYu6r_MPyQ_QPBvzi4F"; 
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Toggle Galleria Fotografica Espandibile
-    function toggleGallery() {
-        const extraPhotos = document.getElementById('extra-photos');
-        const btn = document.getElementById('toggleGalleryBtn');
-        
-        if (extraPhotos.classList.contains('hidden')) {
-            extraPhotos.classList.remove('hidden');
-            btn.innerText = 'Mostra meno';
-        } else {
-            extraPhotos.classList.add('hidden');
-            btn.innerText = 'Mostra altre foto';
-        }
-    }
-
-    // Countdown automatico per il Palio del Quiz
-    (function() {
-        function runCountdown() {
-            const targetDate = new Date('2026-11-02T00:00:00').getTime();
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-            
-            const container = document.getElementById('palio-countdown-finale');
-            if (!container) return;
-
-            if (diff <= 0) {
-                container.innerHTML = '<span class="text-white text-xl sm:text-2xl font-bold">IL PALIO NON È ANCORA INIZIATO</span>';
-                return;
-            }
-
-            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-            if (days === 1) {
-                container.innerHTML = '<span class="text-primary">SOLO 1 GIORNO! 🔥</span>';
-            } else {
-                container.innerHTML = `<span class="text-white">${days} GIORNI</span>`;
-            }
-        }
-
-        runCountdown();
-        setInterval(runCountdown, 60000);
-    })();
-  </script>
-
-  <!-- Script per Installazione PWA -->
-  <script>
-    let deferredPrompt;
-    const installBtn = document.getElementById('install-btn');
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
-
-    if (installBtn) {
-      installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === 'accepted') {
-            installBtn.style.display = 'none';
-          }
-          deferredPrompt = null;
-        } else if (isIOS) {
-          alert("Per installare l'app su iPhone:\n1. Tocca il tasto Condividi in basso (quadrato con freccia ⬆️)\n2. Seleziona 'Aggiungi alla schermata Home'");
-        } else {
-          alert("Per installare l'app, apri il menu del browser e seleziona 'Aggiungi a schermata Home'.");
-        }
-      });
-    }
-  </script>
-
-  <!-- Script per registrare il Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then((reg) => console.log('Service Worker registrato con successo!', reg))
-          .catch((err) => console.log('Registrazione Service Worker fallita:', err));
-      });
-    }
-  </script>
-
-  <!-- Script per Gestione Carte & Rosa 2026 -->
-  <script>
-    const playersDatabase = [
-        { name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 },
-        { name: "LASUGHERA", img: "lasughera.jpg", num: "", weight: 1, rating: 99, pos: "SQD", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 },
-        
-        // BERTONCINI #1
-        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 4, rating: 94, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 91, s2: 89, s3: 94, s4: 93, s5: 83, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
-        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 93, s2: 91, s3: 99, s4: 94, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
-
-        // CIANCIA #6
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89 },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89 },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90 },
-
-        // AGRESTINI #7
-        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 4, rating: 92, pos: "CC/DC", type: "card-gold", typeName: "Base", isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93 },
-        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 2, rating: 96, pos: "CC/DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 94, sho: 89, pas: 93, dri: 89, def: 96, phy: 94 },
-
-        // DARIOKKE #9
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 8, rating: 90, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 85, sho: 89, pas: 89, dri: 87, def: 80, phy: 91 },
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 6, rating: 93, pos: "ATT", type: "card-hero", typeName: "Heroes", isGK: false, pac: 86, sho: 91, pas: 90, dri: 88, def: 82, phy: 94 },
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 2, rating: 97, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 90, sho: 98, pas: 93, dri: 91, def: 83, phy: 94 },
-
-        // PIZZI #11
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 10, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 91, pas: 88, dri: 85, def: 83, phy: 87 },
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90 },
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90 },
-
-        // MADDALENA #10
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90 },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93 },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC", type: "card-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93 },
-
-        // MUCCI #3
-        { name: "Mucci #3", img: "mucci.jpg", num: "#3", weight: 3, rating: 98, pos: "DC", type: "card-icon", typeName: "Icon", isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99 },
-
-        // ROSAMILIA #5
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 5, rating: 90, pos: "DC", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 89, pas: 91, dri: 84, def: 96, phy: 90 },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 4, rating: 93, pos: "DC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 90, pas: 92, dri: 86, def: 96, phy: 91 },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 2, rating: 97, pos: "DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 91, pas: 96, dri: 88, def: 99, phy: 93 },
-
-        // MATRANGA #18
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 8, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82 },
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 5, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 92, pas: 87, dri: 90, def: 84, phy: 83 },
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 91, sho: 92, pas: 88, dri: 90, def: 85, phy: 88 },
-
-        // FERRERA #2
-        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 12, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90 },
-        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 4, rating: 91, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 89, sho: 91, pas: 90, dri: 87, def: 88, phy: 91 },
-
-        // MATRANGA #99
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 6, rating: 93, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 4, rating: 95, pos: "POR", type: "card-futures", typeName: "Future Stars", isGK: true, s1: 97, s2: 94, s3: 91, s4: 97, s5: 90, s6: 96, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" }
-    ];
-
-    // Gestione Username permanente associato all'account/dispositivo
     function getPlayerUsername() {
         let username = localStorage.getItem('rione_user_nickname');
         if (!username || username.trim() === "") {
-            username = prompt("Inserisci il tuo nome/soprannome per la Classifica del Rione (verrà salvato per il tuo account):");
+            username = prompt("Inserisci il tuo nome/soprannome per la Classifica del Rione:");
             if (username && username.trim() !== "") {
                 username = username.trim();
             } else {
@@ -1027,6 +721,106 @@
             localStorage.setItem('rione_user_nickname', username);
         }
         return username;
+    }
+
+    const playersDatabase = [
+        { name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false },
+        { name: "LASUGHERA", img: "lasughera.jpg", num: "", weight: 1, rating: 99, pos: "SQD", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false },
+        
+        // BERTONCINI #1
+        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 4, rating: 94, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 91, s2: 89, s3: 94, s4: 93, s5: 83, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
+        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 93, s2: 91, s3: 99, s4: 94, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
+
+        // CIANCIA #6 (Immagine ridotta)
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89, smallImg: true },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89, smallImg: true },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90, smallImg: true },
+
+        // AGRESTINI #7 (Immagine ridotta)
+        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 4, rating: 92, pos: "CC/DC", type: "card-gold", typeName: "Base", isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93, smallImg: true },
+        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 2, rating: 96, pos: "CC/DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 94, sho: 89, pas: 93, dri: 89, def: 96, phy: 94, smallImg: true },
+
+        // DARIOKKE #9 (Base CC)
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 8, rating: 90, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 85, sho: 89, pas: 89, dri: 87, def: 80, phy: 91, smallImg: true },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 6, rating: 93, pos: "ATT", type: "card-hero", typeName: "Heroes", isGK: false, pac: 86, sho: 91, pas: 90, dri: 88, def: 82, phy: 94, smallImg: true },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 2, rating: 97, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 90, sho: 98, pas: 93, dri: 91, def: 83, phy: 94, smallImg: true },
+
+        // PIZZI #11
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 10, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 91, pas: 88, dri: 85, def: 83, phy: 87, smallImg: false },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90, smallImg: false },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90, smallImg: false },
+
+        // MADDALENA #10
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90, smallImg: false },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93, smallImg: false },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC", type: "card-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93, smallImg: false },
+
+        // MUCCI #3
+        { name: "Mucci #3", img: "mucci.jpg", num: "#3", weight: 3, rating: 98, pos: "DC", type: "card-icon", typeName: "Icon", isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99, smallImg: false },
+
+        // ROSAMILIA #5
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 5, rating: 90, pos: "DC", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 89, pas: 91, dri: 84, def: 96, phy: 90, smallImg: false },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 4, rating: 93, pos: "DC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 90, pas: 92, dri: 86, def: 96, phy: 91, smallImg: false },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 2, rating: 97, pos: "DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 91, pas: 96, dri: 88, def: 99, phy: 93, smallImg: false },
+
+        // MATRANGA #18
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 8, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82, smallImg: false },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 5, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 92, pas: 87, dri: 90, def: 84, phy: 83, smallImg: false },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 91, sho: 92, pas: 88, dri: 90, def: 85, phy: 88, smallImg: false },
+
+        // FERRERA #2
+        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 12, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90, smallImg: false },
+        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 4, rating: 91, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 89, sho: 91, pas: 90, dri: 87, def: 88, phy: 91, smallImg: false },
+
+        // MATRANGA #99
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 6, rating: 93, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 4, rating: 95, pos: "POR", type: "card-futures", typeName: "Future Stars", isGK: true, s1: 97, s2: 94, s3: 91, s4: 97, s5: 90, s6: 96, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false }
+    ];
+
+    function createFutCardHTML(player) {
+        if (!player) return '';
+        const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
+        
+        let statsHtml = player.isGK ? `
+            <div class="fut-stats">
+                <div>${player.s1} <span>${player.l1}</span></div>
+                <div>${player.s2} <span>${player.l2}</span></div>
+                <div>${player.s3} <span>${player.l3}</span></div>
+            </div>
+            <div class="fut-stats mt-1">
+                <div>${player.s4} <span>${player.l4}</span></div>
+                <div>${player.s5} <span>${player.l5}</span></div>
+                <div>${player.s6} <span>${player.l6}</span></div>
+            </div>
+        ` : `
+            <div class="fut-stats">
+                <div>${player.pac} <span>VEL</span></div>
+                <div>${player.sho} <span>TIR</span></div>
+                <div>${player.pas} <span>PAS</span></div>
+            </div>
+            <div class="fut-stats mt-1">
+                <div>${player.dri} <span>DRI</span></div>
+                <div>${player.def} <span>DIF</span></div>
+                <div>${player.phy} <span>FIS</span></div>
+            </div>
+        `;
+
+        return `
+            <div class="fut-card ${player.type}">
+                <div class="fut-card-inner">
+                    <div class="fut-top-info">
+                        <span class="fut-rating">${player.rating}</span>
+                        <span class="fut-position">${player.pos}</span>
+                    </div>
+                    <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
+                    <div class="fut-bottom-section">
+                        <div class="fut-name">${player.name}</div>
+                        ${statsHtml}
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     function renderAlbum() {
@@ -1042,34 +836,30 @@
             const isUnlocked = collectedCards.includes(cardKey);
             if (isUnlocked) unlockedCount++;
 
-            let statsHtml = "";
-            if (player.isGK) {
-                statsHtml = `
-                    <div class="fut-stats">
-                        <div>${player.s1} <span>${player.l1}</span></div>
-                        <div>${player.s2} <span>${player.l2}</span></div>
-                        <div>${player.s3} <span>${player.l3}</span></div>
-                    </div>
-                    <div class="fut-stats mt-1">
-                        <div>${player.s4} <span>${player.l4}</span></div>
-                        <div>${player.s5} <span>${player.l5}</span></div>
-                        <div>${player.s6} <span>${player.l6}</span></div>
-                    </div>
-                `;
-            } else {
-                statsHtml = `
-                    <div class="fut-stats">
-                        <div>${player.pac} <span>PAC</span></div>
-                        <div>${player.sho} <span>SHO</span></div>
-                        <div>${player.pas} <span>PAS</span></div>
-                    </div>
-                    <div class="fut-stats mt-1">
-                        <div>${player.dri} <span>DRI</span></div>
-                        <div>${player.def} <span>DEF</span></div>
-                        <div>${player.phy} <span>PHY</span></div>
-                    </div>
-                `;
-            }
+            const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
+            let statsHtml = player.isGK ? `
+                <div class="fut-stats">
+                    <div>${player.s1} <span>${player.l1}</span></div>
+                    <div>${player.s2} <span>${player.l2}</span></div>
+                    <div>${player.s3} <span>${player.l3}</span></div>
+                </div>
+                <div class="fut-stats mt-1">
+                    <div>${player.s4} <span>${player.l4}</span></div>
+                    <div>${player.s5} <span>${player.l5}</span></div>
+                    <div>${player.s6} <span>${player.l6}</span></div>
+                </div>
+            ` : `
+                <div class="fut-stats">
+                    <div>${player.pac} <span>VEL</span></div>
+                    <div>${player.sho} <span>TIR</span></div>
+                    <div>${player.pas} <span>PAS</span></div>
+                </div>
+                <div class="fut-stats mt-1">
+                    <div>${player.dri} <span>DRI</span></div>
+                    <div>${player.def} <span>DIF</span></div>
+                    <div>${player.phy} <span>FIS</span></div>
+                </div>
+            `;
 
             if (isUnlocked) {
                 grid.innerHTML += `
@@ -1078,10 +868,8 @@
                             <div class="fut-top-info">
                                 <span class="fut-rating">${player.rating}</span>
                                 <span class="fut-position">${player.pos}</span>
-                                <img src="logo.png" alt="Logo La Sughera" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
-                                <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${player.num}</span>
                             </div>
-                            <img src="${player.img}" alt="${player.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
+                            <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
                             <div class="fut-bottom-section">
                                 <div class="fut-name">${player.name}</div>
                                 ${statsHtml}
@@ -1106,51 +894,6 @@
         if (counterEl) {
             counterEl.innerText = `${unlockedCount} / ${playersDatabase.length} Trovate`;
         }
-    }
-
-    function createFutCardHTML(player) {
-        if (!player) return '';
-        let statsHtml = player.isGK ? `
-            <div class="fut-stats">
-                <div>${player.s1} <span>${player.l1}</span></div>
-                <div>${player.s2} <span>${player.l2}</span></div>
-                <div>${player.s3} <span>${player.l3}</span></div>
-            </div>
-            <div class="fut-stats mt-1">
-                <div>${player.s4} <span>${player.l4}</span></div>
-                <div>${player.s5} <span>${player.l5}</span></div>
-                <div>${player.s6} <span>${player.l6}</span></div>
-            </div>
-        ` : `
-            <div class="fut-stats">
-                <div>${player.pac} <span>PAC</span></div>
-                <div>${player.sho} <span>SHO</span></div>
-                <div>${player.pas} <span>PAS</span></div>
-            </div>
-            <div class="fut-stats mt-1">
-                <div>${player.dri} <span>DRI</span></div>
-                <div>${player.def} <span>DEF</span></div>
-                <div>${player.phy} <span>PHY</span></div>
-            </div>
-        `;
-
-        return `
-            <div class="fut-card ${player.type}">
-                <div class="fut-card-inner">
-                    <div class="fut-top-info">
-                        <span class="fut-rating">${player.rating}</span>
-                        <span class="fut-position">${player.pos}</span>
-                        <img src="logo.png" alt="Logo La Sughera" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
-                        <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${player.num}</span>
-                    </div>
-                    <img src="${player.img}" alt="${player.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
-                    <div class="fut-bottom-section">
-                        <div class="fut-name">${player.name}</div>
-                        ${statsHtml}
-                    </div>
-                </div>
-            </div>
-        `;
     }
 
     function renderRosa2026() {
@@ -1180,28 +923,12 @@
         renderLine('bench-grid', bench);
     }
 
-    function toggleBench() {
-        const bench = document.getElementById('bench-container');
-        const btn = document.getElementById('toggleBenchBtn');
-        if (!bench || !btn) return;
-
-        if (bench.classList.contains('hidden')) {
-            bench.classList.remove('hidden');
-            btn.innerHTML = '<span id="benchArrow">▲</span> Nascondi Panchina e Mister';
-        } else {
-            bench.classList.add('hidden');
-            btn.innerHTML = '<span id="benchArrow">▼</span> Mostra Panchina e Mister (4)';
-        }
-    }
-
-    // PACCHETTO GIORNALIERO AZZERATO A MEZZANOTTE (Controllo per Data)
     function checkPackTimer() {
         const lastOpenDate = localStorage.getItem('rione_last_open_date');
         const openBtn = document.getElementById('open-pack-btn');
         const container = document.getElementById('card-container');
         
         if (!openBtn) return;
-
         const todayStr = new Date().toDateString();
 
         if (lastOpenDate === todayStr) {
@@ -1234,42 +961,35 @@
     const openBtn = document.getElementById('open-pack-btn');
     if (openBtn) {
         openBtn.addEventListener('click', () => {
-            // Salva la data odierna per bloccare fino a mezzanotte
             localStorage.setItem('rione_last_open_date', new Date().toDateString());
-
-            // Assicura che l'utente abbia inserito il nome una sola volta e lo associa all'account
             getPlayerUsername();
 
             const wonPlayer = openPack();
+            const imgClass = wonPlayer.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
             
-            let wonStatsHtml = "";
-            if (wonPlayer.isGK) {
-                wonStatsHtml = `
-                    <div class="fut-stats">
-                        <div>${wonPlayer.s1} <span>${wonPlayer.l1}</span></div>
-                        <div>${wonPlayer.s2} <span>${wonPlayer.l2}</span></div>
-                        <div>${wonPlayer.s3} <span>${wonPlayer.l3}</span></div>
-                    </div>
-                    <div class="fut-stats mt-1">
-                        <div>${wonPlayer.s4} <span>${wonPlayer.l4}</span></div>
-                        <div>${wonPlayer.s5} <span>${wonPlayer.l5}</span></div>
-                        <div>${wonPlayer.s6} <span>${wonPlayer.l6}</span></div>
-                    </div>
-                `;
-            } else {
-                wonStatsHtml = `
-                    <div class="fut-stats">
-                        <div>${wonPlayer.pac} <span>PAC</span></div>
-                        <div>${wonPlayer.sho} <span>SHO</span></div>
-                        <div>${wonPlayer.pas} <span>PAS</span></div>
-                    </div>
-                    <div class="fut-stats mt-1">
-                        <div>${wonPlayer.dri} <span>DRI</span></div>
-                        <div>${wonPlayer.def} <span>DEF</span></div>
-                        <div>${wonPlayer.phy} <span>PHY</span></div>
-                    </div>
-                `;
-            }
+            let wonStatsHtml = wonPlayer.isGK ? `
+                <div class="fut-stats">
+                    <div>${wonPlayer.s1} <span>${wonPlayer.l1}</span></div>
+                    <div>${wonPlayer.s2} <span>${wonPlayer.l2}</span></div>
+                    <div>${wonPlayer.s3} <span>${wonPlayer.l3}</span></div>
+                </div>
+                <div class="fut-stats mt-1">
+                    <div>${wonPlayer.s4} <span>${wonPlayer.l4}</span></div>
+                    <div>${wonPlayer.s5} <span>${wonPlayer.l5}</span></div>
+                    <div>${wonPlayer.s6} <span>${wonPlayer.l6}</span></div>
+                </div>
+            ` : `
+                <div class="fut-stats">
+                    <div>${wonPlayer.pac} <span>VEL</span></div>
+                    <div>${wonPlayer.sho} <span>TIR</span></div>
+                    <div>${wonPlayer.pas} <span>PAS</span></div>
+                </div>
+                <div class="fut-stats mt-1">
+                    <div>${wonPlayer.dri} <span>DRI</span></div>
+                    <div>${wonPlayer.def} <span>DIF</span></div>
+                    <div>${wonPlayer.phy} <span>FIS</span></div>
+                </div>
+            `;
 
             const container = document.getElementById('card-container');
             if (container) {
@@ -1281,10 +1001,8 @@
                                 <div class="fut-top-info">
                                     <span class="fut-rating">${wonPlayer.rating}</span>
                                     <span class="fut-position">${wonPlayer.pos}</span>
-                                    <img src="logo.png" alt="Logo La Sughera" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
-                                    <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${wonPlayer.num}</span>
                                 </div>
-                                <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
+                                <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
                                 <div class="fut-bottom-section">
                                     <div class="fut-name">${wonPlayer.name}</div>
                                     ${wonStatsHtml}
@@ -1308,20 +1026,6 @@
         });
     }
 
-    renderAlbum();
-    renderRosa2026();
-    checkPackTimer();
-  </script>
-
-  <!-- SDK Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script>
-    const SUPABASE_URL = "https://vuhgzhyamdkiciuueyhp.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_cH_SxDLZnkbImYu6r_MPyQ_QPBvzi4F"; 
-
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
     async function fetchGlobalLeaderboard() {
         const container = document.getElementById('friend-stats');
         if (!container) return;
@@ -1342,10 +1046,7 @@
             if (error || !leaderboard) {
                 html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato.</p>`;
             } else {
-                const filteredList = leaderboard.filter(user => 
-                    user.username && user.username.toLowerCase() !== "rosa"
-                );
-
+                const filteredList = leaderboard.filter(user => user.username && user.username.toLowerCase() !== "rosa");
                 if (filteredList.length === 0) {
                     html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato.</p>`;
                 } else {
@@ -1367,7 +1068,6 @@
                     });
                 }
             }
-
             html += `</div></div>`;
             container.innerHTML = html;
         } catch (e) {
@@ -1380,10 +1080,6 @@
         if (username.toLowerCase() === "rosa") return;
         
         let collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
-        if (collectedCards.length === 0) {
-            collectedCards = JSON.parse(localStorage.getItem('my_cards')) || [];
-        }
-        
         const cardsCount = collectedCards.length;
 
         try {
@@ -1396,12 +1092,68 @@
         } catch (err) {
             console.error("Errore di connessione:", err);
         }
-
         await fetchGlobalLeaderboard();
     }
 
+    // Menu Mobile
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    }
+
+    function toggleGallery() {
+        const extraPhotos = document.getElementById('extra-photos');
+        const btn = document.getElementById('toggleGalleryBtn');
+        if (extraPhotos.classList.contains('hidden')) {
+            extraPhotos.classList.remove('hidden');
+            btn.innerText = 'Mostra meno';
+        } else {
+            extraPhotos.classList.add('hidden');
+            btn.innerText = 'Mostra altre foto';
+        }
+    }
+
+    function toggleBench() {
+        const bench = document.getElementById('bench-container');
+        const btn = document.getElementById('toggleBenchBtn');
+        if (!bench || !btn) return;
+
+        if (bench.classList.contains('hidden')) {
+            bench.classList.remove('hidden');
+            btn.innerHTML = '<span id="benchArrow">▲</span> Nascondi Panchina e Mister';
+        } else {
+            bench.classList.add('hidden');
+            btn.innerHTML = '<span id="benchArrow">▼</span> Mostra Panchina e Mister (4)';
+        }
+    }
+
+    // Countdown
+    (function() {
+        function runCountdown() {
+            const targetDate = new Date('2026-11-02T00:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            const container = document.getElementById('palio-countdown-finale');
+            if (!container) return;
+
+            if (diff <= 0) {
+                container.innerHTML = '<span class="text-white text-xl sm:text-2xl font-bold">IL PALIO NON È ANCORA INIZIATO</span>';
+                return;
+            }
+
+            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            container.innerHTML = days === 1 ? '<span class="text-primary">SOLO 1 GIORNO! 🔥</span>' : `<span class="text-white">${days} GIORNI</span>`;
+        }
+        runCountdown();
+        setInterval(runCountdown, 60000);
+    })();
+
+    // Avvio script
+    renderAlbum();
+    renderRosa2026();
+    checkPackTimer();
     fetchGlobalLeaderboard();
   </script>
-  
 </body>
 </html>
