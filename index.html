@@ -38,7 +38,7 @@
   </script>
 
   <style>
-    /* --- CAMPO DA GIOCO STILE FUT --- */
+    /* --- CAMPO DA CALCIOTTO STILE FUT --- */
     .fut-pitch {
       background: repeating-linear-gradient(
         to bottom,
@@ -95,21 +95,74 @@
       perspective: 1000px;
     }
 
-    /* --- STRUTTURA DELLE CARTE PULITA E ORIGINALE --- */
+    /* --- VERA SAGOMA GEOMETRICA STILE FUT --- */
     .fut-card {
       width: 210px;
       height: 310px;
+      clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
+      padding: 3px;
       position: relative;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
       display: flex;
       flex-direction: column;
       align-items: center;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border: 3px solid #334155;
-      border-radius: 16px;
-      color: #ffffff;
+    }
+
+    .fut-card-inner {
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
+      position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 1. CARTE NORMALI / BASE (ORO) */
+    .card-gold {
+      background: linear-gradient(135deg, #f5d77f 0%, #d4af37 40%, #aa771c 100%);
+      color: #3b2c0d;
+    }
+    .card-gold .fut-card-inner {
+      background: linear-gradient(180deg, #2a2008 0%, #0d1117 60%);
+    }
+
+    /* 2. CARTE ICON (BIANCO / GRIGIO) */
+    .card-icon {
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #64748b 100%);
+      color: #0f172a;
+    }
+    .card-icon .fut-card-inner {
+      background: linear-gradient(180deg, #334155 0%, #0f172a 60%);
+    }
+
+    /* 3. CARTE TOTY / TOTS (BLU) */
+    .card-toty {
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #1e3a8a 100%);
+      color: #e0f2fe;
+    }
+    .card-toty .fut-card-inner {
+      background: linear-gradient(180deg, #0c4a6e 0%, #030712 60%);
+    }
+
+    /* 4. CARTE HEROES (VERDI) */
+    .card-hero {
+      background: linear-gradient(135deg, #4ade80 0%, #16a34a 50%, #14532d 100%);
+      color: #dcfce7;
+    }
+    .card-hero .fut-card-inner {
+      background: linear-gradient(180deg, #14532d 0%, #051c0f 60%);
+    }
+
+    /* 5. CARTE FUTURE STARS (VIOLA ACCESO) */
+    .card-futures {
+      background: linear-gradient(135deg, #e879f9 0%, #a855f7 50%, #6b21a8 100%);
+      color: #fae8ff;
+    }
+    .card-futures .fut-card-inner {
+      background: linear-gradient(180deg, #581c87 0%, #0f051d 60%);
     }
 
     .fut-card-locked {
@@ -117,7 +170,7 @@
       height: 310px;
       background: #1e293b;
       border: 2px dashed #475569;
-      border-radius: 16px;
+      clip-path: polygon(0% 0%, 78% 0%, 100% 12%, 100% 100%, 0% 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -129,102 +182,97 @@
 
     .fut-top-info {
       position: absolute;
-      top: 14px;
-      left: 16px;
+      top: 10px;
+      left: 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
       line-height: 1;
       font-weight: 900;
-      color: #f8fafc;
+      color: #fef08a;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
 
     .fut-rating {
-      font-size: 24px;
+      font-size: 26px;
       font-family: 'Impact', sans-serif;
       letter-spacing: 1px;
     }
 
     .fut-position {
-      font-size: 10px;
+      font-size: 11px;
       margin-top: 2px;
       letter-spacing: 1px;
-      font-weight: bold;
-      color: #cbd5e1;
     }
 
-    /* Badge specifico per il tipo di carta (Base, Icon, TOTY, ecc.) */
+    /* Badge specifico per il tipo di carta posizionato in alto a destra */
     .fut-type-badge {
       position: absolute;
-      top: 14px;
-      right: 16px;
+      top: 12px;
+      right: 32px;
       font-size: 9px;
       font-weight: 900;
       text-transform: uppercase;
       padding: 3px 6px;
-      border-radius: 6px;
+      border-radius: 4px;
       letter-spacing: 0.5px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      background: rgba(0, 0, 0, 0.75);
+      color: #fef08a;
+      border: 1px solid rgba(254, 240, 138, 0.4);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      z-index: 10;
     }
-    .badge-base { background: #475569; color: #f8fafc; }
-    .badge-icon { background: #eab308; color: #1e293b; }
-    .badge-toty { background: #3b82f6; color: #ffffff; }
-    .badge-futures { background: #a855f7; color: #ffffff; }
-    .badge-hero { background: #22c55e; color: #ffffff; }
 
     .fut-player-img {
-      width: 100px;
-      height: 115px;
+      width: 110px;
+      height: 125px;
       position: absolute;
-      top: 50px;
+      top: 28px;
       object-fit: cover;
-      border-radius: 8px;
-      border: 2px solid rgba(255,255,255,0.15);
-      background: #0f172a;
-    }
-
-    .fut-player-img-small {
-      width: 85px !important;
-      height: 98px !important;
-      top: 55px !important;
+      filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));
     }
 
     .fut-bottom-section {
       position: absolute;
-      bottom: 16px;
+      bottom: 0;
       width: 100%;
+      height: 125px;
+      background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.95) 35%, #090d16 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
+      padding-bottom: 12px;
     }
 
     .fut-name {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
       text-transform: uppercase;
+      color: #ffffff;
       text-align: center;
       letter-spacing: 0.5px;
-      color: #ffffff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
       width: 85%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding-bottom: 3px;
+      margin-bottom: 5px;
     }
 
     .fut-stats {
       display: flex;
-      gap: 12px;
+      gap: 8px;
       font-size: 10px;
       font-weight: bold;
+      color: #fef08a;
       text-transform: uppercase;
-      color: #e2e8f0;
     }
 
     .fut-stats span {
-      opacity: 0.7;
-      font-size: 9px;
+      color: #94a3b8;
     }
   </style>
 </head>
@@ -237,18 +285,19 @@
         <img src="logo.png" alt="Stemma Rione La Sughera" class="h-12 w-auto object-contain">
         <span class="font-display text-2xl text-white leading-none hidden sm:block">RIONE LA SUGHERA</span>
       </a>
-      <nav class="hidden md:flex items-center gap-5">
-          <a href="#storia" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Storia</a>
-          <a href="#eventi" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Eventi</a>
-          <a href="#palmares" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palmarès</a>
-          <a href="#rosa" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Rosa 2026</a>
-          <a href="#galleria" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Galleria</a>
-          <a href="#palio-quiz" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Quiz</a>
-          <a href="#faq" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">FAQ</a>
-          <a href="#carte" class="text-xs font-semibold uppercase tracking-wider text-yellow-400 hover:underline transition">Carte</a>
-          <a href="#orentano-news" class="text-xs font-semibold uppercase tracking-wider text-primary hover:underline transition">News</a>
-          <a href="#contatti" class="text-xs font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Contatti</a>
-          <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-3.5 py-2 rounded-full font-bold uppercase text-[11px] tracking-wider">Unisciti</a>
+      <nav class="hidden md:flex items-center gap-6">
+          <a href="#storia" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Storia</a>
+          <a href="#eventi" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Eventi</a>
+          <a href="#unisciti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Unisciti</a>
+          <a href="#palmares" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palmarès</a>
+          <a href="#rosa" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Rosa 2026</a>
+          <a href="#galleria" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Galleria</a>
+          <a href="#palio-quiz" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Quiz</a>
+          <a href="#faq" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">FAQ</a>
+          <a href="#carte" class="text-sm font-semibold uppercase tracking-wider text-yellow-400 hover:underline transition">Carte</a>
+          <a href="#orentano-news" class="text-sm font-semibold uppercase tracking-wider text-primary hover:underline transition">News</a>
+          <a href="#contatti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Contatti</a>
+          <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener noreferrer" class="bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold uppercase text-xs tracking-wider">Unisciti</a>
       </nav>
       <button id="menuBtn" aria-label="Menu" class="md:hidden text-white w-10 h-10 grid place-items-center text-2xl">☰</button>
     </div>
@@ -256,6 +305,7 @@
     <div id="mobileMenu" class="hidden md:hidden bg-foreground border-t border-white/10 px-4 pb-4">
         <a href="#storia" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Storia</a>
         <a href="#eventi" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Eventi</a>
+        <a href="#unisciti" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Unisciti</a>
         <a href="#palmares" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palmarès</a>
         <a href="#rosa" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Rosa 2026</a>
         <a href="#galleria" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Galleria</a>
@@ -284,6 +334,9 @@
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition">UNISCITI AL RIONE</a>
           <a href="#eventi" class="border-2 border-white text-white px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-white hover:text-foreground transition">Prossimi eventi</a>
+          <button id="install-btn" class="bg-primary text-primary-foreground px-7 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-opacity-90 transition cursor-pointer">
+            🦊 INSTALLA APP
+          </button>
         </div>
       </div>
       <div class="flex justify-center">
@@ -342,7 +395,26 @@
     </div>
   </section>
 
-  <!-- SEZIONE PALMARÈS -->
+  <!-- UNISCITI -->
+  <section id="unisciti" class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-primary font-bold uppercase tracking-[0.2em] text-sm">Vuoi essere dei nostri?</p>
+      <h2 class="font-display text-5xl md:text-7xl mt-2 leading-none">ENTRA NELLA <span class="text-primary">FAMIGLIA</span></h2>
+      <p class="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
+        Chiunque voglia far parte del Rione La Sughera è il benvenuto. Non servono tessere né requisiti: basta scrivere al numero qui sotto e sei dentro.
+      </p>
+      <div class="mt-8 flex flex-col md:flex-row md:justify-center md:gap-10 gap-3">
+        <a href="tel:+393331645269" class="inline-block font-display text-4xl md:text-5xl text-foreground hover:text-primary transition">333 16 45 269</a>
+        <a href="tel:+393711260190" class="inline-block font-display text-4xl md:text-5xl text-foreground hover:text-primary transition">371 12 60 190</a>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="https://wa.me/393331645269?text=Ciao%20Sughera!%20Vorrei%20entrare%20nel%20Rione" target="_blank" rel="noopener" class="inline-block bg-[#25D366] text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide shadow-lg hover:brightness-105">Scrivici su WhatsApp</a>
+        <a href="https://chat.whatsapp.com/HKhymgvgMgQK8F8nnWZTfl" target="_blank" rel="noopener" class="inline-block border-2 border-primary text-primary px-8 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-primary hover:text-primary-foreground transition">Entra nel gruppo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PALMARÈS -->
   <section id="palmares" class="py-16 bg-zinc-950 text-white border-t border-primary/30">
     <div class="max-w-5xl mx-auto px-4 text-center">
         <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">Albo d'Oro</span>
@@ -386,11 +458,11 @@
     </div>
   </section>
 
-  <!-- SEZIONE ROSA 2026 -->
+  <!-- ROSA 2026 -->
   <section id="rosa" class="py-16 bg-slate-950 text-white border-t border-primary/30">
     <div class="max-w-5xl mx-auto px-4 text-center">
       <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
-        1ª Edizione Torneo dei Rioni
+        1ª Edizione Torneo dei Rioni · Calciotto
       </span>
       <h2 class="font-display text-4xl sm:text-5xl text-white font-bold tracking-tight mb-2">LA ROSA <span class="text-primary">2026</span></h2>
       <p class="text-yellow-400 font-bold text-xs sm:text-sm uppercase tracking-widest mb-8">Modulo 2 - 3 - 2</p>
@@ -652,89 +724,106 @@
     </div>
   </footer>
 
-  <!-- ========================================== -->
-  <!-- JAVASCRIPT UNIFICATO E ORGANIZZATO -->
-  <!-- ========================================== -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    const SUPABASE_URL = "https://vuhgzhyamdkiciuueyhp.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_cH_SxDLZnkbImYu6r_MPyQ_QPBvzi4F"; 
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    function getPlayerUsername() {
-        let username = localStorage.getItem('rione_user_nickname');
-        if (!username || username.trim() === "") {
-            username = prompt("Inserisci il tuo nome/soprannome per la Classifica del Rione:");
-            if (username && username.trim() !== "") {
-                username = username.trim();
-            } else {
-                username = "Collezionista_" + Math.floor(1000 + Math.random() * 9000);
-            }
-            localStorage.setItem('rione_user_nickname', username);
-        }
-        return username;
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     }
 
+    function toggleGallery() {
+        const extraPhotos = document.getElementById('extra-photos');
+        const btn = document.getElementById('toggleGalleryBtn');
+        if (extraPhotos.classList.contains('hidden')) {
+            extraPhotos.classList.remove('hidden');
+            btn.innerText = 'Mostra meno';
+        } else {
+            extraPhotos.classList.add('hidden');
+            btn.innerText = 'Mostra altre foto';
+        }
+    }
+
+    (function() {
+        function runCountdown() {
+            const targetDate = new Date('2026-11-02T00:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            const container = document.getElementById('palio-countdown-finale');
+            if (!container) return;
+
+            if (diff <= 0) {
+                container.innerHTML = '<span class="text-white text-xl sm:text-2xl font-bold">IL PALIO NON È ANCORA INIZIATO</span>';
+                return;
+            }
+
+            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            container.innerHTML = days === 1 ? '<span class="text-primary">SOLO 1 GIORNO! 🔥</span>' : `<span class="text-white">${days} GIORNI</span>`;
+        }
+        runCountdown();
+        setInterval(runCountdown, 60000);
+    })();
+  </script>
+
+  <!-- Script per Gestione Carte & Rosa 2026 -->
+  <script>
     const playersDatabase = [
-        { name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", typeBadge: "badge-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false },
-        { name: "LASUGHERA", img: "lasughera.jpg", num: "", weight: 1, rating: 99, pos: "SQD", typeBadge: "badge-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99, smallImg: false },
+        { name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 },
+        { name: "LASUGHERA", img: "lasughera.jpg", num: "", weight: 1, rating: 99, pos: "SQD", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 },
         
         // BERTONCINI #1
-        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 4, rating: 94, pos: "POR", typeBadge: "badge-base", typeName: "Base", isGK: true, s1: 91, s2: 89, s3: 94, s4: 93, s5: 83, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
-        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 2, rating: 97, pos: "POR", typeBadge: "badge-toty", typeName: "TOTY", isGK: true, s1: 93, s2: 91, s3: 99, s4: 94, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
+        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 4, rating: 94, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 91, s2: 89, s3: 94, s4: 93, s5: 83, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
+        { name: "BERTONCINI #1", img: "bertoncini.jpg", num: "#1", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 93, s2: 91, s3: 99, s4: 94, s5: 85, s6: 99, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
 
-        // CIANCIA #6 (Immagine ridotta)
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89, smallImg: true },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC", typeBadge: "badge-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89, smallImg: true },
-        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90, smallImg: true },
+        // CIANCIA #6
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 8, rating: 91, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 91, sho: 88, pas: 93, dri: 87, def: 90, phy: 89 },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 4, rating: 94, pos: "CC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 95, sho: 90, pas: 94, dri: 88, def: 93, phy: 89 },
+        { name: "Ciancia #6", img: "ciancia.jpg", num: "#6", weight: 2, rating: 97, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 96, sho: 92, pas: 96, dri: 89, def: 94, phy: 90 },
 
-        // AGRESTINI #7 (Immagine ridotta)
-        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 4, rating: 92, pos: "CC/DC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93, smallImg: true },
-        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 2, rating: 96, pos: "CC/DC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 94, sho: 89, pas: 93, dri: 89, def: 96, phy: 94, smallImg: true },
+        // AGRESTINI #7
+        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 4, rating: 92, pos: "CC/DC", type: "card-gold", typeName: "Base", isGK: false, pac: 93, sho: 87, pas: 90, dri: 86, def: 93, phy: 93 },
+        { name: "Agrestini #7", img: "agrestini.jpg", num: "#7", weight: 2, rating: 96, pos: "CC/DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 94, sho: 89, pas: 93, dri: 89, def: 96, phy: 94 },
 
-        // DARIOKKE #9 (Base CC)
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 8, rating: 90, pos: "CC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 85, sho: 89, pas: 89, dri: 87, def: 80, phy: 91, smallImg: true },
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 6, rating: 93, pos: "ATT", typeBadge: "badge-hero", typeName: "Heroes", isGK: false, pac: 86, sho: 91, pas: 90, dri: 88, def: 82, phy: 94, smallImg: true },
-        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 2, rating: 97, pos: "ATT", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 90, sho: 98, pas: 93, dri: 91, def: 83, phy: 94, smallImg: true },
+        // DARIOKKE #9
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 8, rating: 90, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 85, sho: 89, pas: 89, dri: 87, def: 80, phy: 91 },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 6, rating: 93, pos: "ATT", type: "card-hero", typeName: "Heroes", isGK: false, pac: 86, sho: 91, pas: 90, dri: 88, def: 82, phy: 94 },
+        { name: "Dariokke #9", img: "dariokke.jpg", num: "#9", weight: 2, rating: 97, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 90, sho: 98, pas: 93, dri: 91, def: 83, phy: 94 },
 
         // PIZZI #11
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 10, rating: 89, pos: "ATT", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 88, sho: 91, pas: 88, dri: 85, def: 83, phy: 87, smallImg: false },
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", typeBadge: "badge-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90, smallImg: false },
-        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90, smallImg: false },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 10, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 91, pas: 88, dri: 85, def: 83, phy: 87 },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 6, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 93, pas: 90, dri: 86, def: 90, phy: 90 },
+        { name: "Pizzi #11", img: "pizzi.jpg", num: "#11", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 94, pas: 91, dri: 88, def: 88, phy: 90 },
 
         // MADDALENA #10
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90, smallImg: false },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93, smallImg: false },
-        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC", typeBadge: "badge-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93, smallImg: false },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 8, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 90, sho: 86, pas: 84, dri: 82, def: 86, phy: 90 },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 6, rating: 90, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 95, sho: 90, pas: 88, dri: 85, def: 86, phy: 93 },
+        { name: "Maddalena #10", img: "maddalena.jpg", num: "#10", weight: 4, rating: 93, pos: "CC", type: "card-hero", typeName: "Heroes", isGK: false, pac: 95, sho: 91, pas: 93, dri: 90, def: 86, phy: 93 },
 
         // MUCCI #3
-        { name: "Mucci #3", img: "mucci.jpg", num: "#3", weight: 3, rating: 98, pos: "DC", typeBadge: "badge-icon", typeName: "Icon", isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99, smallImg: false },
+        { name: "Mucci #3", img: "mucci.jpg", num: "#3", weight: 3, rating: 98, pos: "DC", type: "card-icon", typeName: "Icon", isGK: false, pac: 90, sho: 87, pas: 93, dri: 90, def: 99, phy: 99 },
 
         // ROSAMILIA #5
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 5, rating: 90, pos: "DC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 88, sho: 89, pas: 91, dri: 84, def: 96, phy: 90, smallImg: false },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 4, rating: 93, pos: "DC", typeBadge: "badge-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 90, pas: 92, dri: 86, def: 96, phy: 91, smallImg: false },
-        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 2, rating: 97, pos: "DC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 91, pas: 96, dri: 88, def: 99, phy: 93, smallImg: false },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 5, rating: 90, pos: "DC", type: "card-gold", typeName: "Base", isGK: false, pac: 88, sho: 89, pas: 91, dri: 84, def: 96, phy: 90 },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 4, rating: 93, pos: "DC", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 90, pas: 92, dri: 86, def: 96, phy: 91 },
+        { name: "Rosamilia #5", img: "rosamilia.jpg", num: "#5", weight: 2, rating: 97, pos: "DC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 92, sho: 91, pas: 96, dri: 88, def: 99, phy: 93 },
 
         // MATRANGA #18
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 8, rating: 89, pos: "ATT", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82, smallImg: false },
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 5, rating: 91, pos: "ATT", typeBadge: "badge-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 92, pas: 87, dri: 90, def: 84, phy: 83, smallImg: false },
-        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 2, rating: 94, pos: "ATT", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 91, sho: 92, pas: 88, dri: 90, def: 85, phy: 88, smallImg: false },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 8, rating: 89, pos: "ATT", type: "card-gold", typeName: "Base", isGK: false, pac: 89, sho: 91, pas: 87, dri: 90, def: 83, phy: 82 },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 5, rating: 91, pos: "ATT", type: "card-futures", typeName: "Future Stars", isGK: false, pac: 90, sho: 92, pas: 87, dri: 90, def: 84, phy: 83 },
+        { name: "Matranga #18", img: "matranga-movimento.jpg", num: "#18", weight: 2, rating: 94, pos: "ATT", type: "card-toty", typeName: "TOTY", isGK: false, pac: 91, sho: 92, pas: 88, dri: 90, def: 85, phy: 88 },
 
         // FERRERA #2
-        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 12, rating: 88, pos: "CC", typeBadge: "badge-base", typeName: "Base", isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90, smallImg: false },
-        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 4, rating: 91, pos: "CC", typeBadge: "badge-toty", typeName: "TOTY", isGK: false, pac: 89, sho: 91, pas: 90, dri: 87, def: 88, phy: 91, smallImg: false },
+        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 12, rating: 88, pos: "CC", type: "card-gold", typeName: "Base", isGK: false, pac: 87, sho: 89, pas: 89, dri: 85, def: 85, phy: 90 },
+        { name: "Ferrera #2", img: "ferrera.jpg", num: "#2", weight: 4, rating: 91, pos: "CC", type: "card-toty", typeName: "TOTY", isGK: false, pac: 89, sho: 91, pas: 90, dri: 87, def: 88, phy: 91 },
 
         // MATRANGA #99
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 6, rating: 93, pos: "POR", typeBadge: "badge-base", typeName: "Base", isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 4, rating: 95, pos: "POR", typeBadge: "badge-futures", typeName: "Future Stars", isGK: true, s1: 97, s2: 94, s3: 91, s4: 97, s5: 90, s6: 96, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false },
-        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", typeBadge: "badge-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA", smallImg: false }
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 6, rating: 93, pos: "POR", type: "card-gold", typeName: "Base", isGK: true, s1: 96, s2: 93, s3: 90, s4: 97, s5: 89, s6: 95, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 4, rating: 95, pos: "POR", type: "card-futures", typeName: "Future Stars", isGK: true, s1: 97, s2: 94, s3: 91, s4: 97, s5: 90, s6: 96, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" },
+        { name: "MATRANGA #99", img: "matranga-portiere.jpg", num: "#99", weight: 2, rating: 97, pos: "POR", type: "card-toty", typeName: "TOTY", isGK: true, s1: 98, s2: 95, s3: 92, s4: 98, s5: 91, s6: 97, l1: "TUF", l2: "PRE", l3: "RIN", l4: "RIF", l5: "VEL", l6: "PIA" }
     ];
 
     function createFutCardHTML(player) {
         if (!player) return '';
-        const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
-        
         let statsHtml = player.isGK ? `
             <div class="fut-stats">
                 <div>${player.s1} <span>${player.l1}</span></div>
@@ -748,28 +837,32 @@
             </div>
         ` : `
             <div class="fut-stats">
-                <div>${player.pac} <span>VEL</span></div>
-                <div>${player.sho} <span>TIR</span></div>
+                <div>${player.pac} <span>PAC</span></div>
+                <div>${player.sho} <span>SHO</span></div>
                 <div>${player.pas} <span>PAS</span></div>
             </div>
             <div class="fut-stats mt-1">
                 <div>${player.dri} <span>DRI</span></div>
-                <div>${player.def} <span>DIF</span></div>
-                <div>${player.phy} <span>FIS</span></div>
+                <div>${player.def} <span>DEF</span></div>
+                <div>${player.phy} <span>PHY</span></div>
             </div>
         `;
 
         return `
-            <div class="fut-card">
-                <div class="fut-top-info">
-                    <span class="fut-rating">${player.rating}</span>
-                    <span class="fut-position">${player.pos}</span>
-                </div>
-                <div class="fut-type-badge ${player.typeBadge}">${player.typeName}</div>
-                <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
-                <div class="fut-bottom-section">
-                    <div class="fut-name">${player.name}</div>
-                    ${statsHtml}
+            <div class="fut-card ${player.type}">
+                <div class="fut-card-inner">
+                    <div class="fut-top-info">
+                        <span class="fut-rating">${player.rating}</span>
+                        <span class="fut-position">${player.pos}</span>
+                        <img src="logo.png" alt="Logo La Sughera" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
+                        <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${player.num}</span>
+                    </div>
+                    <div class="fut-type-badge">${player.typeName}</div>
+                    <img src="${player.img}" alt="${player.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
+                    <div class="fut-bottom-section">
+                        <div class="fut-name">${player.name}</div>
+                        ${statsHtml}
+                    </div>
                 </div>
             </div>
         `;
@@ -788,7 +881,6 @@
             const isUnlocked = collectedCards.includes(cardKey);
             if (isUnlocked) unlockedCount++;
 
-            const imgClass = player.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
             let statsHtml = player.isGK ? `
                 <div class="fut-stats">
                     <div>${player.s1} <span>${player.l1}</span></div>
@@ -802,30 +894,34 @@
                 </div>
             ` : `
                 <div class="fut-stats">
-                    <div>${player.pac} <span>VEL</span></div>
-                    <div>${player.sho} <span>TIR</span></div>
+                    <div>${player.pac} <span>PAC</span></div>
+                    <div>${player.sho} <span>SHO</span></div>
                     <div>${player.pas} <span>PAS</span></div>
                 </div>
                 <div class="fut-stats mt-1">
                     <div>${player.dri} <span>DRI</span></div>
-                    <div>${player.def} <span>DIF</span></div>
-                    <div>${player.phy} <span>FIS</span></div>
+                    <div>${player.def} <span>DEF</span></div>
+                    <div>${player.phy} <span>PHY</span></div>
                 </div>
             `;
 
             if (isUnlocked) {
                 grid.innerHTML += `
-                    <div class="fut-card transition-transform hover:scale-105">
-                        <div class="fut-top-info">
-                            <span class="fut-rating">${player.rating}</span>
-                            <span class="fut-position">${player.pos}</span>
-                        </div>
-                        <div class="fut-type-badge ${player.typeBadge}">${player.typeName}</div>
-                        <img src="${player.img}" alt="${player.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
-                        <div class="fut-bottom-section">
-                            <div class="fut-name">${player.name}</div>
-                            ${statsHtml}
-                            <span class="text-[9px] text-green-400 font-bold mt-1">✓ Sbloccata</span>
+                    <div class="fut-card ${player.type} transition-transform hover:scale-105">
+                        <div class="fut-card-inner">
+                            <div class="fut-top-info">
+                                <span class="fut-rating">${player.rating}</span>
+                                <span class="fut-position">${player.pos}</span>
+                                <img src="logo.png" alt="Logo La Sughera" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
+                                <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${player.num}</span>
+                            </div>
+                            <div class="fut-type-badge">${player.typeName}</div>
+                            <img src="${player.img}" alt="${player.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
+                            <div class="fut-bottom-section">
+                                <div class="fut-name">${player.name}</div>
+                                ${statsHtml}
+                                <span class="text-[9px] text-green-400 font-bold mt-1">✓ Sbloccata</span>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -874,22 +970,43 @@
         renderLine('bench-grid', bench);
     }
 
+    function toggleBench() {
+        const bench = document.getElementById('bench-container');
+        const btn = document.getElementById('toggleBenchBtn');
+        if (!bench || !btn) return;
+
+        if (bench.classList.contains('hidden')) {
+            bench.classList.remove('hidden');
+            btn.innerHTML = '<span id="benchArrow">▲</span> Nascondi Panchina e Mister';
+        } else {
+            bench.classList.add('hidden');
+            btn.innerHTML = '<span id="benchArrow">▼</span> Mostra Panchina e Mister (4)';
+        }
+    }
+
     function checkPackTimer() {
-        const lastOpenDate = localStorage.getItem('rione_last_open_date');
+        const lastOpenTime = localStorage.getItem('rione_last_pack_time');
         const openBtn = document.getElementById('open-pack-btn');
         const container = document.getElementById('card-container');
         
-        if (!openBtn) return;
-        const todayStr = new Date().toDateString();
+        if (!lastOpenTime || !openBtn) return;
 
-        if (lastOpenDate === todayStr) {
+        const now = new Date().getTime();
+        const oneDayInMs = 24 * 60 * 60 * 1000;
+        const timeElapsed = now - parseInt(lastOpenTime);
+
+        if (timeElapsed < oneDayInMs) {
+            const timeLeft = oneDayInMs - timeElapsed;
+            const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
             openBtn.disabled = true;
             openBtn.classList.add('opacity-55', 'cursor-not-allowed');
             openBtn.classList.remove('hover:from-yellow-400', 'cursor-pointer');
-            openBtn.innerText = `⏳ PACCHETTO GIORNALIERO GIÀ APERTO`;
+            openBtn.innerText = `⏳ PROSSIMO PACCHETTO TRA ${hoursLeft}h ${minutesLeft}m`;
 
             if (container && container.innerHTML.trim() === '') {
-                container.innerHTML = `<p class="text-amber-400/80 text-xs font-semibold">Hai già aperto il pacchetto oggi! Torna dopo mezzanotte per il prossimo.</p>`;
+                container.innerHTML = `<p class="text-amber-400/80 text-xs font-semibold">Hai già aperto un pacchetto di recente. Torna domani per il prossimo!</p>`;
             }
         } else {
             openBtn.disabled = false;
@@ -912,12 +1029,9 @@
     const openBtn = document.getElementById('open-pack-btn');
     if (openBtn) {
         openBtn.addEventListener('click', () => {
-            localStorage.setItem('rione_last_open_date', new Date().toDateString());
-            getPlayerUsername();
+            localStorage.setItem('rione_last_pack_time', new Date().getTime().toString());
 
             const wonPlayer = openPack();
-            const imgClass = wonPlayer.smallImg ? "fut-player-img fut-player-img-small" : "fut-player-img";
-            
             let wonStatsHtml = wonPlayer.isGK ? `
                 <div class="fut-stats">
                     <div>${wonPlayer.s1} <span>${wonPlayer.l1}</span></div>
@@ -931,14 +1045,14 @@
                 </div>
             ` : `
                 <div class="fut-stats">
-                    <div>${wonPlayer.pac} <span>VEL</span></div>
-                    <div>${wonPlayer.sho} <span>TIR</span></div>
+                    <div>${wonPlayer.pac} <span>PAC</span></div>
+                    <div>${wonPlayer.sho} <span>SHO</span></div>
                     <div>${wonPlayer.pas} <span>PAS</span></div>
                 </div>
                 <div class="fut-stats mt-1">
                     <div>${wonPlayer.dri} <span>DRI</span></div>
-                    <div>${wonPlayer.def} <span>DIF</span></div>
-                    <div>${wonPlayer.phy} <span>FIS</span></div>
+                    <div>${wonPlayer.def} <span>DEF</span></div>
+                    <div>${wonPlayer.phy} <span>PHY</span></div>
                 </div>
             `;
 
@@ -947,16 +1061,20 @@
                 container.innerHTML = `
                     <div class="flex flex-col items-center w-full animate-reveal">
                         <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold mb-3">🎉 HAI SBUSTATO:</span>
-                        <div class="fut-card shadow-2xl scale-105">
-                            <div class="fut-top-info">
-                                <span class="fut-rating">${wonPlayer.rating}</span>
-                                <span class="fut-position">${wonPlayer.pos}</span>
-                            </div>
-                            <div class="fut-type-badge ${wonPlayer.typeBadge}">${wonPlayer.typeName}</div>
-                            <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="${imgClass}" onerror="this.src='icon-192.png'">
-                            <div class="fut-bottom-section">
-                                <div class="fut-name">${wonPlayer.name}</div>
-                                ${wonStatsHtml}
+                        <div class="fut-card ${wonPlayer.type} shadow-2xl scale-105">
+                            <div class="fut-card-inner">
+                                <div class="fut-top-info">
+                                    <span class="fut-rating">${wonPlayer.rating}</span>
+                                    <span class="fut-position">${wonPlayer.pos}</span>
+                                    <img src="logo.png" alt="Logo La Sughera" class="w-7 h-7 object-contain mt-1 drop-shadow" onerror="this.style.display='none'">
+                                    <span class="text-[10px] font-bold text-white/90 bg-black/40 px-1.5 rounded mt-0.5">${wonPlayer.num}</span>
+                                </div>
+                                <div class="fut-type-badge">${wonPlayer.typeName}</div>
+                                <img src="${wonPlayer.img}" alt="${wonPlayer.name}" class="fut-player-img" onerror="this.src='icon-192.png'">
+                                <div class="fut-bottom-section">
+                                    <div class="fut-name">${wonPlayer.name}</div>
+                                    ${wonStatsHtml}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -974,6 +1092,33 @@
             checkPackTimer();
             syncProgressToCloud();
         });
+    }
+
+    renderAlbum();
+    renderRosa2026();
+    checkPackTimer();
+    setInterval(checkPackTimer, 60000);
+  </script>
+
+  <!-- SDK Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://vuhgzhyamdkiciuueyhp.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_cH_SxDLZnkbImYu6r_MPyQ_QPBvzi4F"; 
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    function getPlayerUsername() {
+        let username = localStorage.getItem('rione_user_nickname');
+        if (!username || username.trim() === "") {
+            username = prompt("Inserisci il tuo nome/soprannome per la Classifica del Rione:");
+            if (username && username.trim() !== "") {
+                username = username.trim();
+            } else {
+                username = "Collezionista_" + Math.floor(1000 + Math.random() * 9000);
+            }
+            localStorage.setItem('rione_user_nickname', username);
+        }
+        return username;
     }
 
     async function fetchGlobalLeaderboard() {
@@ -1045,64 +1190,6 @@
         await fetchGlobalLeaderboard();
     }
 
-    // Menu Mobile
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (menuBtn && mobileMenu) {
-      menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    }
-
-    function toggleGallery() {
-        const extraPhotos = document.getElementById('extra-photos');
-        const btn = document.getElementById('toggleGalleryBtn');
-        if (extraPhotos.classList.contains('hidden')) {
-            extraPhotos.classList.remove('hidden');
-            btn.innerText = 'Mostra meno';
-        } else {
-            extraPhotos.classList.add('hidden');
-            btn.innerText = 'Mostra altre foto';
-        }
-    }
-
-    function toggleBench() {
-        const bench = document.getElementById('bench-container');
-        const btn = document.getElementById('toggleBenchBtn');
-        if (!bench || !btn) return;
-
-        if (bench.classList.contains('hidden')) {
-            bench.classList.remove('hidden');
-            btn.innerHTML = '<span id="benchArrow">▲</span> Nascondi Panchina e Mister';
-        } else {
-            bench.classList.add('hidden');
-            btn.innerHTML = '<span id="benchArrow">▼</span> Mostra Panchina e Mister (4)';
-        }
-    }
-
-    // Countdown
-    (function() {
-        function runCountdown() {
-            const targetDate = new Date('2026-11-02T00:00:00').getTime();
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-            const container = document.getElementById('palio-countdown-finale');
-            if (!container) return;
-
-            if (diff <= 0) {
-                container.innerHTML = '<span class="text-white text-xl sm:text-2xl font-bold">IL PALIO NON È ANCORA INIZIATO</span>';
-                return;
-            }
-
-            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-            container.innerHTML = days === 1 ? '<span class="text-primary">SOLO 1 GIORNO! 🔥</span>' : `<span class="text-white">${days} GIORNI</span>`;
-        }
-        runCountdown();
-        setInterval(runCountdown, 60000);
-    })();
-
-    // Avvio script
-    renderAlbum();
-    renderRosa2026();
-    checkPackTimer();
     fetchGlobalLeaderboard();
   </script>
 </body>
