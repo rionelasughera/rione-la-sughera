@@ -38,7 +38,6 @@
   </script>
 
   <style>
-    <style>
     /* --- CAMPO DA CALCIOTTO STILE FUT --- */
     .fut-pitch {
       background: repeating-linear-gradient(
@@ -72,7 +71,6 @@
       }
     }
 
-    html { scroll-behavior: smooth; }
     html { scroll-behavior: smooth; }
     @keyframes marquee {
       0% { transform: translateX(0%); }
@@ -273,8 +271,8 @@
           <a href="#storia" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Storia</a>
           <a href="#eventi" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Eventi</a>
           <a href="#unisciti" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Unisciti</a>
-<a href="#palmares" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palmarès</a>
-<a href="#rosa" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Rosa 2026</a>
+          <a href="#palmares" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palmarès</a>
+          <a href="#rosa" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Rosa 2026</a>
           <a href="#galleria" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Galleria</a>
           <a href="#palio-quiz" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">Palio del Quiz</a>
           <a href="#faq" class="text-sm font-semibold uppercase tracking-wider text-white/85 hover:text-primary transition">FAQ</a>
@@ -290,8 +288,8 @@
         <a href="#storia" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Storia</a>
         <a href="#eventi" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Eventi</a>
         <a href="#unisciti" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Unisciti</a>
-<a href="#palmares" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palmarès</a>
-<a href="#rosa" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Rosa 2026</a>
+        <a href="#palmares" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palmarès</a>
+        <a href="#rosa" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Rosa 2026</a>
         <a href="#galleria" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Galleria</a>
         <a href="#palio-quiz" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">Palio del Quiz</a>
         <a href="#faq" class="mobile-link block py-3 font-display text-2xl text-white/90 border-b border-white/10">FAQ</a>
@@ -471,7 +469,7 @@
     </div>
   </section>
 
-<!-- SEZIONE ROSA 2026 (MODULO 2-3-2 STILE FIFA) -->
+  <!-- SEZIONE ROSA 2026 (MODULO 2-3-2 STILE FIFA) -->
   <section id="rosa" class="py-16 bg-slate-950 text-white border-t border-primary/30">
     <div class="max-w-5xl mx-auto px-4 text-center">
       <span class="inline-block bg-primary/20 text-white font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3 shadow">
@@ -959,7 +957,7 @@
     }
   </script>
 
-  <!-- Script per Gestione Carte (Tipo di carta al posto dell'overall nelle bloccate) -->
+  <!-- Script per Gestione Carte & Rosa 2026 -->
   <script>
     const playersDatabase = [
         { name: "MISTER", img: "mister.jpg", num: "", weight: 1, rating: 99, pos: "ALL", type: "card-icon", typeName: "Icon", isGK: false, pac: 99, sho: 99, pas: 99, dri: 99, def: 99, phy: 99 },
@@ -1095,8 +1093,9 @@
         }
     }
 
-// Funzione per generare l'HTML di una singola carta FUT
+    // Funzione per generare l'HTML di una singola carta FUT (per il campo e la panchina)
     function createFutCardHTML(player) {
+        if (!player) return '';
         let statsHtml = player.isGK ? `
             <div class="fut-stats">
                 <div>${player.s1} <span>${player.l1}</span></div>
@@ -1144,13 +1143,11 @@
     function renderRosa2026() {
         const findCard = (name, typeName) => playersDatabase.find(p => p.name === name && p.typeName === typeName);
 
-        // Titolari richiesti
         const gk = [findCard("BERTONCINI #1", "Base")];
         const def = [findCard("Rosamilia #5", "Base"), findCard("Mucci #3", "Icon")];
         const mid = [findCard("Dariokke #9", "Base"), findCard("Ciancia #6", "Base"), findCard("Agrestini #7", "Base")];
         const att = [findCard("Pizzi #11", "Base"), findCard("Matranga #18", "Base")];
 
-        // Riserve + Mister (tutti gli altri giocatori non titolari)
         const bench = [
             findCard("Maddalena #10", "Base"),
             findCard("Ferrera #2", "Base"),
@@ -1185,8 +1182,6 @@
         }
     }
 
-    renderRosa2026();
-    
     // Controlla il timer delle 24 ore
     function checkPackTimer() {
         const lastOpenTime = localStorage.getItem('rione_last_pack_time');
@@ -1304,6 +1299,7 @@
     }
 
     renderAlbum();
+    renderRosa2026();
     checkPackTimer();
     setInterval(checkPackTimer, 60000);
   </script>
@@ -1331,7 +1327,6 @@
         return username;
     }
 
-    // 1. Funzione che scarica e mostra la classifica da Supabase
     async function fetchGlobalLeaderboard() {
         const container = document.getElementById('friend-stats');
         if (!container) return;
@@ -1349,35 +1344,35 @@
                     <div class="space-y-2">
             `;
 
-if (error || !leaderboard) {
-              html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato.</p>`;
-          } else {
-              // BLOCCO TOTALE: Escludi categoricamente "Rosa" (case-insensitive) da qualsiasi visualizzazione
-              const filteredList = leaderboard.filter(user => 
-                  user.username && user.username.toLowerCase() !== "rosa"
-              );
+            if (error || !leaderboard) {
+                html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato.</p>`;
+            } else {
+                // Filtro per escludere Rosa
+                const filteredList = leaderboard.filter(user => 
+                    user.username && user.username.toLowerCase() !== "rosa"
+                );
 
-              if (filteredList.length === 0) {
-                  html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato.</p>`;
-              } else {
-                  filteredList.forEach((user, index) => {
-                      let badge = `#${index + 1}`;
-                      if (index === 0) badge = "🥇";
-                      else if (index === 1) badge = "🥈";
-                      else if (index === 2) badge = "🥉";
+                if (filteredList.length === 0) {
+                    html += `<p class="text-xs text-slate-400 text-center py-2">Nessun punteggio registrato.</p>`;
+                } else {
+                    filteredList.forEach((user, index) => {
+                        let badge = `#${index + 1}`;
+                        if (index === 0) badge = "🥇";
+                        else if (index === 1) badge = "🥈";
+                        else if (index === 2) badge = "🥉";
 
-                      html += `
-                          <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-xl border border-slate-800">
-                              <div class="flex items-center gap-2">
-                                  <span class="text-sm font-black w-6 text-center">${badge}</span>
-                                  <span class="text-xs font-bold text-white">${user.username}</span>
-                              </div>
-                              <span class="text-xs font-extrabold text-amber-400">${user.cards_count} carte</span>
-                          </div>
-                      `;
-                  });
-              }
-          }
+                        html += `
+                            <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-xl border border-slate-800">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm font-black w-6 text-center">${badge}</span>
+                                    <span class="text-xs font-bold text-white">${user.username}</span>
+                                </div>
+                                <span class="text-xs font-extrabold text-amber-400">${user.cards_count} carte</span>
+                            </div>
+                        `;
+                    });
+                }
+            }
 
             html += `</div></div>`;
             container.innerHTML = html;
@@ -1386,10 +1381,9 @@ if (error || !leaderboard) {
         }
     }
 
-    // 2. Funzione che invia i dati al cloud (solo quando apri un pacchetto)
     async function syncProgressToCloud() {
         const username = getPlayerUsername();
-        if (username === "Rosa") return; // Blocca categoricamente se l'utente è Rosa
+        if (username.toLowerCase() === "rosa") return;
         
         let collectedCards = JSON.parse(localStorage.getItem('rione_cards')) || [];
         if (collectedCards.length === 0) {
@@ -1412,7 +1406,6 @@ if (error || !leaderboard) {
         await fetchGlobalLeaderboard();
     }
 
-    // Carica subito la classifica all'avvio della pagina
     fetchGlobalLeaderboard();
   </script>
   
